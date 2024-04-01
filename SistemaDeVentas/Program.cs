@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SistemaDeVentas.Login;
+using SistemaDeVentas.Shared;
 
 namespace SistemaDeVentas
 {
@@ -22,7 +23,7 @@ namespace SistemaDeVentas
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm());
+            Application.Run(new PrincipalForm());
         }
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern bool SetProcessDPIAware();
