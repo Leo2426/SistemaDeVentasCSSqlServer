@@ -25,9 +25,31 @@ namespace SistemaDeVentas.Login
 
         private void iconButton1_Click(object sender, EventArgs e)
         {
-            PrincipalForm principalForm = new PrincipalForm();
-            GlobalClass.Username = textBox1.Text;
-            principalForm.Show();
+            UserRepository userRepository = new UserRepository();
+            User user = new User();
+            user.Username = textBox1.Text;
+            user.Password = textBox2.Text;
+            if (userRepository.Login(user))
+            {
+                GlobalClass.Username = user.Username;
+                PrincipalForm principalForm = new PrincipalForm();
+                this.Hide();
+                principalForm.ShowDialog();
+                this.Close();
+                
+            }
+            else
+            {
+                MessageBox.Show("Usuario o contraseña incorrectos");
+            }
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                iconButton1_Click(sender, e);
+            }
         }
     }
 }

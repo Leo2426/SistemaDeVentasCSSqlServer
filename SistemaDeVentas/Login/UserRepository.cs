@@ -15,7 +15,7 @@ namespace SistemaDeVentas.Login
             using (var connection = new System.Data.SqlClient.SqlConnection(connectionString))
             {
                 connection.Open();
-                using (var command = new System.Data.SqlClient.SqlCommand("SELECT * FROM Users WHERE Username = @Username AND Password = @Password", connection))
+                using (var command = new System.Data.SqlClient.SqlCommand("SELECT * FROM users WHERE user_name = @Username AND password = @Password", connection))
                 {
                     command.Parameters.AddWithValue("@Username", user.Username);
                     command.Parameters.AddWithValue("@Password", user.Password);

@@ -9,6 +9,6 @@ namespace SistemaDeVentas
 {
     public class Conexion
     {
-        public static string stringConexion =  ConfigurationManager.ConnectionStrings["sistemadeventasdbConnectionString"].ToString();
+        public static string stringConexion =  ConfigurationManager.ConnectionStrings["SistemaDeVentas.Properties.Settings.sistemadeventasdbConnectionString"].ToString();
     }
 }
