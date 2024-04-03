@@ -33,25 +33,24 @@ namespace SistemaDeVentas.Shared
             ActivateButton(sender);
 
             if (currentButton.Text == "Home")
-            {
+            
                 configForm(new HomeForm());
-            }
+            
             else if (currentButton.Text == "Ventas")
-            {
+            
                 configForm(new VentasForm());
-            }
+            
             else if (currentButton.Text == "Productos")
-            {
+            
                 configForm(new ProductosForm());
-            }
+            
             else if (currentButton.Text == "Clientes")
-            {
+           
                 configForm(new ClientesForm());
-            }
             else
-            {
+            
                 MessageBox.Show("No se ha encontrado el formulario");
-            }
+            
 
 
         }
