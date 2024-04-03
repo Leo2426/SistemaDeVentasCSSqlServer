@@ -92,12 +92,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clientes\Client.cs" />
     <Compile Include="Clientes\ClientesForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Clientes\ClientesForm.Designer.cs">
       <DependentUpon>ClientesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Clientes\ClientRepository.cs" />
     <Compile Include="Home\HomeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,6 +135,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>sistemadeventasdbDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Ubication\Department.cs" />
+    <Compile Include="Ubication\DepartmentRepository.cs" />
+    <Compile Include="Ubication\District.cs" />
+    <Compile Include="Ubication\DistrictRepository.cs" />
+    <Compile Include="Ubication\Province.cs" />
+    <Compile Include="Ubication\ProvinceRepository.cs" />
     <Compile Include="Ventas\VentasForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -194,6 +202,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Shared\Querys\Stored Procedures Provinces and districts.sql" />
+    <Content Include="Shared\Querys\Add Data.sql" />
+    <Content Include="Shared\Querys\Create All Tables.sql" />
+    <Content Include="Shared\Querys\Insert Departments Provinces and Districts.sql" />
     <Content Include="sistemadeventasdb.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -219,5 +231,6 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

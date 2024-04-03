@@ -33,14 +33,14 @@
             this.sistemadeventasdbDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sistemadeventasdbDataSet = new SistemaDeVentas.sistemadeventasdbDataSet();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.iconButton4 = new FontAwesome.Sharp.IconButton();
             this.iconButton3 = new FontAwesome.Sharp.IconButton();
             this.iconButton2 = new FontAwesome.Sharp.IconButton();
             this.iconButton1 = new FontAwesome.Sharp.IconButton();
             this.btn_home = new FontAwesome.Sharp.IconButton();
             this.iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.principal_panel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.sistemadeventasdbDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sistemadeventasdbDataSet)).BeginInit();
@@ -84,7 +84,20 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(270, 938);
-            this.panel1.TabIndex = 2;
+            this.panel1.TabIndex = 2;           
+            // panel3
+            // 
+            this.panel3.Location = new System.Drawing.Point(272, 233);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1173, 692);
+            this.panel3.TabIndex = 3;
+            // 
+            // panel2
+            // 
+            this.panel2.Location = new System.Drawing.Point(273, 289);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1162, 616);
+            this.panel2.TabIndex = 3;
             // 
             // iconButton4
             // 
@@ -212,20 +225,6 @@
             this.iconPictureBox1.Size = new System.Drawing.Size(87, 87);
             this.iconPictureBox1.TabIndex = 0;
             this.iconPictureBox1.TabStop = false;
-            // 
-            // panel2
-            // 
-            this.panel2.Location = new System.Drawing.Point(273, 289);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1162, 616);
-            this.panel2.TabIndex = 3;
-            // 
-            // panel3
-            // 
-            this.panel3.Location = new System.Drawing.Point(272, 233);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1173, 692);
-            this.panel3.TabIndex = 3;
             // 
             // principal_panel
             // 
