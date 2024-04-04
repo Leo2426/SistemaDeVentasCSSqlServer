@@ -46,7 +46,7 @@ namespace SistemaDeVentas.Shared
             
             else if (currentButton.Text == "Clientes")
            
-                configForm(new ClientesForm());
+                configForm(new ClientsForm());
             else
             
                 MessageBox.Show("No se ha encontrado el formulario");

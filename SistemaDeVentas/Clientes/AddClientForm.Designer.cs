@@ -1,6 +1,6 @@
 ﻿namespace SistemaDeVentas.Clientes
 {
-    partial class ClientesForm
+    partial class AddClientForm
     {
         /// <summary>
         /// Required designer variable.
@@ -45,8 +45,6 @@
             this.cb_province = new System.Windows.Forms.ComboBox();
             this.cb_district = new System.Windows.Forms.ComboBox();
             this.btn_add_client = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // txt_name
@@ -185,7 +183,7 @@
             // 
             // btn_add_client
             // 
-            this.btn_add_client.Location = new System.Drawing.Point(419, 620);
+            this.btn_add_client.Location = new System.Drawing.Point(361, 608);
             this.btn_add_client.Name = "btn_add_client";
             this.btn_add_client.Size = new System.Drawing.Size(197, 39);
             this.btn_add_client.TabIndex = 7;
@@ -193,22 +191,11 @@
             this.btn_add_client.UseVisualStyleBackColor = true;
             this.btn_add_client.Click += new System.EventHandler(this.btn_add_client_Click);
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(651, 35);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 62;
-            this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(616, 507);
-            this.dataGridView1.TabIndex = 8;
-            // 
-            // ClientesForm
+            // AddClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1303, 671);
-            this.Controls.Add(this.dataGridView1);
+            this.ClientSize = new System.Drawing.Size(634, 671);
             this.Controls.Add(this.btn_add_client);
             this.Controls.Add(this.cb_district);
             this.Controls.Add(this.cb_province);
@@ -226,10 +213,9 @@
             this.Controls.Add(this.txt_phone);
             this.Controls.Add(this.txt_address);
             this.Controls.Add(this.txt_name);
-            this.Name = "ClientesForm";
+            this.Name = "AddClientForm";
             this.Text = "ClientesForm";
             this.Load += new System.EventHandler(this.ClientesForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -254,6 +240,5 @@
         private System.Windows.Forms.ComboBox cb_province;
         private System.Windows.Forms.ComboBox cb_district;
         private System.Windows.Forms.Button btn_add_client;
-        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

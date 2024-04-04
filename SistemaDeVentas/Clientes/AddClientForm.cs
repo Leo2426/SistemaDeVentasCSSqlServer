@@ -11,9 +11,10 @@ using System.Windows.Forms;
 
 namespace SistemaDeVentas.Clientes
 {
-    public partial class ClientesForm : Form
+    public partial class AddClientForm : Form
     {
-        public ClientesForm()
+
+        public AddClientForm()
         {
             InitializeComponent();
         }
@@ -33,17 +34,6 @@ namespace SistemaDeVentas.Clientes
             client.District = cb_district.Text;
             clientRepository.InsertClient(client);
             MessageBox.Show("Cliente insertado correctamente");
-
-            //llenar datagrid
-            List<Client> clients = clientRepository.GetAllClients();
-            dataGridView1.DataSource = clients;
-
-            //limpiar campos
-
-
-            //MessageBox.Show(client.Name + client.Address + client.Document + client.Phone + client.Reference + client.Department + client.Province + client.District);
-
-
 
         }
 

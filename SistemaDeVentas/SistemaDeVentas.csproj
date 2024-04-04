@@ -26,7 +26,7 @@
     <ProductName>Sistema de Ventas</ProductName>
     <PublisherName>Entersoft Publiser</PublisherName>
     <SuiteName>Entersoft Suite Name</SuiteName>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -93,11 +93,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clientes\Client.cs" />
-    <Compile Include="Clientes\ClientesForm.cs">
+    <Compile Include="Clientes\AddClientForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Clientes\ClientesForm.Designer.cs">
-      <DependentUpon>ClientesForm.cs</DependentUpon>
+    <Compile Include="Clientes\AddClientForm.Designer.cs">
+      <DependentUpon>AddClientForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Clientes\ClientsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Clientes\ClientsForm.Designer.cs">
+      <DependentUpon>ClientsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Clientes\ClientRepository.cs" />
     <Compile Include="Home\HomeForm.cs">
@@ -147,8 +153,11 @@
     <Compile Include="Ventas\VentasForm.Designer.cs">
       <DependentUpon>VentasForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Clientes\ClientesForm.resx">
-      <DependentUpon>ClientesForm.cs</DependentUpon>
+    <EmbeddedResource Include="Clientes\AddClientForm.resx">
+      <DependentUpon>AddClientForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Clientes\ClientsForm.resx">
+      <DependentUpon>ClientsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Home\HomeForm.resx">
       <DependentUpon>HomeForm.cs</DependentUpon>
