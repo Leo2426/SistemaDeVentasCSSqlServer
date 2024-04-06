@@ -59,7 +59,8 @@ namespace SistemaDeVentas.Clientes
             try
             {
                 SqlConnection connection = new SqlConnection(connectionString);
-                SqlCommand command = new SqlCommand("select * from clients", connection);
+                SqlCommand command = new SqlCommand("spGetAllClientsWithDetails", connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
@@ -71,14 +72,15 @@ namespace SistemaDeVentas.Clientes
                     client.Document = reader["document"].ToString();
                     client.Phone = reader["phone"].ToString();
                     client.Reference = reader["reference"].ToString();
-                    client.Department = reader["departments_id"].ToString();
-                    client.Province = reader["provinces_id"].ToString();
-                    client.District = reader["districts_id"].ToString();
+                    client.Department = reader["DepartmentName"].ToString();
+                    client.Province = reader["ProvinceName"].ToString();
+                    client.District = reader["DistrictName"].ToString();
                     clients.Add(client);
                 }
-                reader.Close();
+                
                 connection.Close();
-                return clients;
+                return clients;   
+
             }catch(Exception ex)
             {
                 throw new Exception("Error al obtener clientes: " + ex.Message);
@@ -92,7 +94,6 @@ namespace SistemaDeVentas.Clientes
             // Actualizar cliente en base de datos
             try
             {
-                MessageBox.Show(client.Id.ToString());
                 SqlConnection connection = new SqlConnection(connectionString);
                 
                 //crea el stored procedure 
@@ -120,6 +121,60 @@ namespace SistemaDeVentas.Clientes
             }
         }   
 
+        public void deleteClient(int id)
+        {
+            // Eliminar cliente de la base de datos
+            try
+            {
+                SqlConnection connection = new SqlConnection(connectionString);
+                SqlCommand command = new SqlCommand("spDeleteClient", connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@clientid", id);
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar cliente: " + ex.Message);
+            }
+        }
 
+
+        public List<Client> searchClient(string searchTerm){
+            // Buscar cliente por nombre o documento
+            try
+            {
+                SqlConnection connection = new SqlConnection(connectionString);
+                SqlCommand command = new SqlCommand("spSearchClients", connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@searchTerm", searchTerm);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                
+                List<Client> clients = new List<Client>();
+                while (reader.Read())
+                {
+                    Client client = new Client();
+                    client.Id = Convert.ToInt32(reader["id"]);
+                    client.Name = reader["name"].ToString();
+                    client.Address = reader["address"].ToString();
+                    client.Document = reader["document"].ToString();
+                    client.Phone = reader["phone"].ToString();
+                    client.Reference = reader["reference"].ToString();
+                    client.Department = reader["DepartmentName"].ToString();
+                    client.Province = reader["ProvinceName"].ToString();
+                    client.District = reader["DistrictName"].ToString();
+                    clients.Add(client);
+                }
+                connection.Close();
+                return clients;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al buscar cliente: " + ex.Message);
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemaDeVentas.Ubication;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,9 +28,36 @@ namespace SistemaDeVentas.Clientes
             txt_phone.Text = client.Phone;
             txt_reference.Text = client.Reference;
             cb_department.Text = client.Department;
-            cb_province.Text = client.Province;
-            cb_district.Text = client.District;
 
+            DepartmentRepository departmentRepository = new DepartmentRepository();
+            List<Department> departments = departmentRepository.GetAllDepartments();
+            foreach (Department department in departments)
+            {
+                cb_department.Items.Add(department.Name);
+
+            }
+            cb_department.DropDownStyle = ComboBoxStyle.DropDownList;
+            cb_department.Text = client.Department;
+
+            ProvinceRepository provinceRepository = new ProvinceRepository();
+            List<Province> provinces = provinceRepository.GetProvincesByDepartment(cb_department.Text);
+            cb_province.Items.Clear();
+            foreach (Province province in provinces)
+            {
+                cb_province.Items.Add(province.Name);
+            }
+            cb_province.Text = client.Province;
+            cb_province.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            DistrictRepository districtRepository = new DistrictRepository();
+            List<District> districts = districtRepository.GetDistrictsByProvince(cb_province.Text);
+            cb_district.Items.Clear();
+            foreach (District district in districts)
+            {
+                cb_district.Items.Add(district.Name);
+            }
+            cb_district.Text = client.District;
+            cb_district.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void btn_add_client_Click(object sender, EventArgs e)
@@ -47,6 +75,34 @@ namespace SistemaDeVentas.Clientes
             clientRepository.UpdateClient(client);
             this.Close();
 
+        }
+
+        private void cb_department_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //cargar datos de province repository a cb_province
+            ProvinceRepository provinceRepository = new ProvinceRepository();
+            List<Province> provinces = provinceRepository.GetProvincesByDepartment(cb_department.Text);
+            cb_province.Items.Clear();
+            foreach (Province province in provinces)
+            {
+                cb_province.Items.Add(province.Name);
+            }
+            cb_province.SelectedIndex = 0;
+
+        }
+
+
+        private void cb_province_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //cargar datos de district repository a cb_district
+            DistrictRepository districtRepository = new DistrictRepository();
+            List<District> districts = districtRepository.GetDistrictsByProvince(cb_province.Text);
+            cb_district.Items.Clear();
+            foreach (District district in districts)
+            {
+                cb_district.Items.Add(district.Name);
+            }
+            cb_district.SelectedIndex = 0;
         }
     }
 }

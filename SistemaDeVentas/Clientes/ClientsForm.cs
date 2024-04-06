@@ -48,14 +48,7 @@ namespace SistemaDeVentas.Clientes
             AddClientForm addClientForm = new AddClientForm();
             addClientForm.ShowDialog();
 
-            //actualizar datagrid
-
-            dt_clients.Rows.Clear();
-            ClientRepository clientRepository = new ClientRepository();
-            List<Client> clients = clientRepository.GetAllClients();
-            foreach (Client c in clients) {
-                dt_clients.Rows.Add(c.Id, c.Name, c.Address, c.Document, c.Phone, c.Reference, c.Department, c.Province, c.District);
-            }
+            updateDataGrid();
 
         }
 
@@ -75,13 +68,53 @@ namespace SistemaDeVentas.Clientes
 
             UpdateClientForm updateClientForm = new UpdateClientForm(client);
             updateClientForm.ShowDialog();
+            
+            updateDataGrid();
+        }
+
+        void updateDataGrid()
+        {
             dt_clients.Rows.Clear();
             ClientRepository clientRepository = new ClientRepository();
             List<Client> clients = clientRepository.GetAllClients();
             foreach (Client c in clients)
             {
-                dt_clients.Rows.Add(c.Id,c.Name, c.Address, c.Document, c.Phone, c.Reference, c.Department, c.Province, c.District);
+                dt_clients.Rows.Add(c.Id, c.Name, c.Address, c.Document, c.Phone, c.Reference, c.Department, c.Province, c.District);
             }
+        }
+
+        private void btn_delete_Click(object sender, EventArgs e)
+        {
+            //seleccionar id del cliente
+            int id = Convert.ToInt32(dt_clients.CurrentRow.Cells[0].Value);
+
+            //crear message box para confirmar eliminacion
+            DialogResult result = MessageBox.Show("¿Está seguro que desea eliminar este cliente?", "Eliminar Cliente", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
+            {
+                //eliminar cliente
+                ClientRepository clientRepository = new ClientRepository();
+                clientRepository.deleteClient(id);
+            }
+
+            updateDataGrid();
+
+        }
+
+        private void iconButton1_Click(object sender, EventArgs e)
+        {
+            string searchTerm = txt_search.Text;
+            ClientRepository clientRepository = new ClientRepository();
+            List<Client> clients = clientRepository.searchClient(searchTerm);
+
+            dt_clients.Rows.Clear();
+            foreach (Client c in clients)
+            {
+                dt_clients.Rows.Add(c.Id, c.Name, c.Address, c.Document, c.Phone, c.Reference, c.Department, c.Province, c.District);
+            }
+
+
         }
     }
 }

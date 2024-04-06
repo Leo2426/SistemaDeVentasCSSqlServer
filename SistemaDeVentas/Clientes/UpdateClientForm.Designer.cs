@@ -72,15 +72,16 @@
             this.cb_province.Name = "cb_province";
             this.cb_province.Size = new System.Drawing.Size(328, 28);
             this.cb_province.TabIndex = 22;
+            this.cb_province.SelectedIndexChanged += new System.EventHandler(this.cb_province_SelectedIndexChanged);
             // 
             // cb_department
             // 
-            this.cb_department.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.cb_department.FormattingEnabled = true;
             this.cb_department.Location = new System.Drawing.Point(222, 418);
             this.cb_department.Name = "cb_department";
             this.cb_department.Size = new System.Drawing.Size(328, 28);
             this.cb_department.TabIndex = 21;
+            this.cb_department.SelectedIndexChanged += new System.EventHandler(this.cb_department_SelectedIndexChanged);
             // 
             // label3
             // 

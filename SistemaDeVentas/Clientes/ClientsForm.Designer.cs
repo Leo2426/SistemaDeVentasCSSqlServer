@@ -33,12 +33,16 @@
             this.btn_update = new FontAwesome.Sharp.IconButton();
             this.btn_delete = new FontAwesome.Sharp.IconButton();
             this.btn_add_client = new FontAwesome.Sharp.IconButton();
+            this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            this.txt_search = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dt_clients)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dt_clients
             // 
+            this.dt_clients.AllowUserToAddRows = false;
+            this.dt_clients.AllowUserToDeleteRows = false;
             this.dt_clients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dt_clients.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dt_clients.Location = new System.Drawing.Point(0, 0);
@@ -95,6 +99,7 @@
             this.btn_delete.TabIndex = 2;
             this.btn_delete.Text = "Eliminar";
             this.btn_delete.UseVisualStyleBackColor = false;
+            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
             // 
             // btn_add_client
             // 
@@ -115,11 +120,32 @@
             this.btn_add_client.UseVisualStyleBackColor = false;
             this.btn_add_client.Click += new System.EventHandler(this.btn_add_Click);
             // 
+            // iconButton1
+            // 
+            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.SearchDollar;
+            this.iconButton1.IconColor = System.Drawing.Color.Black;
+            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButton1.Location = new System.Drawing.Point(644, 12);
+            this.iconButton1.Name = "iconButton1";
+            this.iconButton1.Size = new System.Drawing.Size(63, 59);
+            this.iconButton1.TabIndex = 3;
+            this.iconButton1.UseVisualStyleBackColor = true;
+            this.iconButton1.Click += new System.EventHandler(this.iconButton1_Click);
+            // 
+            // txt_search
+            // 
+            this.txt_search.Location = new System.Drawing.Point(128, 28);
+            this.txt_search.Name = "txt_search";
+            this.txt_search.Size = new System.Drawing.Size(484, 26);
+            this.txt_search.TabIndex = 4;
+            // 
             // ClientsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1221, 718);
+            this.Controls.Add(this.txt_search);
+            this.Controls.Add(this.iconButton1);
             this.Controls.Add(this.btn_add_client);
             this.Controls.Add(this.btn_delete);
             this.Controls.Add(this.btn_update);
@@ -130,6 +156,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dt_clients)).EndInit();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -140,5 +167,7 @@
         private FontAwesome.Sharp.IconButton btn_update;
         private FontAwesome.Sharp.IconButton btn_delete;
         private FontAwesome.Sharp.IconButton btn_add_client;
+        private FontAwesome.Sharp.IconButton iconButton1;
+        private System.Windows.Forms.TextBox txt_search;
     }
 }
