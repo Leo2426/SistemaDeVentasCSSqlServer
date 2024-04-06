@@ -42,9 +42,12 @@
             this.dt_clients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dt_clients.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dt_clients.Location = new System.Drawing.Point(0, 0);
+            this.dt_clients.MultiSelect = false;
             this.dt_clients.Name = "dt_clients";
+            this.dt_clients.ReadOnly = true;
             this.dt_clients.RowHeadersWidth = 62;
             this.dt_clients.RowTemplate.Height = 28;
+            this.dt_clients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dt_clients.Size = new System.Drawing.Size(1212, 525);
             this.dt_clients.TabIndex = 0;
             // 
@@ -73,6 +76,7 @@
             this.btn_update.TabIndex = 2;
             this.btn_update.Text = "Actualizar";
             this.btn_update.UseVisualStyleBackColor = false;
+            this.btn_update.Click += new System.EventHandler(this.btn_update_Click);
             // 
             // btn_delete
             // 

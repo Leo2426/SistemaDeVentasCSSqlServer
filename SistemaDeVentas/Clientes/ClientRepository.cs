@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Markup;
@@ -85,6 +86,39 @@ namespace SistemaDeVentas.Clientes
 
         }
 
+
+        public void UpdateClient(Client client)
+        {
+            // Actualizar cliente en base de datos
+            try
+            {
+                MessageBox.Show(client.Id.ToString());
+                SqlConnection connection = new SqlConnection(connectionString);
+                
+                //crea el stored procedure 
+                SqlCommand command = new SqlCommand("spUpdateClient", connection);
+
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+
+                command.Parameters.AddWithValue("@id", client.Id);
+                command.Parameters.AddWithValue("@name", client.Name);
+                command.Parameters.AddWithValue("@address", client.Address);
+                command.Parameters.AddWithValue("@document", client.Document);
+                command.Parameters.AddWithValue("@phone", client.Phone);
+                command.Parameters.AddWithValue("@reference", client.Reference);
+                command.Parameters.AddWithValue("@departmentName", client.Department);
+                command.Parameters.AddWithValue("@provinceName", client.Province);
+                command.Parameters.AddWithValue("@districtName", client.District);
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar cliente: " + ex.Message);
+            }
+        }   
 
 
     }

@@ -53,6 +53,7 @@
             this.txt_name.Name = "txt_name";
             this.txt_name.Size = new System.Drawing.Size(328, 26);
             this.txt_name.TabIndex = 0;
+            this.txt_name.TextChanged += new System.EventHandler(this.txt_name_TextChanged);
             // 
             // txt_address
             // 
@@ -60,6 +61,7 @@
             this.txt_address.Name = "txt_address";
             this.txt_address.Size = new System.Drawing.Size(328, 26);
             this.txt_address.TabIndex = 1;
+            this.txt_address.TextChanged += new System.EventHandler(this.txt_address_TextChanged);
             // 
             // txt_document
             // 
@@ -67,6 +69,7 @@
             this.txt_document.Name = "txt_document";
             this.txt_document.Size = new System.Drawing.Size(328, 26);
             this.txt_document.TabIndex = 2;
+            this.txt_document.TextChanged += new System.EventHandler(this.txt_document_TextChanged);
             // 
             // label1
             // 
@@ -76,6 +79,7 @@
             this.label1.Size = new System.Drawing.Size(65, 20);
             this.label1.TabIndex = 3;
             this.label1.Text = "Nombre";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -85,6 +89,7 @@
             this.label2.Size = new System.Drawing.Size(75, 20);
             this.label2.TabIndex = 4;
             this.label2.Text = "Direccion";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -94,6 +99,7 @@
             this.label3.Size = new System.Drawing.Size(80, 20);
             this.label3.TabIndex = 5;
             this.label3.Text = "RUC/ DNI";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // txt_phone
             // 
@@ -101,6 +107,7 @@
             this.txt_phone.Name = "txt_phone";
             this.txt_phone.Size = new System.Drawing.Size(328, 26);
             this.txt_phone.TabIndex = 0;
+            this.txt_phone.TextChanged += new System.EventHandler(this.txt_phone_TextChanged);
             // 
             // txt_reference
             // 
@@ -108,6 +115,7 @@
             this.txt_reference.Name = "txt_reference";
             this.txt_reference.Size = new System.Drawing.Size(328, 26);
             this.txt_reference.TabIndex = 1;
+            this.txt_reference.TextChanged += new System.EventHandler(this.txt_reference_TextChanged);
             // 
             // label4
             // 
@@ -117,6 +125,7 @@
             this.label4.Size = new System.Drawing.Size(58, 20);
             this.label4.TabIndex = 3;
             this.label4.Text = "Celular";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 
@@ -126,6 +135,7 @@
             this.label5.Size = new System.Drawing.Size(87, 20);
             this.label5.TabIndex = 4;
             this.label5.Text = "Referencia";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label6
             // 
@@ -135,6 +145,7 @@
             this.label6.Size = new System.Drawing.Size(112, 20);
             this.label6.TabIndex = 4;
             this.label6.Text = "Departamento";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label7
             // 
@@ -144,6 +155,7 @@
             this.label7.Size = new System.Drawing.Size(72, 20);
             this.label7.TabIndex = 4;
             this.label7.Text = "Provincia";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // label8
             // 
@@ -153,6 +165,7 @@
             this.label8.Size = new System.Drawing.Size(59, 20);
             this.label8.TabIndex = 4;
             this.label8.Text = "Distrito";
+            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // cb_department
             // 
@@ -160,7 +173,7 @@
             this.cb_department.FormattingEnabled = true;
             this.cb_department.Location = new System.Drawing.Point(230, 431);
             this.cb_department.Name = "cb_department";
-            this.cb_department.Size = new System.Drawing.Size(262, 28);
+            this.cb_department.Size = new System.Drawing.Size(328, 28);
             this.cb_department.TabIndex = 6;
             this.cb_department.SelectedIndexChanged += new System.EventHandler(this.cb_department_SelectedIndexChanged);
             // 
@@ -169,7 +182,7 @@
             this.cb_province.FormattingEnabled = true;
             this.cb_province.Location = new System.Drawing.Point(230, 488);
             this.cb_province.Name = "cb_province";
-            this.cb_province.Size = new System.Drawing.Size(262, 28);
+            this.cb_province.Size = new System.Drawing.Size(328, 28);
             this.cb_province.TabIndex = 6;
             this.cb_province.SelectedIndexChanged += new System.EventHandler(this.cb_province_SelectedIndexChanged);
             // 
@@ -178,8 +191,9 @@
             this.cb_district.FormattingEnabled = true;
             this.cb_district.Location = new System.Drawing.Point(230, 554);
             this.cb_district.Name = "cb_district";
-            this.cb_district.Size = new System.Drawing.Size(262, 28);
+            this.cb_district.Size = new System.Drawing.Size(328, 28);
             this.cb_district.TabIndex = 6;
+            this.cb_district.SelectedIndexChanged += new System.EventHandler(this.cb_district_SelectedIndexChanged);
             // 
             // btn_add_client
             // 

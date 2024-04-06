@@ -83,5 +83,74 @@ namespace SistemaDeVentas.Clientes
             cb_district.SelectedIndex = 0;
         }
 
+        private void cb_district_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_reference_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_document_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_phone_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_address_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_name_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
