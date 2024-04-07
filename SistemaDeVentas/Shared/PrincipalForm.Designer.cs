@@ -84,7 +84,8 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(270, 938);
-            this.panel1.TabIndex = 2;           
+            this.panel1.TabIndex = 2;
+            // 
             // panel3
             // 
             this.panel3.Location = new System.Drawing.Point(272, 233);
@@ -108,7 +109,7 @@
             this.iconButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.iconButton4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.iconButton4.ForeColor = System.Drawing.Color.White;
-            this.iconButton4.IconChar = FontAwesome.Sharp.IconChar.HomeUser;
+            this.iconButton4.IconChar = FontAwesome.Sharp.IconChar.Server;
             this.iconButton4.IconColor = System.Drawing.Color.White;
             this.iconButton4.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconButton4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -118,7 +119,7 @@
             this.iconButton4.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.iconButton4.Size = new System.Drawing.Size(270, 104);
             this.iconButton4.TabIndex = 3;
-            this.iconButton4.Text = "LLenar";
+            this.iconButton4.Text = "Configuración";
             this.iconButton4.UseVisualStyleBackColor = false;
             this.iconButton4.Click += new System.EventHandler(this.btn_home_Click);
             // 

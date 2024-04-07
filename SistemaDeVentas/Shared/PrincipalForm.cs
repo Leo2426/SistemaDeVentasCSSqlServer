@@ -1,11 +1,13 @@
 ﻿using FontAwesome.Sharp;
 using SistemaDeVentas.Clientes;
+using SistemaDeVentas.Configuration;
 using SistemaDeVentas.Home;
 using SistemaDeVentas.Productos;
 using SistemaDeVentas.Ventas;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -47,6 +49,10 @@ namespace SistemaDeVentas.Shared
             else if (currentButton.Text == "Clientes")
            
                 configForm(new ClientsForm());
+
+            else if (currentButton.Text == "Configuración")
+
+                configForm(new ConfigurationForm());
             else
             
                 MessageBox.Show("No se ha encontrado el formulario");
