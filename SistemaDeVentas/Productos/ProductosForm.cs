@@ -16,5 +16,113 @@ namespace SistemaDeVentas.Productos
         {
             InitializeComponent();
         }
+
+        private void ProductosForm_Load(object sender, EventArgs e)
+        {
+            //cargar productos
+            LoadProducts();
+        }
+
+
+        private void LoadProducts()
+        {
+            var productRepository = new ProductRepository();
+            var products = productRepository.GetAllProducts();
+            dt_products.DataSource = products;
+
+            //ocultar columna id
+            dt_products.Columns["Id"].Visible = false;
+
+            //renombrar columnas
+            dt_products.Columns["Code"].HeaderText = "Código";
+            dt_products.Columns["Description"].HeaderText = "Descripción";
+            dt_products.Columns["Cost"].HeaderText = "Costo";
+            dt_products.Columns["Price"].HeaderText = "Precio";
+            dt_products.Columns["MinimumStock"].HeaderText = "Stock mínimo";
+            dt_products.Columns["InitialStock"].HeaderText = "Stock inicial";
+            dt_products.Columns["SizesId"].HeaderText = "Talla";
+
+            //dar formato a las columnas de color
+            formating();
+           
+
+
+        }
+
+        private void btn_add_product_Click(object sender, EventArgs e)
+        {
+            //abrir formulario para agregar producto
+            var addProductForm = new AddProductForm();
+            addProductForm.ShowDialog();
+            LoadProducts();
+        }
+
+        private void btn_update_Click(object sender, EventArgs e)
+        {
+            //enviar producto seleccionado al formulario de actualización
+            //validar que haya seleccionado un producto
+
+            if (dt_products.CurrentRow == null)
+            {
+                MessageBox.Show("Debe seleccionar un producto");
+                return;
+            }
+            var product = dt_products.CurrentRow;
+            var updateProductForm = new UpdateProductForm((Product)product.DataBoundItem);
+            updateProductForm.ShowDialog();
+            LoadProducts();  
+        }
+
+        private void btn_delete_Click(object sender, EventArgs e)
+        {
+            //delete product
+            var product = (Product)dt_products.CurrentRow.DataBoundItem;
+            var productRepository = new ProductRepository();
+            //message box de confirmación con la descripcion del producto
+            var result = MessageBox.Show($"¿Está seguro de eliminar el producto {product.Description}?", "Eliminar producto", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                productRepository.DeleteProduct(product.Id);
+                LoadProducts();
+            }
+
+        }
+
+        private void btn_search_Click(object sender, EventArgs e)
+        {
+            //search product
+            var productRepository = new ProductRepository();
+            var products = productRepository.SearchProduct(txt_search.Text);
+            
+            //borrar los productos actuales
+            dt_products.DataSource = null;
+            //cargar los productos encontrados            
+            dt_products.DataSource = products;
+
+
+
+
+        }
+
+        private void formating()
+        {
+         
+            //dar formato a las columnas de color si la resta de stock inicial y stock minimo es menor a 2
+
+            foreach (DataGridViewRow row in dt_products.Rows)
+            {
+                var initialStock = Convert.ToInt32(row.Cells["InitialStock"].Value);
+                var minimumStock = Convert.ToInt32(row.Cells["MinimumStock"].Value);
+                if (initialStock - minimumStock <= 5)
+                {
+                   //toda la fila
+                   row.DefaultCellStyle.BackColor = Color.Red;
+                    row.DefaultCellStyle.ForeColor = Color.White;
+                    //solo una celda
+                }
+            }
+
+            
+        }
     }
 }

@@ -218,11 +218,26 @@
     </Compile>
     <Compile Include="Login\User.cs" />
     <Compile Include="Login\UserRepository.cs" />
+    <Compile Include="Productos\AddProductForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Productos\AddProductForm.Designer.cs">
+      <DependentUpon>AddProductForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Productos\Product.cs" />
     <Compile Include="Productos\ProductosForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Productos\ProductosForm.Designer.cs">
       <DependentUpon>ProductosForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Productos\ProductRepository.cs" />
+    <Compile Include="Productos\SizeRepository.cs" />
+    <Compile Include="Productos\UpdateProductForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Productos\UpdateProductForm.Designer.cs">
+      <DependentUpon>UpdateProductForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Shared\Conexion.cs" />
     <Compile Include="Login\LoginForm.cs">
@@ -272,8 +287,14 @@
     <EmbeddedResource Include="Login\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Productos\AddProductForm.resx">
+      <DependentUpon>AddProductForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Productos\ProductosForm.resx">
       <DependentUpon>ProductosForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Productos\UpdateProductForm.resx">
+      <DependentUpon>UpdateProductForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
