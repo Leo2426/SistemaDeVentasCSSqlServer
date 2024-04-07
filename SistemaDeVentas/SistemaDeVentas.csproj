@@ -272,6 +272,12 @@
     <Compile Include="Ubication\DistrictRepository.cs" />
     <Compile Include="Ubication\Province.cs" />
     <Compile Include="Ubication\ProvinceRepository.cs" />
+    <Compile Include="Ventas\Delivery\DeliveryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ventas\Delivery\DeliveryForm.Designer.cs">
+      <DependentUpon>DeliveryForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ventas\VentasForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -316,6 +322,9 @@
     </Compile>
     <EmbeddedResource Include="Shared\PrincipalForm.resx">
       <DependentUpon>PrincipalForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ventas\Delivery\DeliveryForm.resx">
+      <DependentUpon>DeliveryForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ventas\VentasForm.resx">
       <DependentUpon>VentasForm.cs</DependentUpon>
