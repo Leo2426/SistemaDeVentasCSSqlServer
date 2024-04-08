@@ -28,9 +28,10 @@
     <ProductName>Sistema de Ventas</ProductName>
     <PublisherName>Entersoft Publiser</PublisherName>
     <SuiteName>Entersoft Suite Name</SuiteName>
-    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationRevision>7</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -288,6 +289,13 @@
     <Compile Include="Ventas\Payments\PaymentConditionRepository.cs" />
     <Compile Include="Ventas\Payments\PaymentType.cs" />
     <Compile Include="Ventas\Payments\PaymentTypeRepository.cs" />
+    <Compile Include="Ventas\ProductSaled.cs" />
+    <Compile Include="Ventas\ProductsWithSalesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ventas\ProductsWithSalesForm.Designer.cs">
+      <DependentUpon>ProductsWithSalesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ventas\Sale.cs" />
     <Compile Include="Ventas\SaleRepository.cs" />
     <Compile Include="Ventas\SalesMan.cs" />
@@ -348,6 +356,9 @@
     <EmbeddedResource Include="Ventas\Delivery\DeliveryForm.resx">
       <DependentUpon>DeliveryForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Ventas\ProductsWithSalesForm.resx">
+      <DependentUpon>ProductsWithSalesForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Ventas\SearchProductForm.resx">
       <DependentUpon>SearchProductForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -397,7 +408,7 @@
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 y x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">

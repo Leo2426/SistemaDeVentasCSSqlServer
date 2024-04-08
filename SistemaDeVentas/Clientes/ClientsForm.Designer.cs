@@ -65,7 +65,7 @@
             // 
             // btn_update
             // 
-            this.btn_update.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btn_update.BackColor = System.Drawing.SystemColors.Control;
             this.btn_update.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_update.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btn_update.IconChar = FontAwesome.Sharp.IconChar.Upload;
@@ -84,7 +84,7 @@
             // 
             // btn_delete
             // 
-            this.btn_delete.BackColor = System.Drawing.Color.RosyBrown;
+            this.btn_delete.BackColor = System.Drawing.SystemColors.Control;
             this.btn_delete.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_delete.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btn_delete.IconChar = FontAwesome.Sharp.IconChar.CircleMinus;
@@ -103,7 +103,7 @@
             // 
             // btn_add_client
             // 
-            this.btn_add_client.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.btn_add_client.BackColor = System.Drawing.SystemColors.Control;
             this.btn_add_client.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_add_client.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btn_add_client.IconChar = FontAwesome.Sharp.IconChar.PlusCircle;

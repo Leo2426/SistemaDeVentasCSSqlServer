@@ -35,15 +35,16 @@
             this.btn_update = new FontAwesome.Sharp.IconButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.dt_products = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dt_products)).BeginInit();
             this.SuspendLayout();
             // 
             // txt_search
             // 
-            this.txt_search.Location = new System.Drawing.Point(175, 12);
+            this.txt_search.Location = new System.Drawing.Point(65, 64);
             this.txt_search.Name = "txt_search";
-            this.txt_search.Size = new System.Drawing.Size(484, 26);
+            this.txt_search.Size = new System.Drawing.Size(495, 26);
             this.txt_search.TabIndex = 10;
             // 
             // btn_search
@@ -51,16 +52,17 @@
             this.btn_search.IconChar = FontAwesome.Sharp.IconChar.SearchDollar;
             this.btn_search.IconColor = System.Drawing.Color.Black;
             this.btn_search.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btn_search.Location = new System.Drawing.Point(691, -4);
+            this.btn_search.IconSize = 35;
+            this.btn_search.Location = new System.Drawing.Point(576, 56);
             this.btn_search.Name = "btn_search";
-            this.btn_search.Size = new System.Drawing.Size(63, 59);
+            this.btn_search.Size = new System.Drawing.Size(41, 42);
             this.btn_search.TabIndex = 9;
             this.btn_search.UseVisualStyleBackColor = true;
             this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
             // 
             // btn_add_product
             // 
-            this.btn_add_product.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.btn_add_product.BackColor = System.Drawing.SystemColors.Control;
             this.btn_add_product.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_add_product.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btn_add_product.IconChar = FontAwesome.Sharp.IconChar.PlusCircle;
@@ -68,7 +70,7 @@
             this.btn_add_product.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btn_add_product.IconSize = 40;
             this.btn_add_product.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_add_product.Location = new System.Drawing.Point(967, 623);
+            this.btn_add_product.Location = new System.Drawing.Point(982, 675);
             this.btn_add_product.Name = "btn_add_product";
             this.btn_add_product.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
             this.btn_add_product.Size = new System.Drawing.Size(279, 67);
@@ -79,7 +81,7 @@
             // 
             // btn_delete
             // 
-            this.btn_delete.BackColor = System.Drawing.Color.RosyBrown;
+            this.btn_delete.BackColor = System.Drawing.SystemColors.Control;
             this.btn_delete.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_delete.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btn_delete.IconChar = FontAwesome.Sharp.IconChar.CircleMinus;
@@ -87,7 +89,7 @@
             this.btn_delete.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btn_delete.IconSize = 40;
             this.btn_delete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_delete.Location = new System.Drawing.Point(658, 623);
+            this.btn_delete.Location = new System.Drawing.Point(673, 675);
             this.btn_delete.Name = "btn_delete";
             this.btn_delete.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
             this.btn_delete.Size = new System.Drawing.Size(279, 67);
@@ -98,7 +100,7 @@
             // 
             // btn_update
             // 
-            this.btn_update.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btn_update.BackColor = System.Drawing.SystemColors.Control;
             this.btn_update.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_update.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btn_update.IconChar = FontAwesome.Sharp.IconChar.Upload;
@@ -106,7 +108,7 @@
             this.btn_update.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btn_update.IconSize = 40;
             this.btn_update.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_update.Location = new System.Drawing.Point(353, 623);
+            this.btn_update.Location = new System.Drawing.Point(368, 675);
             this.btn_update.Name = "btn_update";
             this.btn_update.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
             this.btn_update.Size = new System.Drawing.Size(279, 67);
@@ -118,7 +120,7 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.dt_products);
-            this.panel1.Location = new System.Drawing.Point(50, 75);
+            this.panel1.Location = new System.Drawing.Point(65, 127);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1212, 525);
             this.panel1.TabIndex = 5;
@@ -139,11 +141,21 @@
             this.dt_products.Size = new System.Drawing.Size(1212, 525);
             this.dt_products.TabIndex = 0;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(65, 38);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 20);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Código";
+            // 
             // ProductosForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1312, 686);
+            this.ClientSize = new System.Drawing.Size(1316, 784);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.txt_search);
             this.Controls.Add(this.btn_search);
             this.Controls.Add(this.btn_add_product);
@@ -169,5 +181,6 @@
         private FontAwesome.Sharp.IconButton btn_update;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridView dt_products;
+        private System.Windows.Forms.Label label1;
     }
 }

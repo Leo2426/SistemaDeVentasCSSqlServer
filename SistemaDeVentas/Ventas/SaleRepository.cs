@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SistemaDeVentas.Productos;
 
 namespace SistemaDeVentas.Ventas
 {
@@ -117,5 +118,39 @@ namespace SistemaDeVentas.Ventas
             
         }
 
+        public List<ProductSaled> getAllProductsWithSaleId(int saleID)
+        {
+            //traer todos los productos de una venta
+            List<ProductSaled> products = new List<ProductSaled>();
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand("spGetSaleDetails", connection);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@SaleId", saleID);
+
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        ProductSaled product = new ProductSaled()
+                        {
+                            Id = int.Parse(reader["Id"].ToString()),
+                            Description = reader["Descripción"].ToString(),
+                            Code = reader["Código"].ToString(),
+                            Quantity = int.Parse(reader["Cantidad"].ToString()),
+                            SalePrice = decimal.Parse(reader["Precio de Venta"].ToString()),
+                            Stock = int.Parse(reader["Stock"].ToString()),
+                            Size = reader["Talla"].ToString()
+                        };
+                        products.Add(product);
+                    }
+                }
+
+            }
+            return products;
+        }
+        
     }
 }

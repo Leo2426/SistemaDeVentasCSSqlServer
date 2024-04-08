@@ -92,7 +92,7 @@ namespace SistemaDeVentas.Ventas
             var saleRepository = new SaleRepository();
             saleRepository.InsertSale(sale);
 
-            this.Close();
+            this.Close(); 
 
 
         }

@@ -37,5 +37,14 @@ namespace SistemaDeVentas.Ventas
             addSaleForm.ShowDialog();
             loadSales();
         }
+
+        private void dt_sales_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //obtener la venta seleccionada y mostrar los productos
+            var sale = (Sale)dt_sales.CurrentRow.DataBoundItem;
+            var productsWithSalesForm = new ProductsWithSalesForm(sale);
+            productsWithSalesForm.ShowDialog();
+
+        }
     }
 }

@@ -44,10 +44,11 @@
             this.dt_sales.RowTemplate.Height = 28;
             this.dt_sales.Size = new System.Drawing.Size(1037, 465);
             this.dt_sales.TabIndex = 0;
+            this.dt_sales.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dt_sales_CellDoubleClick);
             // 
             // btn_add
             // 
-            this.btn_add.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.btn_add.BackColor = System.Drawing.SystemColors.Control;
             this.btn_add.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_add.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btn_add.IconChar = FontAwesome.Sharp.IconChar.PlusCircle;
@@ -66,7 +67,7 @@
             // 
             // btn_delete
             // 
-            this.btn_delete.BackColor = System.Drawing.Color.RosyBrown;
+            this.btn_delete.BackColor = System.Drawing.SystemColors.Control;
             this.btn_delete.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_delete.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btn_delete.IconChar = FontAwesome.Sharp.IconChar.CircleMinus;
@@ -84,7 +85,7 @@
             // 
             // btn_update
             // 
-            this.btn_update.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btn_update.BackColor = System.Drawing.SystemColors.Control;
             this.btn_update.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_update.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btn_update.IconChar = FontAwesome.Sharp.IconChar.Upload;
@@ -104,7 +105,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1198, 879);
+            this.ClientSize = new System.Drawing.Size(1257, 794);
             this.Controls.Add(this.btn_add);
             this.Controls.Add(this.btn_delete);
             this.Controls.Add(this.btn_update);
