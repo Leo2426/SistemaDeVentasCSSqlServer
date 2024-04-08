@@ -34,6 +34,7 @@ namespace SistemaDeVentas.Clientes
             client.District = cb_district.Text;
             clientRepository.InsertClient(client);
             MessageBox.Show("Cliente insertado correctamente");
+            this.Close();
 
         }
 
