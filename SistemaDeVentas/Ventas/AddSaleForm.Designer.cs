@@ -71,6 +71,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cb_client_name = new System.Windows.Forms.ComboBox();
             this.btn_add_client = new FontAwesome.Sharp.IconButton();
+            this.label19 = new System.Windows.Forms.Label();
+            this.txt_size = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dt_products)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -280,8 +282,10 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.txt_quantity);
+            this.groupBox1.Controls.Add(this.txt_size);
             this.groupBox1.Controls.Add(this.txt_product_price);
             this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.label19);
             this.groupBox1.Controls.Add(this.txt_product_name);
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.btn_search);
@@ -290,7 +294,7 @@
             this.groupBox1.Controls.Add(this.txt_product_code);
             this.groupBox1.Location = new System.Drawing.Point(41, 400);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(894, 120);
+            this.groupBox1.Size = new System.Drawing.Size(929, 120);
             this.groupBox1.TabIndex = 42;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Producto";
@@ -298,7 +302,7 @@
             // txt_quantity
             // 
             this.txt_quantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_quantity.Location = new System.Drawing.Point(725, 66);
+            this.txt_quantity.Location = new System.Drawing.Point(788, 66);
             this.txt_quantity.Name = "txt_quantity";
             this.txt_quantity.Size = new System.Drawing.Size(89, 30);
             this.txt_quantity.TabIndex = 45;
@@ -306,7 +310,7 @@
             // txt_product_price
             // 
             this.txt_product_price.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_product_price.Location = new System.Drawing.Point(610, 66);
+            this.txt_product_price.Location = new System.Drawing.Point(673, 66);
             this.txt_product_price.Name = "txt_product_price";
             this.txt_product_price.Size = new System.Drawing.Size(89, 30);
             this.txt_product_price.TabIndex = 45;
@@ -314,7 +318,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(721, 43);
+            this.label14.Location = new System.Drawing.Point(784, 43);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(73, 20);
             this.label14.TabIndex = 1;
@@ -323,15 +327,15 @@
             // txt_product_name
             // 
             this.txt_product_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_product_name.Location = new System.Drawing.Point(309, 66);
+            this.txt_product_name.Location = new System.Drawing.Point(282, 66);
             this.txt_product_name.Name = "txt_product_name";
-            this.txt_product_name.Size = new System.Drawing.Size(274, 30);
+            this.txt_product_name.Size = new System.Drawing.Size(235, 30);
             this.txt_product_name.TabIndex = 45;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(606, 43);
+            this.label13.Location = new System.Drawing.Point(669, 43);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(53, 20);
             this.label13.TabIndex = 1;
@@ -344,7 +348,7 @@
             this.btn_search.IconColor = System.Drawing.Color.Black;
             this.btn_search.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btn_search.IconSize = 30;
-            this.btn_search.Location = new System.Drawing.Point(250, 62);
+            this.btn_search.Location = new System.Drawing.Point(224, 66);
             this.btn_search.Name = "btn_search";
             this.btn_search.Size = new System.Drawing.Size(43, 34);
             this.btn_search.TabIndex = 44;
@@ -354,7 +358,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(305, 43);
+            this.label12.Location = new System.Drawing.Point(278, 43);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(73, 20);
             this.label12.TabIndex = 1;
@@ -374,7 +378,7 @@
             this.txt_product_code.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_product_code.Location = new System.Drawing.Point(26, 66);
             this.txt_product_code.Name = "txt_product_code";
-            this.txt_product_code.Size = new System.Drawing.Size(218, 30);
+            this.txt_product_code.Size = new System.Drawing.Size(196, 30);
             this.txt_product_code.TabIndex = 0;
             // 
             // cb_chanel
@@ -400,10 +404,10 @@
             this.btn_add_product_to_dt.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btn_add_product_to_dt.IconSize = 55;
             this.btn_add_product_to_dt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btn_add_product_to_dt.Location = new System.Drawing.Point(959, 408);
+            this.btn_add_product_to_dt.Location = new System.Drawing.Point(976, 408);
             this.btn_add_product_to_dt.Name = "btn_add_product_to_dt";
             this.btn_add_product_to_dt.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
-            this.btn_add_product_to_dt.Size = new System.Drawing.Size(130, 112);
+            this.btn_add_product_to_dt.Size = new System.Drawing.Size(120, 112);
             this.btn_add_product_to_dt.TabIndex = 43;
             this.btn_add_product_to_dt.Text = "Agregar";
             this.btn_add_product_to_dt.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
@@ -529,6 +533,23 @@
             this.btn_add_client.UseVisualStyleBackColor = true;
             this.btn_add_client.Click += new System.EventHandler(this.btn_add_client_Click);
             // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(549, 43);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(42, 20);
+            this.label19.TabIndex = 1;
+            this.label19.Text = "Talla";
+            // 
+            // txt_size
+            // 
+            this.txt_size.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_size.Location = new System.Drawing.Point(553, 66);
+            this.txt_size.Name = "txt_size";
+            this.txt_size.Size = new System.Drawing.Size(89, 30);
+            this.txt_size.TabIndex = 45;
+            // 
             // AddSaleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -617,5 +638,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ComboBox cb_client_name;
         private FontAwesome.Sharp.IconButton btn_add_client;
+        private System.Windows.Forms.TextBox txt_size;
+        private System.Windows.Forms.Label label19;
     }
 }

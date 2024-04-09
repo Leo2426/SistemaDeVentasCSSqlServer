@@ -136,7 +136,7 @@ namespace SistemaDeVentas.Ventas
                     {
                         ProductSaled product = new ProductSaled()
                         {
-                            Id = int.Parse(reader["Id"].ToString()),
+                            ProductId = int.Parse(reader["Id"].ToString()),
                             Description = reader["Descripción"].ToString(),
                             Code = reader["Código"].ToString(),
                             Quantity = int.Parse(reader["Cantidad"].ToString()),
@@ -150,6 +150,44 @@ namespace SistemaDeVentas.Ventas
 
             }
             return products;
+        }
+
+        public void InsertProductSaled(ProductSaled productSaled)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand("spInsertProductSale", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@sales_id", productSaled.SaleId);
+                command.Parameters.AddWithValue("@products_id", productSaled.ProductId);
+                command.Parameters.AddWithValue("@quantity", productSaled.Quantity);
+                command.Parameters.AddWithValue("@sale_price", productSaled.SalePrice);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public int GetLastSaleId()
+        {
+            int saleId = 0;
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand("spGetLastSaleId", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        saleId = int.Parse(reader["id"].ToString());
+                    }
+                }
+            }
+            return saleId;
         }
         
     }

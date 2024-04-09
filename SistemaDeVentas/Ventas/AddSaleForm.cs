@@ -92,6 +92,23 @@ namespace SistemaDeVentas.Ventas
             var saleRepository = new SaleRepository();
             saleRepository.InsertSale(sale);
 
+
+            //insertar los productos de la venta
+            foreach (DataGridViewRow row in dt_products.Rows)
+            {
+                var productSaled = new ProductSaled();
+                //se obtiene el id de la venta que se acaba de insertar
+                productSaled.ProductId = Convert.ToInt32(row.Cells["Id"].Value.ToString());
+                //se obtiene el id de la venta que se acaba de insertar
+                productSaled.SaleId = saleRepository.GetLastSaleId();
+                productSaled.Code = row.Cells["Code"].Value.ToString();
+                productSaled.Quantity = int.Parse(row.Cells["Quantity"].Value.ToString());
+                productSaled.SalePrice = decimal.Parse(row.Cells["Price"].Value.ToString());
+                saleRepository.InsertProductSaled(productSaled);
+            }
+
+
+
             this.Close(); 
 
 
@@ -112,10 +129,10 @@ namespace SistemaDeVentas.Ventas
                 txt_product_name.Text = product.Description;
                 txt_product_code.Text = product.Code;
                 txt_product_price.Text = product.Price.ToString();
+                txt_size.Text = product.SizesId;
                 txt_quantity.Text = "1";
             }
 
-            GlobalClass.SelectedProduct = null;
         }
 
         private void btn_add_product_to_dt_Click(object sender, EventArgs e)
@@ -133,15 +150,19 @@ namespace SistemaDeVentas.Ventas
             //agregar cabeceras a la tabla  
             if (dt_products.Columns.Count == 0)
             {
+                dt_products.Columns.Add("Id", "Id");
                 dt_products.Columns.Add("Code", "Código");
                 dt_products.Columns.Add("Description", "Descripción");
                 dt_products.Columns.Add("Price", "Precio");
+                dt_products.Columns.Add("Size", "Talla");
                 dt_products.Columns.Add("Quantity", "Cantidad");
             }
 
 
             //agregar producto a la lista de productos
-            dt_products.Rows.Add(txt_product_code.Text, txt_product_name.Text, txt_product_price.Text, txt_quantity.Text);
+            dt_products.Rows.Add(GlobalClass.SelectedProduct.Id,txt_product_code.Text, txt_product_name.Text, txt_product_price.Text, txt_size.Text, txt_quantity.Text);
+
+            GlobalClass.SelectedProduct = null;
 
             //calcular el total
             decimal total = 0;
@@ -186,5 +207,6 @@ namespace SistemaDeVentas.Ventas
             //recargar los clientes
             loadClients();
         }
+
     }
 }
