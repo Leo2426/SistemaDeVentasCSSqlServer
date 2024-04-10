@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Ticket de Venta</title>
+</head>
+<style>
+    .line{
+        border-top: 1px solid black;
+        margin-top: 10px;
+        width: 100%;
+    }
+    body {
+        font-family: 'Arial', sans-serif;
+        font-size: 10px;
+        margin-left: 2em;
+        margin-right: 2em;
+    }
+    .ticket {
+        width: 100%;
+        text-align: center;
+
+    }
+
+    .info {
+        text-align: left;
+        margin: 10px 0;
+        padding: 5px 0;
+    }
+    .item {
+        margin: 5px 0;
+    }
+
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        font-size: 10px;
+    }
+
+    h3 {
+        margin-top: 20px;
+        margin-right: 10px;
+        text-align: right;
+    }
+    .single{
+        font-size: 8px;
+        margin: 0;    
+        margin-top: 2px;
+    }
+
+
+</style>
+
+<body>
+<div class="ticket">
+    <br/>
+    <div class="line"></div>
+    <p id="first" class="single" >MARCAS ORIGINALES </p>
+    <p class="single">Modelos únicos y Exclusivos </p>  
+    <p class="single">INSTAGRAM : @Marcas_Origanaless</p>   
+    <p class="single"> WHATSAPP: 902 409 961</p>  
+    <div class="line"></div>
+    <div class="info">
+        <div class="item">Cliente: @Client</div>
+        <div class="item">Celular: @Phone</div>
+        <div class="item">Dirección: @Address</div>
+        <div class="item">Referencia: @Reference</div>
+        <div class="item">Observación: @Observation</div>
+        <div class="item">Tipo de Pago: @PaymentType</div>
+        <div class="item">Fecha: @Date</div>
+
+        <!-- Más información del ticket -->
+    </div>
+    <div class="line"></div>
+    <!-- Productos y totales -->
+    <table>
+        <thead>
+            <tr>
+                <th>Descripción</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>SubTotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @Products
+        </tbody>
+    </table>
+
+        <h3>Total @Total</h3>
+</div>
+</body>
+</html>

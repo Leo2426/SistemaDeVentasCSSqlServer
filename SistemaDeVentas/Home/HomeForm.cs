@@ -1,4 +1,5 @@
-﻿using SistemaDeVentas.Ventas;
+﻿using SistemaDeVentas.Print;
+using SistemaDeVentas.Ventas;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,5 +41,7 @@ namespace SistemaDeVentas.Home
             var totalSales = sales.Sum(s => s.Total);
             lbl_total_sales.Text = totalSales.ToString();
         }
+
+
     }
 }

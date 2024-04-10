@@ -1,5 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using SistemaDeVentas.Clientes;
+using SistemaDeVentas.Print;
 using SistemaDeVentas.Shared;
 using SistemaDeVentas.Ventas.Payments;
 using System;
@@ -72,6 +73,13 @@ namespace SistemaDeVentas.Ventas
 
         private void btn_add_Click(object sender, EventArgs e)
         {
+            //validar que hayan productos
+            if (dt_products.Rows.Count == 0)
+            {
+                MessageBox.Show("Debe agregar productos a la venta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
             sale.SaleType = cb_type.Text;
             sale.ClientName = cb_client_name.Text;
             sale.Date = DateTime.Now;
@@ -94,6 +102,7 @@ namespace SistemaDeVentas.Ventas
 
 
             //insertar los productos de la venta
+            var saledProducts = new List<ProductSaled>();
             foreach (DataGridViewRow row in dt_products.Rows)
             {
                 var productSaled = new ProductSaled();
@@ -105,15 +114,22 @@ namespace SistemaDeVentas.Ventas
                 productSaled.Quantity = int.Parse(row.Cells["Quantity"].Value.ToString());
                 productSaled.SalePrice = decimal.Parse(row.Cells["Price"].Value.ToString());
                 saleRepository.InsertProductSaled(productSaled);
+                saledProducts.Add(productSaled);
             }
 
 
 
-            this.Close(); 
+            this.Close();
 
-
+            generatePdf(saledProducts);
         }
 
+        private void generatePdf(List<ProductSaled> productSaleds)
+        {
+            //generar ticket de venta
+            var saleTicket = new SaleTicket(sale,productSaleds);
+            saleTicket.CreateSaleTicketPdf();
+        }
 
         private void btn_search_Click(object sender, EventArgs e)
         {

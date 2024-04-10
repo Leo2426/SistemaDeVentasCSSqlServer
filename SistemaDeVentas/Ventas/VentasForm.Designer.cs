@@ -37,12 +37,19 @@
             // 
             // dt_sales
             // 
+            this.dt_sales.AllowUserToAddRows = false;
+            this.dt_sales.AllowUserToDeleteRows = false;
+            this.dt_sales.AllowUserToOrderColumns = true;
             this.dt_sales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dt_sales.Location = new System.Drawing.Point(78, 76);
+            this.dt_sales.Location = new System.Drawing.Point(44, 92);
+            this.dt_sales.MultiSelect = false;
             this.dt_sales.Name = "dt_sales";
+            this.dt_sales.ReadOnly = true;
             this.dt_sales.RowHeadersWidth = 62;
             this.dt_sales.RowTemplate.Height = 28;
-            this.dt_sales.Size = new System.Drawing.Size(1037, 465);
+            this.dt_sales.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dt_sales.ShowEditingIcon = false;
+            this.dt_sales.Size = new System.Drawing.Size(1145, 525);
             this.dt_sales.TabIndex = 0;
             this.dt_sales.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dt_sales_CellDoubleClick);
             // 
@@ -56,7 +63,7 @@
             this.btn_add.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btn_add.IconSize = 40;
             this.btn_add.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_add.Location = new System.Drawing.Point(826, 660);
+            this.btn_add.Location = new System.Drawing.Point(909, 657);
             this.btn_add.Name = "btn_add";
             this.btn_add.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
             this.btn_add.Size = new System.Drawing.Size(279, 67);
@@ -75,7 +82,7 @@
             this.btn_delete.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btn_delete.IconSize = 40;
             this.btn_delete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_delete.Location = new System.Drawing.Point(517, 660);
+            this.btn_delete.Location = new System.Drawing.Point(600, 657);
             this.btn_delete.Name = "btn_delete";
             this.btn_delete.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
             this.btn_delete.Size = new System.Drawing.Size(279, 67);
@@ -93,7 +100,7 @@
             this.btn_update.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btn_update.IconSize = 40;
             this.btn_update.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_update.Location = new System.Drawing.Point(211, 657);
+            this.btn_update.Location = new System.Drawing.Point(294, 654);
             this.btn_update.Name = "btn_update";
             this.btn_update.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
             this.btn_update.Size = new System.Drawing.Size(279, 67);
@@ -105,7 +112,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1257, 794);
+            this.ClientSize = new System.Drawing.Size(1253, 769);
             this.Controls.Add(this.btn_add);
             this.Controls.Add(this.btn_delete);
             this.Controls.Add(this.btn_update);

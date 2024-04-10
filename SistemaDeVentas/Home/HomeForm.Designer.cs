@@ -38,6 +38,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lbl_total_sales = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chart_sales)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sistemadeventasdbDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sistemadeventasdbDataSet)).BeginInit();
@@ -98,11 +99,22 @@
             this.lbl_total_sales.TabIndex = 2;
             this.lbl_total_sales.Text = "label3";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(12, 182);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(892, 46);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Validar entrar los mismos productos en el list box\r\n";
+            // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(762, 630);
+            this.ClientSize = new System.Drawing.Size(938, 630);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.lbl_total_sales);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -126,5 +138,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lbl_total_sales;
+        private System.Windows.Forms.Label label3;
     }
 }

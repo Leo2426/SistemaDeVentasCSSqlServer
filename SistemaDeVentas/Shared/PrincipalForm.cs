@@ -28,6 +28,8 @@ namespace SistemaDeVentas.Shared
         private void PrincipalForm_Load(object sender, EventArgs e)
         {
             lbl_heading.Text = "Home";
+            //dar click al boton home
+            btn_home.PerformClick();
         }
 
         private void btn_home_Click(object sender, EventArgs e)
