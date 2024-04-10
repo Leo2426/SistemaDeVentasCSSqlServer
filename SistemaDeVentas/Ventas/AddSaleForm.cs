@@ -1,6 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using SistemaDeVentas.Clientes;
 using SistemaDeVentas.Print;
+using SistemaDeVentas.Productos;
 using SistemaDeVentas.Shared;
 using SistemaDeVentas.Ventas.Payments;
 using System;
@@ -69,6 +70,40 @@ namespace SistemaDeVentas.Ventas
         private void AddSaleForm_Load(object sender, EventArgs e)
         {
             loadComboBoxes();
+            addbtndeleteAndHeaders();
+        }
+
+        private void addbtndeleteAndHeaders()
+        {
+
+
+            //agregar cabeceras a la tabla  
+
+            dt_products.Columns.Add("Id", "Id");
+            dt_products.Columns.Add("Code", "Código");
+            dt_products.Columns.Add("Description", "Descripción");
+            dt_products.Columns.Add("Price", "Precio");
+            dt_products.Columns.Add("Size", "Talla");
+            dt_products.Columns.Add("Quantity", "Cantidad");
+
+            //agregar un boton para eliminar del data grid view
+            DataGridViewButtonColumn btn = new DataGridViewButtonColumn();
+            dt_products.Columns.Add(btn);
+            btn.HeaderText = "";
+            btn.Text = "Eliminar";
+            btn.Name = "btn";
+            btn.UseColumnTextForButtonValue = true;
+            btn = new DataGridViewButtonColumn();
+
+            //si da click al boton se elimina toda la fila
+            dt_products.CellClick += (s, ev) =>
+            {
+                if (ev.RowIndex >= 0 && ev.ColumnIndex == dt_products.Columns["btn"].Index)
+                {
+                    dt_products.Rows.RemoveAt(ev.RowIndex);
+                }
+            };
+
         }
 
         private void btn_add_Click(object sender, EventArgs e)
@@ -115,6 +150,13 @@ namespace SistemaDeVentas.Ventas
                 productSaled.SalePrice = decimal.Parse(row.Cells["Price"].Value.ToString());
                 saleRepository.InsertProductSaled(productSaled);
                 saledProducts.Add(productSaled);
+
+
+                //disminuir la cantidad de initial stock de cada producto
+                var productRepository = new ProductRepository();
+                var product = productRepository.GetProductByCode(productSaled.Code);
+                product.InitialStock -= productSaled.Quantity;
+                productRepository.UpdateProduct(product);
             }
 
 
@@ -153,6 +195,26 @@ namespace SistemaDeVentas.Ventas
 
         private void btn_add_product_to_dt_Click(object sender, EventArgs e)
         {
+            //si el producto seleccionado ya esta en la lista no permitir agregarlo
+            foreach (DataGridViewRow row in dt_products.Rows)
+            {
+                if (row.Cells["Code"].Value.ToString() == txt_product_code.Text)
+                {
+                    MessageBox.Show("El producto ya se encuentra en la lista", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+            }
+
+            //validar que el producto cuente con intial_stock luego de restarle la cantidad
+            var productRepository = new ProductRepository();
+            var product = productRepository.GetProductByCode(txt_product_code.Text);
+            if (product.InitialStock < int.Parse(txt_quantity.Text))
+            {
+                MessageBox.Show("No hay suficiente stock para el producto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            
+            
             //validar que haya seleccionado un producto
             if (txt_product_code.Text == "")
             {
@@ -160,20 +222,6 @@ namespace SistemaDeVentas.Ventas
                 MessageBox.Show("Debe seleccionar un producto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-
-
-
-            //agregar cabeceras a la tabla  
-            if (dt_products.Columns.Count == 0)
-            {
-                dt_products.Columns.Add("Id", "Id");
-                dt_products.Columns.Add("Code", "Código");
-                dt_products.Columns.Add("Description", "Descripción");
-                dt_products.Columns.Add("Price", "Precio");
-                dt_products.Columns.Add("Size", "Talla");
-                dt_products.Columns.Add("Quantity", "Cantidad");
-            }
-
 
             //agregar producto a la lista de productos
             dt_products.Rows.Add(GlobalClass.SelectedProduct.Id,txt_product_code.Text, txt_product_name.Text, txt_product_price.Text, txt_size.Text, txt_quantity.Text);

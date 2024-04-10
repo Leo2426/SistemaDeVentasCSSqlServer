@@ -138,47 +138,45 @@ namespace SistemaDeVentas.Productos
                 }
             }
             return products;
+        }
 
+        //obtener un producto por codigo
+        public Product GetProductByCode(string code)
+            {
+            Product product = new Product();
+            using (var connection = new SqlConnection(Conexion.stringConexion))
+                {
+                var cmd = new SqlCommand("spGetProductByCode", connection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
 
+                cmd.Parameters.Add(new SqlParameter("@code", code));
 
-
-
-            //// Buscar cliente por nombre o documento
-            //try
-            //{
-            //    SqlConnection connection = new SqlConnection(connectionString);
-            //    SqlCommand command = new SqlCommand("spSearchClients", connection);
-            //    command.CommandType = System.Data.CommandType.StoredProcedure;
-            //    command.Parameters.AddWithValue("@searchTerm", searchTerm);
-            //    connection.Open();
-            //    SqlDataReader reader = command.ExecuteReader();
-
-            //    List<Client> clients = new List<Client>();
-            //    while (reader.Read())
-            //    {
-            //        Client client = new Client();
-            //        client.Id = Convert.ToInt32(reader["id"]);
-            //        client.Name = reader["name"].ToString();
-            //        client.Address = reader["address"].ToString();
-            //        client.Document = reader["document"].ToString();
-            //        client.Phone = reader["phone"].ToString();
-            //        client.Reference = reader["reference"].ToString();
-            //        client.Department = reader["DepartmentName"].ToString();
-            //        client.Province = reader["ProvinceName"].ToString();
-            //        client.District = reader["DistrictName"].ToString();
-            //        clients.Add(client);
-            //    }
-            //    connection.Close();
-            //    return clients;
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw new Exception("Error al buscar cliente: " + ex.Message);
-            //}
+                connection.Open();
+                using (var reader = cmd.ExecuteReader())
+                    {
+                    while (reader.Read())
+                        {
+                        product = new Product
+                        {
+                            Id = int.Parse(reader["id"].ToString()),
+                            Code = reader["code"].ToString(),
+                            Description = reader["description"].ToString(),
+                            Cost = decimal.Parse(reader["cost"].ToString()),
+                            Price = decimal.Parse(reader["price"].ToString()),
+                            MinimumStock = int.Parse(reader["minimum_stock"].ToString()),
+                            InitialStock = int.Parse(reader["initial_stock"].ToString()),
+                            SizesId = (reader["SizeName"].ToString())
+                        };
+                    }
+                }
+            }
+            return product;
+            }
         
         }
 
 
-    }
-}
+ }
+
