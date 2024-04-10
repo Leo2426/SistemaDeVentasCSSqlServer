@@ -346,6 +346,7 @@
     <Compile Include="Ventas\AddSaleForm.Designer.cs">
       <DependentUpon>AddSaleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ventas\Delivery\Delivery.cs" />
     <Compile Include="Ventas\Delivery\DeliveryForm.cs">
       <SubType>Form</SubType>
     </Compile>

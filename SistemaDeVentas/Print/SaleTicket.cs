@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
+using System.Threading;
 using System.Windows.Forms;
 
 
@@ -28,7 +30,8 @@ namespace SistemaDeVentas.Print
 
         public void CreateSaleTicketPdf()
         {
-            string dest = GetSaveFilePath();
+            string nameofpdf = sale.Id.ToString();
+            string dest = GetSaveFilePath(nameofpdf);
             if (string.IsNullOrEmpty(dest))
             {
                 // El usuario canceló el diálogo o no seleccionó un archivo.
@@ -105,6 +108,27 @@ namespace SistemaDeVentas.Print
             }
 
 
+            pressCtrlP(dest);
+
+        }
+
+        private void pressCtrlP(string dest)
+        {
+            // Abre el archivo PDF generado con la aplicación predeterminada
+            ProcessStartInfo psi = new ProcessStartInfo(dest)
+            {
+                UseShellExecute = true
+            };
+            Process process = Process.Start(psi);
+
+            // Espera un momento para que el archivo PDF se abra
+            Thread.Sleep(2000); // Espera 2 segundos
+
+            // Simula la presión de la tecla Control + P
+            SendKeys.SendWait("^(p)"); // '^' representa la tecla Control, y 'p' es la tecla 'P'
+
+            // Nota: Este enfoque depende del contexto actual y de la aplicación que tenga el foco. Puede que no funcione como se espera en todos los casos.
+
         }
 
         private void insertImage(Document pdf)
@@ -116,12 +140,14 @@ namespace SistemaDeVentas.Print
             pdf.Add(logo);
         }
 
-        private static string GetSaveFilePath()
+        private static string GetSaveFilePath(string name)
         {
             using (SaveFileDialog dialog = new SaveFileDialog())
             {
                 dialog.Filter = "PDF files (*.pdf)|*.pdf"; // Filtra solo archivos .pdf
                 dialog.Title = "Guardar Ticket de Venta como PDF";
+                //guardar con nombre predefinido
+                dialog.FileName = "TicketVenta_" + name + "_"+DateTime.Now.ToString("yyyyMMddHHmmss") + ".pdf";
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     return dialog.FileName; // Retorna la ruta completa del archivo

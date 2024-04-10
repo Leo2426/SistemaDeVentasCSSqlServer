@@ -34,7 +34,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(113, 70);
+            this.label1.Location = new System.Drawing.Point(479, 589);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 20);
             this.label1.TabIndex = 0;
@@ -44,7 +44,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(280, 165);
+            this.ClientSize = new System.Drawing.Size(709, 736);
             this.Controls.Add(this.label1);
             this.Name = "DeliveryForm";
             this.Text = "DeliveryForm";

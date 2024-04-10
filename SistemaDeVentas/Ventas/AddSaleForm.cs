@@ -114,7 +114,8 @@ namespace SistemaDeVentas.Ventas
                 MessageBox.Show("Debe agregar productos a la venta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-
+            SaleRepository salerepo = new SaleRepository();
+            sale.Id = salerepo.GetLastSaleId() + 1;
             sale.SaleType = cb_type.Text;
             sale.ClientName = cb_client_name.Text;
             sale.Date = DateTime.Now;
