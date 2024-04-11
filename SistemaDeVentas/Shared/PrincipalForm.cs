@@ -4,6 +4,7 @@ using SistemaDeVentas.Configuration;
 using SistemaDeVentas.Home;
 using SistemaDeVentas.Productos;
 using SistemaDeVentas.Ventas;
+using SistemaDeVentas.Ventas.Delivery;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -55,6 +56,10 @@ namespace SistemaDeVentas.Shared
             else if (currentButton.Text == "Configuración")
 
                 configForm(new ConfigurationForm());
+
+            else if (currentButton.Text == "Delivery")
+
+                configForm(new ShowDeliveryForm());
             else
             
                 MessageBox.Show("No se ha encontrado el formulario");
@@ -79,6 +84,8 @@ namespace SistemaDeVentas.Shared
 
         }
 
+
+        #region Botones
         private void DisableButton()
         {
             foreach (Control previousBtn in panel1.Controls)
@@ -89,6 +96,8 @@ namespace SistemaDeVentas.Shared
                 }
             }
         }
+
+        #endregion
 
 
         private void configForm(Form form)

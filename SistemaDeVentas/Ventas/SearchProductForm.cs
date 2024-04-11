@@ -33,6 +33,16 @@ namespace SistemaDeVentas.Ventas
 
             var productRepository = new ProductRepository();
             var products = productRepository.GetAllProducts();
+
+            //si la no hay productos mostrar mensaje
+            if (products.Count == 0)
+            {
+                MessageBox.Show("No hay productos registrados", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+                return;
+            }
+
+
             dt_products.DataSource = products;
 
             //ocultar columna id

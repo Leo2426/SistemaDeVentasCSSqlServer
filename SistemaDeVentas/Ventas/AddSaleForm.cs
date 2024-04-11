@@ -3,6 +3,7 @@ using SistemaDeVentas.Clientes;
 using SistemaDeVentas.Print;
 using SistemaDeVentas.Productos;
 using SistemaDeVentas.Shared;
+using SistemaDeVentas.Ventas.Delivery;
 using SistemaDeVentas.Ventas.Payments;
 using System;
 using System.Collections.Generic;
@@ -145,6 +146,7 @@ namespace SistemaDeVentas.Ventas
                 //se obtiene el id de la venta que se acaba de insertar
                 productSaled.ProductId = Convert.ToInt32(row.Cells["Id"].Value.ToString());
                 //se obtiene el id de la venta que se acaba de insertar
+                productSaled.Description = row.Cells["Description"].Value.ToString();
                 productSaled.SaleId = saleRepository.GetLastSaleId();
                 productSaled.Code = row.Cells["Code"].Value.ToString();
                 productSaled.Quantity = int.Parse(row.Cells["Quantity"].Value.ToString());
@@ -164,7 +166,17 @@ namespace SistemaDeVentas.Ventas
 
             this.Close();
 
-            generatePdf(saledProducts);
+            //Preguntar si quiere generar pdf
+            DialogResult dialogResult = MessageBox.Show("¿Desea generar un ticket de venta?", "Ticket de venta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.Yes)
+            {
+                generatePdf(saledProducts);
+            }
+
+            //lanzar form de delivery
+            var deliveryForm = new DeliveryForm(sale, saledProducts);
+            deliveryForm.ShowDialog();
+
         }
 
         private void generatePdf(List<ProductSaled> productSaleds)
@@ -180,19 +192,26 @@ namespace SistemaDeVentas.Ventas
             var searchProductForm = new SearchProductForm();
             searchProductForm.ShowDialog();
 
+            //cargar los campos con el producto seleccionado
+            loadTextBoxesWithProductSelected();
+
+        }
+
+        public void loadTextBoxesWithProductSelected()
+        {
             //obtener el producto seleccionado
             var product = GlobalClass.SelectedProduct;
             if (product != null)
             {
-                   //agregar el producto a la lista de productos
+                //agregar el producto a la lista de productos
                 txt_product_name.Text = product.Description;
                 txt_product_code.Text = product.Code;
                 txt_product_price.Text = product.Price.ToString();
                 txt_size.Text = product.SizesId;
                 txt_quantity.Text = "1";
             }
-
         }
+
 
         private void btn_add_product_to_dt_Click(object sender, EventArgs e)
         {
@@ -206,16 +225,29 @@ namespace SistemaDeVentas.Ventas
                 }
             }
 
-            //validar que el producto cuente con intial_stock luego de restarle la cantidad
             var productRepository = new ProductRepository();
+
             var product = productRepository.GetProductByCode(txt_product_code.Text);
+
+
+            //si no existen productos que salga un messagebox de error
+            if (product.Code == null)
+            {
+                MessageBox.Show("Selecciona un producto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            //validar que el producto cuente con intial_stock luego de restarle la cantidad
             if (product.InitialStock < int.Parse(txt_quantity.Text))
             {
                 MessageBox.Show("No hay suficiente stock para el producto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-            
-            
+
+
+
+
+
             //validar que haya seleccionado un producto
             if (txt_product_code.Text == "")
             {
@@ -273,5 +305,30 @@ namespace SistemaDeVentas.Ventas
             loadClients();
         }
 
+        private void txt_product_code_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                //buscar el producto por el codigo
+                var productRepository = new ProductRepository();
+                var product = productRepository.GetProductByCode(txt_product_code.Text);
+                if (product.Code != null)
+                {
+                    txt_product_name.Text = product.Description;
+                    txt_product_price.Text = product.Price.ToString();
+                    txt_size.Text = product.SizesId;
+                    txt_quantity.Text = "1";
+                }
+                //sino lanzar un mensaje
+                else
+                {
+                    MessageBox.Show("Producto no encontrado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+
+
+            }
+
+
+        }
     }
 }

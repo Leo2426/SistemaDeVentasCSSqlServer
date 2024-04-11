@@ -70,7 +70,7 @@
             this.btn_add_product.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btn_add_product.IconSize = 40;
             this.btn_add_product.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_add_product.Location = new System.Drawing.Point(982, 675);
+            this.btn_add_product.Location = new System.Drawing.Point(937, 674);
             this.btn_add_product.Name = "btn_add_product";
             this.btn_add_product.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
             this.btn_add_product.Size = new System.Drawing.Size(279, 67);
@@ -89,7 +89,7 @@
             this.btn_delete.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btn_delete.IconSize = 40;
             this.btn_delete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_delete.Location = new System.Drawing.Point(673, 675);
+            this.btn_delete.Location = new System.Drawing.Point(628, 674);
             this.btn_delete.Name = "btn_delete";
             this.btn_delete.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
             this.btn_delete.Size = new System.Drawing.Size(279, 67);
@@ -108,7 +108,7 @@
             this.btn_update.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btn_update.IconSize = 40;
             this.btn_update.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_update.Location = new System.Drawing.Point(368, 675);
+            this.btn_update.Location = new System.Drawing.Point(323, 674);
             this.btn_update.Name = "btn_update";
             this.btn_update.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
             this.btn_update.Size = new System.Drawing.Size(279, 67);

@@ -183,7 +183,14 @@ namespace SistemaDeVentas.Ventas
                 {
                     while (reader.Read())
                     {
-                        saleId = int.Parse(reader["id"].ToString());
+                        //si el sale id es null o no existe que sea 1
+                        if (reader["id"] == DBNull.Value)
+                        {
+                            saleId = 1;
+                        }
+                        else
+                        { saleId = int.Parse(reader["id"].ToString()); }
+
                     }
                 }
             }

@@ -50,8 +50,10 @@
             this.dt_products = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txt_quantity = new System.Windows.Forms.TextBox();
+            this.txt_size = new System.Windows.Forms.TextBox();
             this.txt_product_price = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
             this.txt_product_name = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.btn_search = new FontAwesome.Sharp.IconButton();
@@ -71,8 +73,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cb_client_name = new System.Windows.Forms.ComboBox();
             this.btn_add_client = new FontAwesome.Sharp.IconButton();
-            this.label19 = new System.Windows.Forms.Label();
-            this.txt_size = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dt_products)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -91,7 +91,8 @@
             // 
             // cb_sales_man
             // 
-            this.cb_sales_man.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cb_sales_man.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cb_sales_man.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_sales_man.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cb_sales_man.FormattingEnabled = true;
             this.cb_sales_man.Location = new System.Drawing.Point(857, 79);
@@ -205,7 +206,7 @@
             // 
             // cb_payment_condition
             // 
-            this.cb_payment_condition.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cb_payment_condition.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_payment_condition.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cb_payment_condition.FormattingEnabled = true;
             this.cb_payment_condition.Location = new System.Drawing.Point(51, 341);
@@ -307,6 +308,15 @@
             this.txt_quantity.Size = new System.Drawing.Size(89, 30);
             this.txt_quantity.TabIndex = 45;
             // 
+            // txt_size
+            // 
+            this.txt_size.Enabled = false;
+            this.txt_size.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_size.Location = new System.Drawing.Point(553, 66);
+            this.txt_size.Name = "txt_size";
+            this.txt_size.Size = new System.Drawing.Size(89, 30);
+            this.txt_size.TabIndex = 45;
+            // 
             // txt_product_price
             // 
             this.txt_product_price.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -324,8 +334,18 @@
             this.label14.TabIndex = 1;
             this.label14.Text = "Cantidad";
             // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(549, 43);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(42, 20);
+            this.label19.TabIndex = 1;
+            this.label19.Text = "Talla";
+            // 
             // txt_product_name
             // 
+            this.txt_product_name.Enabled = false;
             this.txt_product_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_product_name.Location = new System.Drawing.Point(282, 66);
             this.txt_product_name.Name = "txt_product_name";
@@ -380,10 +400,11 @@
             this.txt_product_code.Name = "txt_product_code";
             this.txt_product_code.Size = new System.Drawing.Size(196, 30);
             this.txt_product_code.TabIndex = 0;
+            this.txt_product_code.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_product_code_KeyDown);
             // 
             // cb_chanel
             // 
-            this.cb_chanel.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cb_chanel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_chanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cb_chanel.FormattingEnabled = true;
             this.cb_chanel.Items.AddRange(new object[] {
@@ -505,7 +526,8 @@
             // 
             // cb_client_name
             // 
-            this.cb_client_name.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_client_name.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cb_client_name.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cb_client_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cb_client_name.FormattingEnabled = true;
             this.cb_client_name.Items.AddRange(new object[] {
@@ -532,23 +554,6 @@
             this.btn_add_client.TabIndex = 44;
             this.btn_add_client.UseVisualStyleBackColor = true;
             this.btn_add_client.Click += new System.EventHandler(this.btn_add_client_Click);
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(549, 43);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(42, 20);
-            this.label19.TabIndex = 1;
-            this.label19.Text = "Talla";
-            // 
-            // txt_size
-            // 
-            this.txt_size.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_size.Location = new System.Drawing.Point(553, 66);
-            this.txt_size.Name = "txt_size";
-            this.txt_size.Size = new System.Drawing.Size(89, 30);
-            this.txt_size.TabIndex = 45;
             // 
             // AddSaleForm
             // 
