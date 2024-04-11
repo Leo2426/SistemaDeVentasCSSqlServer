@@ -231,7 +231,7 @@ namespace SistemaDeVentas.Ventas
 
 
             //si no existen productos que salga un messagebox de error
-            if (product.Code == null)
+            if (GlobalClass.SelectedProduct == null)
             {
                 MessageBox.Show("Selecciona un producto", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
@@ -318,6 +318,11 @@ namespace SistemaDeVentas.Ventas
                     txt_product_price.Text = product.Price.ToString();
                     txt_size.Text = product.SizesId;
                     txt_quantity.Text = "1";
+
+
+                    //agregar al global class
+                    GlobalClass.SelectedProduct = product;
+
                 }
                 //sino lanzar un mensaje
                 else

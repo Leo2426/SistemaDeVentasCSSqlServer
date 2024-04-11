@@ -73,9 +73,12 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cb_client_name = new System.Windows.Forms.ComboBox();
             this.btn_add_client = new FontAwesome.Sharp.IconButton();
+            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.dt_products)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_add
@@ -282,6 +285,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.maskedTextBox1);
             this.groupBox1.Controls.Add(this.txt_quantity);
             this.groupBox1.Controls.Add(this.txt_size);
             this.groupBox1.Controls.Add(this.txt_product_price);
@@ -310,10 +314,10 @@
             // 
             // txt_size
             // 
-            this.txt_size.Enabled = false;
             this.txt_size.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_size.Location = new System.Drawing.Point(553, 66);
             this.txt_size.Name = "txt_size";
+            this.txt_size.ReadOnly = true;
             this.txt_size.Size = new System.Drawing.Size(89, 30);
             this.txt_size.TabIndex = 45;
             // 
@@ -345,10 +349,10 @@
             // 
             // txt_product_name
             // 
-            this.txt_product_name.Enabled = false;
             this.txt_product_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_product_name.Location = new System.Drawing.Point(282, 66);
             this.txt_product_name.Name = "txt_product_name";
+            this.txt_product_name.ReadOnly = true;
             this.txt_product_name.Size = new System.Drawing.Size(235, 30);
             this.txt_product_name.TabIndex = 45;
             // 
@@ -395,6 +399,7 @@
             // 
             // txt_product_code
             // 
+            this.txt_product_code.AllowDrop = true;
             this.txt_product_code.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_product_code.Location = new System.Drawing.Point(26, 66);
             this.txt_product_code.Name = "txt_product_code";
@@ -555,11 +560,27 @@
             this.btn_add_client.UseVisualStyleBackColor = true;
             this.btn_add_client.Click += new System.EventHandler(this.btn_add_client_Click);
             // 
+            // maskedTextBox1
+            // 
+            this.maskedTextBox1.Culture = new System.Globalization.CultureInfo("es-419");
+            this.maskedTextBox1.Location = new System.Drawing.Point(102, 25);
+            this.maskedTextBox1.Name = "maskedTextBox1";
+            this.maskedTextBox1.Size = new System.Drawing.Size(100, 26);
+            this.maskedTextBox1.TabIndex = 46;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(944, 377);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 26);
+            this.numericUpDown1.TabIndex = 49;
+            // 
             // AddSaleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1127, 880);
+            this.ClientSize = new System.Drawing.Size(1765, 880);
+            this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btn_add_product_to_dt);
             this.Controls.Add(this.groupBox1);
@@ -593,6 +614,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -645,5 +667,7 @@
         private FontAwesome.Sharp.IconButton btn_add_client;
         private System.Windows.Forms.TextBox txt_size;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
