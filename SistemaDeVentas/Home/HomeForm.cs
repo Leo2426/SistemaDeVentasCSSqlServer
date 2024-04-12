@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,6 +43,9 @@ namespace SistemaDeVentas.Home
             lbl_total_sales.Text = totalSales.ToString();
         }
 
-
+        private void maskedTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            txt_cash.Text = maskedTextBox1.Text;
+        }
     }
 }

@@ -49,7 +49,7 @@
             this.dtp_date = new System.Windows.Forms.DateTimePicker();
             this.dt_products = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txt_quantity = new System.Windows.Forms.TextBox();
+            this.txt_quantity = new System.Windows.Forms.NumericUpDown();
             this.txt_size = new System.Windows.Forms.TextBox();
             this.txt_product_price = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
@@ -66,27 +66,27 @@
             this.txt_phone = new System.Windows.Forms.TextBox();
             this.txt_total = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.txt_cash = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.txt_credit = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cb_client_name = new System.Windows.Forms.ComboBox();
             this.btn_add_client = new FontAwesome.Sharp.IconButton();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label20 = new System.Windows.Forms.Label();
+            this.txt_cash = new System.Windows.Forms.TextBox();
+            this.txt_credit = new System.Windows.Forms.TextBox();
+            this.txt_days_credit = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dt_products)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_quantity)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_add
             // 
             this.btn_add.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_add.Location = new System.Drawing.Point(867, 785);
+            this.btn_add.Location = new System.Drawing.Point(868, 770);
             this.btn_add.Name = "btn_add";
-            this.btn_add.Size = new System.Drawing.Size(197, 39);
+            this.btn_add.Size = new System.Drawing.Size(197, 58);
             this.btn_add.TabIndex = 39;
             this.btn_add.Text = "Generar Venta";
             this.btn_add.UseVisualStyleBackColor = true;
@@ -216,6 +216,7 @@
             this.cb_payment_condition.Name = "cb_payment_condition";
             this.cb_payment_condition.Size = new System.Drawing.Size(248, 33);
             this.cb_payment_condition.TabIndex = 38;
+            this.cb_payment_condition.SelectedIndexChanged += new System.EventHandler(this.cb_payment_condition_SelectedIndexChanged);
             // 
             // txt_observation
             // 
@@ -285,7 +286,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.maskedTextBox1);
             this.groupBox1.Controls.Add(this.txt_quantity);
             this.groupBox1.Controls.Add(this.txt_size);
             this.groupBox1.Controls.Add(this.txt_product_price);
@@ -308,9 +308,24 @@
             // 
             this.txt_quantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_quantity.Location = new System.Drawing.Point(788, 66);
+            this.txt_quantity.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.txt_quantity.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.txt_quantity.Name = "txt_quantity";
             this.txt_quantity.Size = new System.Drawing.Size(89, 30);
-            this.txt_quantity.TabIndex = 45;
+            this.txt_quantity.TabIndex = 49;
+            this.txt_quantity.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // txt_size
             // 
@@ -459,7 +474,7 @@
             // 
             // txt_total
             // 
-            this.txt_total.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_total.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_total.Location = new System.Drawing.Point(51, 798);
             this.txt_total.Name = "txt_total";
             this.txt_total.Size = new System.Drawing.Size(133, 30);
@@ -475,37 +490,21 @@
             this.label16.TabIndex = 32;
             this.label16.Text = "TOTAL";
             // 
-            // txt_cash
-            // 
-            this.txt_cash.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_cash.Location = new System.Drawing.Point(218, 798);
-            this.txt_cash.Name = "txt_cash";
-            this.txt_cash.Size = new System.Drawing.Size(133, 30);
-            this.txt_cash.TabIndex = 26;
-            // 
             // label17
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(214, 775);
+            this.label17.Location = new System.Drawing.Point(255, 775);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(94, 20);
             this.label17.TabIndex = 32;
             this.label17.Text = "CONTADO";
             // 
-            // txt_credit
-            // 
-            this.txt_credit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_credit.Location = new System.Drawing.Point(406, 798);
-            this.txt_credit.Name = "txt_credit";
-            this.txt_credit.Size = new System.Drawing.Size(133, 30);
-            this.txt_credit.TabIndex = 26;
-            // 
             // label18
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(402, 775);
+            this.label18.Location = new System.Drawing.Point(443, 775);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(88, 20);
             this.label18.TabIndex = 32;
@@ -560,27 +559,52 @@
             this.btn_add_client.UseVisualStyleBackColor = true;
             this.btn_add_client.Click += new System.EventHandler(this.btn_add_client_Click);
             // 
-            // maskedTextBox1
+            // label20
             // 
-            this.maskedTextBox1.Culture = new System.Globalization.CultureInfo("es-419");
-            this.maskedTextBox1.Location = new System.Drawing.Point(102, 25);
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(100, 26);
-            this.maskedTextBox1.TabIndex = 46;
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(609, 775);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(136, 20);
+            this.label20.TabIndex = 32;
+            this.label20.Text = "DÍAS CRÉDITO";
             // 
-            // numericUpDown1
+            // txt_cash
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(944, 377);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 26);
-            this.numericUpDown1.TabIndex = 49;
+            this.txt_cash.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_cash.Location = new System.Drawing.Point(259, 799);
+            this.txt_cash.MaxLength = 8;
+            this.txt_cash.Name = "txt_cash";
+            this.txt_cash.Size = new System.Drawing.Size(133, 30);
+            this.txt_cash.TabIndex = 26;
+            this.txt_cash.TextChanged += new System.EventHandler(this.txt_cash_TextChanged);
+            this.txt_cash.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_cash_KeyPress);
+            // 
+            // txt_credit
+            // 
+            this.txt_credit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_credit.Location = new System.Drawing.Point(447, 799);
+            this.txt_credit.MaxLength = 8;
+            this.txt_credit.Name = "txt_credit";
+            this.txt_credit.Size = new System.Drawing.Size(133, 30);
+            this.txt_credit.TabIndex = 26;
+            this.txt_credit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_cash_KeyPress);
+            // 
+            // txt_days_credit
+            // 
+            this.txt_days_credit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_days_credit.Location = new System.Drawing.Point(613, 799);
+            this.txt_days_credit.MaxLength = 8;
+            this.txt_days_credit.Name = "txt_days_credit";
+            this.txt_days_credit.Size = new System.Drawing.Size(133, 30);
+            this.txt_days_credit.TabIndex = 26;
+            this.txt_days_credit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_cash_KeyPress);
             // 
             // AddSaleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1765, 880);
-            this.Controls.Add(this.numericUpDown1);
+            this.ClientSize = new System.Drawing.Size(1125, 880);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btn_add_product_to_dt);
             this.Controls.Add(this.groupBox1);
@@ -598,11 +622,13 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
+            this.Controls.Add(this.label20);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.txt_observation);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.txt_days_credit);
             this.Controls.Add(this.txt_credit);
             this.Controls.Add(this.txt_cash);
             this.Controls.Add(this.txt_total);
@@ -612,9 +638,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dt_products)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txt_quantity)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -649,7 +675,6 @@
         private FontAwesome.Sharp.IconButton btn_add_product_to_dt;
         private System.Windows.Forms.TextBox txt_product_name;
         private FontAwesome.Sharp.IconButton btn_search;
-        private System.Windows.Forms.TextBox txt_quantity;
         private System.Windows.Forms.TextBox txt_product_price;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
@@ -658,16 +683,17 @@
         private System.Windows.Forms.TextBox txt_phone;
         private System.Windows.Forms.TextBox txt_total;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox txt_cash;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox txt_credit;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ComboBox cb_client_name;
         private FontAwesome.Sharp.IconButton btn_add_client;
         private System.Windows.Forms.TextBox txt_size;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown txt_quantity;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox txt_cash;
+        private System.Windows.Forms.TextBox txt_credit;
+        private System.Windows.Forms.TextBox txt_days_credit;
     }
 }

@@ -335,5 +335,83 @@ namespace SistemaDeVentas.Ventas
 
 
         }
+
+        private void cb_payment_condition_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //si selecciona contado deshabilitar el campo de credito
+            if (cb_payment_condition.Text == "CONTADO")
+            {
+                //desabilitar campo credito , dias de credito y habilitar campo efectivo
+                txt_credit.Enabled = false;
+                txt_total.Enabled = false;
+                txt_days_credit.Enabled = false;
+                txt_credit.Text = "";
+                txt_days_credit.Text = "";
+
+            }
+            else if (cb_payment_condition.Text == "CONTADO / CREDITO")
+            {
+                txt_credit.Enabled = false;
+                txt_total.Enabled = false;
+                txt_days_credit.Enabled = true;
+                txt_cash.Enabled = true;
+                txt_credit.Text = "";
+
+            }else if (cb_payment_condition.Text == "CREDITO")
+            {
+                txt_credit.Enabled = true;
+                txt_total.Enabled = false;
+                txt_days_credit.Enabled = true;
+                txt_cash.Enabled = false;
+
+                txt_cash.Text = "";
+            }
+        }
+
+        private void txt_cash_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_cash_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            if (!Char.IsDigit(ch) && ch != 8 && ch != 46)
+            {
+                e.Handled = true;
+            }
+
+            //que solo acepte el punto 1 vez y que solo haya 2 decimales
+            if (ch == 46 && txt_cash.Text.IndexOf('.') != -1)
+            {
+                e.Handled = true;
+            }
+
+            //que solo acepte 2 decimales
+            if (txt_cash.Text.IndexOf('.') != -1 && txt_cash.Text.Substring(txt_cash.Text.IndexOf('.')).Length > 2)
+            {
+                e.Handled = true;
+            }
+
+            //permitir el backspace
+            if (e.KeyChar == (char)Keys.Back)
+            {
+                e.Handled = false;
+            }
+
+        }
+
+        private void txt_cash_TextChanged(object sender, EventArgs e) {
+            bool cashIsLessThanTotal = false;
+            if (txt_total.Text != "" && txt_cash.Text != "")
+                 cashIsLessThanTotal = (decimal.Parse(txt_cash.Text) < decimal.Parse(txt_total.Text));
+            
+
+            if (cashIsLessThanTotal)
+                txt_credit.Text = (decimal.Parse(txt_total.Text) - decimal.Parse(txt_cash.Text)).ToString();
+            
+            if(txt_cash.Text == "" || !cashIsLessThanTotal)
+                txt_credit.Text = "";
+        }
     }
 }
