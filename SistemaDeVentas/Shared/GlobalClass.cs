@@ -11,5 +11,7 @@ namespace SistemaDeVentas.Shared
     {
         public static string Username { get; set; }
         public static Product SelectedProduct { get; set; }
+
+        public static bool isProductSelectProperly { get; set; } = false;
     }
 }

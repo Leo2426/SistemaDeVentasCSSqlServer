@@ -74,7 +74,19 @@ namespace SistemaDeVentas.Ventas
             product.SizesId = dt_products.CurrentRow.Cells["SizesId"].Value.ToString();
 
             GlobalClass.SelectedProduct = product;
+            GlobalClass.isProductSelectProperly = true;
             this.Close();
+        }
+
+        private void btn_search_Click(object sender, EventArgs e)
+        {
+            //buscar productos por código o descripción
+            var productRepository = new ProductRepository();
+            var products = productRepository.SearchProduct(txt_search.Text);
+            
+            //cargar los productos 
+            dt_products.DataSource = products;
+
         }
     }
 }

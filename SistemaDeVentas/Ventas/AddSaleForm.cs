@@ -195,6 +195,15 @@ namespace SistemaDeVentas.Ventas
 
             //cargar los campos con el producto seleccionado
             loadTextBoxesWithProductSelected();
+            if (GlobalClass.SelectedProduct != null)
+                txt_quantity.Focus();
+
+            if (GlobalClass.isProductSelectProperly)
+            {
+                txt_product_code.ReadOnly = true;
+                GlobalClass.isProductSelectProperly = false;
+            }
+
 
         }
 
@@ -284,7 +293,10 @@ namespace SistemaDeVentas.Ventas
             txt_product_name.Text = "";
             txt_product_price.Text = "";
             txt_quantity.Text = "";
-            
+
+            txt_product_code.ReadOnly = false;
+            GlobalClass.isProductSelectProperly = false;
+
         }
 
         private void cb_client_name_SelectedIndexChanged(object sender, EventArgs e)
@@ -323,6 +335,8 @@ namespace SistemaDeVentas.Ventas
 
                     //agregar al global class
                     GlobalClass.SelectedProduct = product;
+                    GlobalClass.isProductSelectProperly = true;
+                    txt_product_code.ReadOnly = true;
 
                 }
                 //sino lanzar un mensaje
