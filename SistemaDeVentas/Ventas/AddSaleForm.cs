@@ -1,4 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using Org.BouncyCastle.Crypto.Engines;
 using SistemaDeVentas.Clientes;
 using SistemaDeVentas.Print;
 using SistemaDeVentas.Productos;
@@ -342,28 +343,37 @@ namespace SistemaDeVentas.Ventas
             if (cb_payment_condition.Text == "CONTADO")
             {
                 //desabilitar campo credito , dias de credito y habilitar campo efectivo
-                txt_credit.Enabled = false;
-                txt_total.Enabled = false;
-                txt_days_credit.Enabled = false;
+                txt_credit.Visible = false;
+                lbl_credit.Visible = false;
+                txt_days_credit.Visible = false;
+                lbl_days_credit.Visible = false;
                 txt_credit.Text = "";
                 txt_days_credit.Text = "";
 
             }
             else if (cb_payment_condition.Text == "CONTADO / CREDITO")
             {
-                txt_credit.Enabled = false;
-                txt_total.Enabled = false;
-                txt_days_credit.Enabled = true;
-                txt_cash.Enabled = true;
+                txt_credit.Visible = false;
+                lbl_credit.Visible = false;
+                txt_days_credit.Visible = true;
+                lbl_days_credit.Visible = true;
+                lbl_cash.Visible = true;
+                lbl_credit.Visible = true;
+                txt_credit.Visible = true;
+                txt_cash.Visible = true;
                 txt_credit.Text = "";
 
             }else if (cb_payment_condition.Text == "CREDITO")
             {
-                txt_credit.Enabled = true;
-                txt_total.Enabled = false;
-                txt_days_credit.Enabled = true;
-                txt_cash.Enabled = false;
+                txt_credit.Visible = false;
+                lbl_credit.Visible = false;
+                lbl_cash.Visible = false;
+                txt_cash.Visible = false;
+                txt_days_credit.Visible = true;
+                txt_cash.Visible = true;
+                txt_cash.Visible = false;
 
+                txt_credit.Text = "";
                 txt_cash.Text = "";
             }
         }
@@ -412,6 +422,31 @@ namespace SistemaDeVentas.Ventas
             
             if(txt_cash.Text == "" || !cashIsLessThanTotal)
                 txt_credit.Text = "";
+        }
+
+        private void txt_days_credit_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            if (!Char.IsDigit(ch) && ch != 8 && ch != 46)
+            {
+                e.Handled = true;
+            }
+
+            //permitir el backspace
+            if (e.KeyChar == (char)Keys.Back)
+            {
+                e.Handled = false;
+            }
+
+
+            //que no acepte el .
+            if (ch == 46)
+            {
+                e.Handled = true;
+            }
+
+
+
         }
     }
 }
