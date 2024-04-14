@@ -21,7 +21,6 @@ namespace SistemaDeVentas.Shared
     public partial class PrincipalForm : Form
     {
         private IconButton currentButton;
-        private Control previousBtn;
         public PrincipalForm()
         {
             InitializeComponent();

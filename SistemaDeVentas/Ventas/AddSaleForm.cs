@@ -11,16 +11,19 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media.Media3D;
 
 namespace SistemaDeVentas.Ventas
 {
     public partial class AddSaleForm : Form
     {
         private Sale sale = new Sale();
+        private List<ProductSaled> saledProducts = new List<ProductSaled>();
         public AddSaleForm()
         {
             InitializeComponent();
@@ -48,7 +51,7 @@ namespace SistemaDeVentas.Ventas
             cb_payment_condition.Text = "CONTADO";
 
             //cargar vendedores
-            var userRepository = new SaleRepository ();
+            var userRepository = new SaleRepository();
             var users = userRepository.getAllSalesMan();
             cb_sales_man.DataSource = users;
             cb_sales_man.DisplayMember = "Name";
@@ -156,8 +159,6 @@ namespace SistemaDeVentas.Ventas
             //agregar el id de la venta a la clase sale
             sale.Id = saleRepository.GetLastSaleId();
 
-            //insertar los productos de la venta
-            var saledProducts = new List<ProductSaled>();
             foreach (DataGridViewRow row in dt_products.Rows)
             {
                 var productSaled = new ProductSaled();
@@ -184,29 +185,24 @@ namespace SistemaDeVentas.Ventas
 
             this.Close();
 
-            //Preguntar si quiere generar pdf
-            DialogResult dialogResult = MessageBox.Show("¿Desea generar un ticket de venta?", "Ticket de venta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+           //generar ticket de venta si el usuario lo desea por confimacion de messagebox
+            DialogResult dialogResult = MessageBox.Show("¿Imprimir ticket de Venta?", "Ticket de venta", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                generatePdf(saledProducts);
+                Ticket80mm ticket80Mm = new Ticket80mm(sale, saledProducts);
+                ticket80Mm.CreateTicket80mm();
             }
 
+            ////mostrar la venta recien agregada en un message box
+            //MessageBox.Show(saleRepository.GetLastSaleId().ToString());
 
-            //mostrar la venta recien agregada en un message box
-            MessageBox.Show(saleRepository.GetLastSaleId().ToString());
-
-            //lanzar form de delivery
-            var deliveryForm = new DeliveryForm(sale, saledProducts);
-            deliveryForm.ShowDialog();
+            ////lanzar form de delivery
+            //var deliveryForm = new DeliveryForm(sale, saledProducts);
+            //deliveryForm.ShowDialog();
 
         }
 
-        private void generatePdf(List<ProductSaled> productSaleds)
-        {
-            //generar ticket de venta
-            var saleTicket = new SaleTicket(sale,productSaleds);
-            saleTicket.CreateSaleTicketPdf();
-        }
 
         private void btn_search_Click(object sender, EventArgs e)
         {
@@ -298,7 +294,7 @@ namespace SistemaDeVentas.Ventas
             }
 
             //agregar producto a la lista de productos
-            dt_products.Rows.Add(GlobalClass.SelectedProduct.Id,txt_product_code.Text, txt_product_name.Text, txt_product_price.Text, txt_size.Text, txt_quantity.Text);
+            dt_products.Rows.Add(GlobalClass.SelectedProduct.Id, txt_product_code.Text, txt_product_name.Text, txt_product_price.Text, txt_size.Text, txt_quantity.Text);
 
             GlobalClass.SelectedProduct = null;
 
@@ -419,7 +415,8 @@ namespace SistemaDeVentas.Ventas
                 txt_cash.Visible = true;
                 txt_credit.Text = "";
 
-            }else if (cb_payment_condition.Text == "CREDITO")
+            }
+            else if (cb_payment_condition.Text == "CREDITO")
             {
                 txt_credit.Visible = false;
                 lbl_credit.Visible = false;
@@ -465,16 +462,18 @@ namespace SistemaDeVentas.Ventas
 
         }
 
-        private void txt_cash_TextChanged(object sender, EventArgs e) {
+        private void txt_cash_TextChanged(object sender, EventArgs e)
+        {
 
 
             bool cashIsLessThanTotal = false;
             if (txt_total.Text != "" && txt_cash.Text != "")
-                 cashIsLessThanTotal = (decimal.Parse(txt_cash.Text) < decimal.Parse(txt_total.Text));
+                cashIsLessThanTotal = (decimal.Parse(txt_cash.Text) < decimal.Parse(txt_total.Text));
 
             if (cashIsLessThanTotal)
                 txt_credit.Text = (decimal.Parse(txt_total.Text) - decimal.Parse(txt_cash.Text)).ToString();
-            else {
+            else
+            {
                 txt_credit.Text = "";
                 txt_cash.Text = "";
             }
@@ -507,10 +506,7 @@ namespace SistemaDeVentas.Ventas
 
         }
 
-        private void label14_Click(object sender, EventArgs e)
-        {
-
-        }
 
     }
 }
+

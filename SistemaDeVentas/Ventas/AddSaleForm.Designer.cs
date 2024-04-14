@@ -79,6 +79,8 @@
             this.txt_credit = new System.Windows.Forms.TextBox();
             this.txt_days_credit = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dt_products)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txt_quantity)).BeginInit();
@@ -88,7 +90,7 @@
             // btn_add
             // 
             this.btn_add.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_add.Location = new System.Drawing.Point(905, 849);
+            this.btn_add.Location = new System.Drawing.Point(773, 850);
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(197, 58);
             this.btn_add.TabIndex = 5;
@@ -411,7 +413,6 @@
             this.label14.Size = new System.Drawing.Size(93, 26);
             this.label14.TabIndex = 1;
             this.label14.Text = "Cantidad";
-            this.label14.Click += new System.EventHandler(this.label14_Click);
             // 
             // label19
             // 
@@ -684,11 +685,21 @@
             this.label17.TabIndex = 47;
             this.label17.Text = "INGRESAR VENTA";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(976, 850);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(174, 58);
+            this.button1.TabIndex = 48;
+            this.button1.Text = "Imprimir";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // AddSaleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1177, 940);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btn_add_product_to_dt);
@@ -784,5 +795,7 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox txt_product_stock;
         private System.Windows.Forms.Label label18;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private System.Windows.Forms.Button button1;
     }
 }
