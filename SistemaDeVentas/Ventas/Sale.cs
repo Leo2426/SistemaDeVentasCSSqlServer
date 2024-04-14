@@ -22,6 +22,7 @@ namespace SistemaDeVentas.Ventas
         public decimal Total { get; set; }
         public decimal? CashPayment { get; set; }
         public decimal? CreditPayment { get; set; }
+        public int CreditDays { get; set; }
         public string UserName { get; set; }
     }
 }

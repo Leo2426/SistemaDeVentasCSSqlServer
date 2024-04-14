@@ -80,8 +80,9 @@ namespace SistemaDeVentas.Ventas
                             Channel = reader["channel"].ToString(),
                             PaymentConditionName = reader["PaymentCondition"].ToString(),
                             Total = decimal.Parse(reader["total"].ToString()),
-                            CashPayment = reader["cash_payment"] == DBNull.Value ? null : (decimal?)decimal.Parse(reader["cash_payment"].ToString()),
-                            CreditPayment = reader["credit_payment"] == DBNull.Value ? null : (decimal?)decimal.Parse(reader["credit_payment"].ToString()),
+                            CashPayment = reader["cash_payment"] == DBNull.Value ? 0 : (decimal?)decimal.Parse(reader["cash_payment"].ToString()),
+                            CreditPayment = reader["credit_payment"] == DBNull.Value ? 0 : (decimal?)decimal.Parse(reader["credit_payment"].ToString()),
+                            CreditDays = reader["credit_days"] == DBNull.Value ? 0 : int.Parse(reader["credit_days"].ToString()),
                             UserName = reader["UserName"].ToString()
 
                         };

@@ -24,22 +24,20 @@ namespace SistemaDeVentas.Ventas.Delivery
             var deliveryRepository = new DeliveryRepository();
             var deliveries = deliveryRepository.GetAllDeliveries();
 
-            //cargar cabeceras al dtw
-            dt_deliverys.Columns.Add("Id", "Id");
-            dt_deliverys.Columns.Add("ClientName", "Nombre del cliente");
+            dt_deliverys.Columns.Add("ClientName", "Cliente");
             dt_deliverys.Columns.Add("Date", "Fecha");
             dt_deliverys.Columns.Add("Address", "Dirección");
             dt_deliverys.Columns.Add("Reference", "Referencia");
             dt_deliverys.Columns.Add("Instructions", "Instrucciones");
-            dt_deliverys.Columns.Add("PaymentCondition", "Condición de pago");
+            dt_deliverys.Columns.Add("PaymentCondition", "C.de Pago");
             dt_deliverys.Columns.Add("Phone", "Teléfono");
             dt_deliverys.Columns.Add("Amount", "Monto");
             dt_deliverys.Columns.Add("Amount_due", "Saldo a cobrar");
-            dt_deliverys.Columns.Add("SaleId", "Id de la venta");
+            dt_deliverys.Columns.Add("SaleId", "Id venta");
             
             foreach (var delivery in deliveries)
             {
-                dt_deliverys.Rows.Add(delivery.Id, delivery.ClientName, delivery.Date, delivery.Address, delivery.Reference, delivery.Instructions, delivery.PaymentCondition, delivery.Phone, delivery.Amount, delivery.Amount_due, delivery.SaleId);
+                dt_deliverys.Rows.Add(delivery.ClientName, delivery.Date, delivery.Address, delivery.Reference, delivery.Instructions, delivery.PaymentCondition, delivery.Phone, delivery.Amount, delivery.Amount_due, delivery.SaleId);
             }
 
 

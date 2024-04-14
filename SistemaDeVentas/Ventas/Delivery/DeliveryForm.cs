@@ -36,12 +36,13 @@ namespace SistemaDeVentas.Ventas.Delivery
             //cargar cabeceras al dtw
             dt_products.Columns.Add("Description","Descripción");
             dt_products.Columns.Add("Quantity", "Cantidad");
+            dt_products.Columns.Add("Price", "Precio");
 
 
             //cargar todos los productos
             foreach (var product in delivery.products)
             {
-                dt_products.Rows.Add(product.Description, product.Quantity);
+                dt_products.Rows.Add(product.Description, product.Quantity,product.SalePrice);
             }
 
         }

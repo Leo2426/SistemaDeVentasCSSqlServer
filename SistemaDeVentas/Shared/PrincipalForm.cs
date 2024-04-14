@@ -21,6 +21,7 @@ namespace SistemaDeVentas.Shared
     public partial class PrincipalForm : Form
     {
         private IconButton currentButton;
+        private Control previousBtn;
         public PrincipalForm()
         {
             InitializeComponent();
@@ -43,7 +44,7 @@ namespace SistemaDeVentas.Shared
             
             else if (currentButton.Text == "Ventas")
             
-                configForm(new VentasForm());
+                configForm(new VentasForm2());
             
             else if (currentButton.Text == "Productos")
             
@@ -107,8 +108,10 @@ namespace SistemaDeVentas.Shared
             form.Dock = DockStyle.Fill;
             form.FormBorderStyle = FormBorderStyle.None;
             form.BringToFront();
+
+
             form.Show();
-            
+
         }
 
     } 

@@ -131,6 +131,7 @@ namespace SistemaDeVentas.Ventas
             //parsear a decimal sino se puede que sea 0
             sale.CashPayment = string.IsNullOrWhiteSpace(txt_cash.Text) ? 0 : decimal.Parse(txt_cash.Text);
             sale.CreditPayment = string.IsNullOrWhiteSpace(txt_credit.Text) ? 0 : decimal.Parse(txt_credit.Text);
+            sale.CreditDays = string.IsNullOrWhiteSpace(txt_days_credit.Text) ? 0 : int.Parse(txt_days_credit.Text);
             sale.UserName = cb_sales_man.Text;
 
             var saleRepository = new SaleRepository();
@@ -222,6 +223,9 @@ namespace SistemaDeVentas.Ventas
                 txt_product_code.Text = product.Code;
                 txt_product_price.Text = product.Price.ToString();
                 txt_size.Text = product.SizesId;
+                txt_product_stock.Text = product.InitialStock.ToString();
+                //setear al txt_quantity que su mayor valor sea el stock del producto
+                txt_quantity.Maximum = int.Parse(product.InitialStock.ToString());
                 txt_quantity.Text = "1";
             }
         }
@@ -237,6 +241,13 @@ namespace SistemaDeVentas.Ventas
                     MessageBox.Show("El producto ya se encuentra en la lista", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
+            }
+
+            //si la cantidad es 0 no permitir agregar el producto
+            if (txt_quantity.Text == "0")
+            {
+                MessageBox.Show("La cantidad no puede ser 0", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
             }
 
             var productRepository = new ProductRepository();
@@ -293,10 +304,15 @@ namespace SistemaDeVentas.Ventas
 
 
             //limpiar los campos
+            txt_product_stock.Text = "";
+            txt_size.Text = "";
             txt_product_code.Text = "";
             txt_product_name.Text = "";
             txt_product_price.Text = "";
             txt_quantity.Text = "";
+
+            //desabilitar maximo de cantidad
+            txt_quantity.Maximum = 10000;
 
             txt_product_code.ReadOnly = false;
             GlobalClass.isProductSelectProperly = false;
@@ -466,5 +482,11 @@ namespace SistemaDeVentas.Ventas
 
 
         }
+
+        private void label14_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

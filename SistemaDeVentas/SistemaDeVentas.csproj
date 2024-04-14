@@ -28,7 +28,7 @@
     <ProductName>Sistema de Ventas</ProductName>
     <PublisherName>Entersoft Publiser</PublisherName>
     <SuiteName>Entersoft Suite Name</SuiteName>
-    <ApplicationRevision>9</ApplicationRevision>
+    <ApplicationRevision>12</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -360,6 +360,12 @@
     <Compile Include="Ventas\Delivery\ShowDeliveryForm.Designer.cs">
       <DependentUpon>ShowDeliveryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Ventas\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ventas\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ventas\Payments\PaymentCondition.cs" />
     <Compile Include="Ventas\Payments\PaymentConditionRepository.cs" />
     <Compile Include="Ventas\Payments\PaymentType.cs" />
@@ -385,6 +391,12 @@
     </Compile>
     <Compile Include="Ventas\VentasForm.Designer.cs">
       <DependentUpon>VentasForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ventas\VentasForm2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ventas\VentasForm2.Designer.cs">
+      <DependentUpon>VentasForm2.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Clientes\AddClientForm.resx">
       <DependentUpon>AddClientForm.cs</DependentUpon>
@@ -435,6 +447,9 @@
     <EmbeddedResource Include="Ventas\Delivery\ShowDeliveryForm.resx">
       <DependentUpon>ShowDeliveryForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Ventas\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Ventas\ProductsWithSalesForm.resx">
       <DependentUpon>ProductsWithSalesForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -443,6 +458,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ventas\VentasForm.resx">
       <DependentUpon>VentasForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ventas\VentasForm2.resx">
+      <DependentUpon>VentasForm2.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
