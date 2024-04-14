@@ -44,7 +44,7 @@ namespace SistemaDeVentas.Shared
             
             else if (currentButton.Text == "Ventas")
             
-                configForm(new VentasForm2());
+                configForm(new VentasForm());
             
             else if (currentButton.Text == "Productos")
             

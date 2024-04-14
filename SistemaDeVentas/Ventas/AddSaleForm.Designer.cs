@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btn_add = new System.Windows.Forms.Button();
             this.cb_sales_man = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -50,8 +51,10 @@
             this.dt_products = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txt_quantity = new System.Windows.Forms.NumericUpDown();
+            this.txt_product_stock = new System.Windows.Forms.TextBox();
             this.txt_size = new System.Windows.Forms.TextBox();
             this.txt_product_price = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.txt_product_name = new System.Windows.Forms.TextBox();
@@ -76,8 +79,6 @@
             this.txt_credit = new System.Windows.Forms.TextBox();
             this.txt_days_credit = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.txt_product_stock = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dt_products)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txt_quantity)).BeginInit();
@@ -90,7 +91,8 @@
             this.btn_add.Location = new System.Drawing.Point(905, 849);
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(197, 58);
-            this.btn_add.TabIndex = 39;
+            this.btn_add.TabIndex = 5;
+            this.btn_add.TabStop = false;
             this.btn_add.Text = "Generar";
             this.btn_add.UseVisualStyleBackColor = true;
             this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
@@ -105,6 +107,7 @@
             this.cb_sales_man.Name = "cb_sales_man";
             this.cb_sales_man.Size = new System.Drawing.Size(251, 34);
             this.cb_sales_man.TabIndex = 38;
+            this.cb_sales_man.TabStop = false;
             // 
             // label3
             // 
@@ -149,7 +152,8 @@
             this.txt_reference.Location = new System.Drawing.Point(290, 71);
             this.txt_reference.Name = "txt_reference";
             this.txt_reference.Size = new System.Drawing.Size(228, 30);
-            this.txt_reference.TabIndex = 28;
+            this.txt_reference.TabIndex = 1;
+            this.txt_reference.TabStop = false;
             // 
             // label1
             // 
@@ -167,7 +171,8 @@
             this.txt_address.Location = new System.Drawing.Point(554, 71);
             this.txt_address.Name = "txt_address";
             this.txt_address.Size = new System.Drawing.Size(228, 30);
-            this.txt_address.TabIndex = 26;
+            this.txt_address.TabIndex = 2;
+            this.txt_address.TabStop = false;
             // 
             // cb_type
             // 
@@ -183,6 +188,7 @@
             this.cb_type.Name = "cb_type";
             this.cb_type.Size = new System.Drawing.Size(234, 34);
             this.cb_type.TabIndex = 38;
+            this.cb_type.TabStop = false;
             // 
             // label8
             // 
@@ -203,6 +209,7 @@
             this.cb_payment_type.Name = "cb_payment_type";
             this.cb_payment_type.Size = new System.Drawing.Size(228, 34);
             this.cb_payment_type.TabIndex = 38;
+            this.cb_payment_type.TabStop = false;
             // 
             // label9
             // 
@@ -222,7 +229,8 @@
             this.cb_payment_condition.Location = new System.Drawing.Point(57, 420);
             this.cb_payment_condition.Name = "cb_payment_condition";
             this.cb_payment_condition.Size = new System.Drawing.Size(248, 34);
-            this.cb_payment_condition.TabIndex = 38;
+            this.cb_payment_condition.TabIndex = 4;
+            this.cb_payment_condition.TabStop = false;
             this.cb_payment_condition.SelectedIndexChanged += new System.EventHandler(this.cb_payment_condition_SelectedIndexChanged);
             // 
             // txt_observation
@@ -231,7 +239,8 @@
             this.txt_observation.Location = new System.Drawing.Point(600, 420);
             this.txt_observation.Name = "txt_observation";
             this.txt_observation.Size = new System.Drawing.Size(502, 31);
-            this.txt_observation.TabIndex = 28;
+            this.txt_observation.TabIndex = 1;
+            this.txt_observation.TabStop = false;
             // 
             // label10
             // 
@@ -274,6 +283,7 @@
             this.dtp_date.Name = "dtp_date";
             this.dtp_date.Size = new System.Drawing.Size(228, 31);
             this.dtp_date.TabIndex = 40;
+            this.dtp_date.TabStop = false;
             // 
             // dt_products
             // 
@@ -281,12 +291,25 @@
             this.dt_products.AllowUserToDeleteRows = false;
             this.dt_products.AllowUserToOrderColumns = true;
             this.dt_products.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dt_products.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dt_products.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dt_products.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dt_products.GridColor = System.Drawing.SystemColors.ActiveBorder;
+            this.dt_products.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.dt_products.Location = new System.Drawing.Point(47, 626);
             this.dt_products.MultiSelect = false;
             this.dt_products.Name = "dt_products";
             this.dt_products.ReadOnly = true;
             this.dt_products.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dt_products.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dt_products.RowHeadersWidth = 62;
             this.dt_products.RowTemplate.Height = 28;
             this.dt_products.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -294,6 +317,7 @@
             this.dt_products.ShowEditingIcon = false;
             this.dt_products.Size = new System.Drawing.Size(1055, 193);
             this.dt_products.TabIndex = 41;
+            this.dt_products.TabStop = false;
             // 
             // groupBox1
             // 
@@ -314,7 +338,7 @@
             this.groupBox1.Location = new System.Drawing.Point(47, 479);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(929, 120);
-            this.groupBox1.TabIndex = 42;
+            this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Producto";
             // 
@@ -334,12 +358,22 @@
             0});
             this.txt_quantity.Name = "txt_quantity";
             this.txt_quantity.Size = new System.Drawing.Size(89, 30);
-            this.txt_quantity.TabIndex = 49;
+            this.txt_quantity.TabIndex = 3;
             this.txt_quantity.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
+            // 
+            // txt_product_stock
+            // 
+            this.txt_product_stock.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_product_stock.Location = new System.Drawing.Point(834, 70);
+            this.txt_product_stock.Name = "txt_product_stock";
+            this.txt_product_stock.ReadOnly = true;
+            this.txt_product_stock.Size = new System.Drawing.Size(62, 30);
+            this.txt_product_stock.TabIndex = 45;
+            this.txt_product_stock.TabStop = false;
             // 
             // txt_size
             // 
@@ -349,6 +383,7 @@
             this.txt_size.ReadOnly = true;
             this.txt_size.Size = new System.Drawing.Size(89, 30);
             this.txt_size.TabIndex = 45;
+            this.txt_size.TabStop = false;
             // 
             // txt_product_price
             // 
@@ -356,7 +391,17 @@
             this.txt_product_price.Location = new System.Drawing.Point(615, 72);
             this.txt_product_price.Name = "txt_product_price";
             this.txt_product_price.Size = new System.Drawing.Size(89, 30);
-            this.txt_product_price.TabIndex = 45;
+            this.txt_product_price.TabIndex = 2;
+            this.txt_product_price.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_cash_KeyPress);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(830, 41);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(61, 26);
+            this.label18.TabIndex = 1;
+            this.label18.Text = "Stock";
             // 
             // label14
             // 
@@ -385,6 +430,7 @@
             this.txt_product_name.ReadOnly = true;
             this.txt_product_name.Size = new System.Drawing.Size(235, 30);
             this.txt_product_name.TabIndex = 45;
+            this.txt_product_name.TabStop = false;
             // 
             // label13
             // 
@@ -406,6 +452,7 @@
             this.btn_search.Name = "btn_search";
             this.btn_search.Size = new System.Drawing.Size(43, 34);
             this.btn_search.TabIndex = 44;
+            this.btn_search.TabStop = false;
             this.btn_search.UseVisualStyleBackColor = true;
             this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
             // 
@@ -434,7 +481,7 @@
             this.txt_product_code.Location = new System.Drawing.Point(26, 72);
             this.txt_product_code.Name = "txt_product_code";
             this.txt_product_code.Size = new System.Drawing.Size(160, 30);
-            this.txt_product_code.TabIndex = 0;
+            this.txt_product_code.TabIndex = 1;
             this.txt_product_code.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_product_code_KeyDown);
             // 
             // cb_chanel
@@ -449,7 +496,8 @@
             this.cb_chanel.Location = new System.Drawing.Point(330, 420);
             this.cb_chanel.Name = "cb_chanel";
             this.cb_chanel.Size = new System.Drawing.Size(228, 34);
-            this.cb_chanel.TabIndex = 38;
+            this.cb_chanel.TabIndex = 5;
+            this.cb_chanel.TabStop = false;
             // 
             // btn_add_product_to_dt
             // 
@@ -465,7 +513,7 @@
             this.btn_add_product_to_dt.Name = "btn_add_product_to_dt";
             this.btn_add_product_to_dt.Padding = new System.Windows.Forms.Padding(0, 10, 0, 0);
             this.btn_add_product_to_dt.Size = new System.Drawing.Size(112, 107);
-            this.btn_add_product_to_dt.TabIndex = 43;
+            this.btn_add_product_to_dt.TabIndex = 4;
             this.btn_add_product_to_dt.Text = "Agregar";
             this.btn_add_product_to_dt.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btn_add_product_to_dt.UseVisualStyleBackColor = true;
@@ -486,7 +534,8 @@
             this.txt_phone.Location = new System.Drawing.Point(811, 71);
             this.txt_phone.Name = "txt_phone";
             this.txt_phone.Size = new System.Drawing.Size(228, 30);
-            this.txt_phone.TabIndex = 44;
+            this.txt_phone.TabIndex = 3;
+            this.txt_phone.TabStop = false;
             // 
             // txt_total
             // 
@@ -496,6 +545,7 @@
             this.txt_total.ReadOnly = true;
             this.txt_total.Size = new System.Drawing.Size(133, 30);
             this.txt_total.TabIndex = 26;
+            this.txt_total.TabStop = false;
             // 
             // label16
             // 
@@ -561,6 +611,7 @@
             this.cb_client_name.Name = "cb_client_name";
             this.cb_client_name.Size = new System.Drawing.Size(196, 33);
             this.cb_client_name.TabIndex = 38;
+            this.cb_client_name.TabStop = false;
             this.cb_client_name.SelectedIndexChanged += new System.EventHandler(this.cb_client_name_SelectedIndexChanged);
             // 
             // btn_add_client
@@ -574,6 +625,7 @@
             this.btn_add_client.Name = "btn_add_client";
             this.btn_add_client.Size = new System.Drawing.Size(43, 34);
             this.btn_add_client.TabIndex = 44;
+            this.btn_add_client.TabStop = false;
             this.btn_add_client.UseVisualStyleBackColor = true;
             this.btn_add_client.Click += new System.EventHandler(this.btn_add_client_Click);
             // 
@@ -595,6 +647,7 @@
             this.txt_cash.Name = "txt_cash";
             this.txt_cash.Size = new System.Drawing.Size(133, 30);
             this.txt_cash.TabIndex = 26;
+            this.txt_cash.TabStop = false;
             this.txt_cash.TextChanged += new System.EventHandler(this.txt_cash_TextChanged);
             this.txt_cash.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_cash_KeyPress);
             // 
@@ -607,6 +660,7 @@
             this.txt_credit.ReadOnly = true;
             this.txt_credit.Size = new System.Drawing.Size(133, 30);
             this.txt_credit.TabIndex = 26;
+            this.txt_credit.TabStop = false;
             this.txt_credit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_cash_KeyPress);
             // 
             // txt_days_credit
@@ -617,6 +671,7 @@
             this.txt_days_credit.Name = "txt_days_credit";
             this.txt_days_credit.Size = new System.Drawing.Size(133, 30);
             this.txt_days_credit.TabIndex = 26;
+            this.txt_days_credit.TabStop = false;
             this.txt_days_credit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_days_credit_KeyPress);
             // 
             // label17
@@ -628,24 +683,6 @@
             this.label17.Size = new System.Drawing.Size(268, 40);
             this.label17.TabIndex = 47;
             this.label17.Text = "INGRESAR VENTA";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(830, 41);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(61, 26);
-            this.label18.TabIndex = 1;
-            this.label18.Text = "Stock";
-            // 
-            // txt_product_stock
-            // 
-            this.txt_product_stock.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_product_stock.Location = new System.Drawing.Point(834, 70);
-            this.txt_product_stock.Name = "txt_product_stock";
-            this.txt_product_stock.ReadOnly = true;
-            this.txt_product_stock.Size = new System.Drawing.Size(62, 30);
-            this.txt_product_stock.TabIndex = 45;
             // 
             // AddSaleForm
             // 

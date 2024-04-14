@@ -392,12 +392,6 @@
     <Compile Include="Ventas\VentasForm.Designer.cs">
       <DependentUpon>VentasForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Ventas\VentasForm2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Ventas\VentasForm2.Designer.cs">
-      <DependentUpon>VentasForm2.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Clientes\AddClientForm.resx">
       <DependentUpon>AddClientForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -458,9 +452,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Ventas\VentasForm.resx">
       <DependentUpon>VentasForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Ventas\VentasForm2.resx">
-      <DependentUpon>VentasForm2.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />

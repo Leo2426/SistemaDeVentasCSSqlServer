@@ -39,6 +39,7 @@ namespace SistemaDeVentas.Ventas
                 command.Parameters.AddWithValue("@Total", sale.Total);
                 command.Parameters.AddWithValue("@CashPayment", sale.CashPayment ?? (object)DBNull.Value);
                 command.Parameters.AddWithValue("@CreditPayment", sale.CreditPayment ?? (object)DBNull.Value);
+                command.Parameters.AddWithValue("@CreditDays", sale.CreditDays);
                 command.Parameters.AddWithValue("@UserName", sale.UserName);
 
                 connection.Open();

@@ -45,6 +45,7 @@ namespace SistemaDeVentas.Ventas
             cb_payment_condition.DataSource = paymentConditions;
             cb_payment_condition.DisplayMember = "Name";
             cb_payment_condition.ValueMember = "Name";
+            cb_payment_condition.Text = "CONTADO";
 
             //cargar vendedores
             var userRepository = new SaleRepository ();
@@ -116,6 +117,21 @@ namespace SistemaDeVentas.Ventas
                 MessageBox.Show("Debe agregar productos a la venta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
+
+            //validar que txt_cash no este vacio si es que esta visible
+            if (txt_cash.Visible && string.IsNullOrWhiteSpace(txt_cash.Text))
+            {
+                MessageBox.Show("Debe ingresar el monto en efectivo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            //validar que dias de credito no este vacio si es que esta visible
+            if (txt_days_credit.Visible && string.IsNullOrWhiteSpace(txt_days_credit.Text))
+            {
+                MessageBox.Show("Debe ingresar los días de crédito", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
 
             sale.SaleType = cb_type.Text;
             sale.ClientName = cb_client_name.Text;
@@ -350,8 +366,12 @@ namespace SistemaDeVentas.Ventas
                     txt_product_name.Text = product.Description;
                     txt_product_price.Text = product.Price.ToString();
                     txt_size.Text = product.SizesId;
+                    txt_product_stock.Text = product.InitialStock.ToString();
                     txt_quantity.Text = "1";
 
+
+                    //establecer maximo stock
+                    txt_quantity.Maximum = int.Parse(product.InitialStock.ToString());
 
                     //agregar al global class
                     GlobalClass.SelectedProduct = product;
@@ -381,6 +401,8 @@ namespace SistemaDeVentas.Ventas
                 lbl_credit.Visible = false;
                 txt_days_credit.Visible = false;
                 lbl_days_credit.Visible = false;
+                txt_cash.Visible = false;
+                lbl_cash.Visible = false;
                 txt_credit.Text = "";
                 txt_days_credit.Text = "";
 
@@ -403,10 +425,8 @@ namespace SistemaDeVentas.Ventas
                 lbl_credit.Visible = false;
                 lbl_cash.Visible = false;
                 txt_cash.Visible = false;
+                lbl_days_credit.Visible = true;
                 txt_days_credit.Visible = true;
-                txt_cash.Visible = true;
-                txt_cash.Visible = false;
-
                 txt_credit.Text = "";
                 txt_cash.Text = "";
             }
@@ -446,16 +466,20 @@ namespace SistemaDeVentas.Ventas
         }
 
         private void txt_cash_TextChanged(object sender, EventArgs e) {
+
+
             bool cashIsLessThanTotal = false;
             if (txt_total.Text != "" && txt_cash.Text != "")
                  cashIsLessThanTotal = (decimal.Parse(txt_cash.Text) < decimal.Parse(txt_total.Text));
-            
 
             if (cashIsLessThanTotal)
                 txt_credit.Text = (decimal.Parse(txt_total.Text) - decimal.Parse(txt_cash.Text)).ToString();
-            
-            if(txt_cash.Text == "" || !cashIsLessThanTotal)
+            else {
                 txt_credit.Text = "";
+                txt_cash.Text = "";
+            }
+
+
         }
 
         private void txt_days_credit_KeyPress(object sender, KeyPressEventArgs e)
