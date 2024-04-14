@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SistemaDeVentas.Productos;
+using SistemaDeVentas.Ventas.Delivery;
 
 namespace SistemaDeVentas.Ventas
 {
@@ -195,6 +196,73 @@ namespace SistemaDeVentas.Ventas
                 }
             }
             return saleId;
+        }
+
+        public void DeleteSale(int saleId)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+
+                //Borrar los delivery de la venta
+                var deliveryRepository = new DeliveryRepository();
+                deliveryRepository.DeleteDeliveryBySalesId(saleId);
+                //Borrar los productos de la venta
+                DeleteProductsSalesBySalesId(saleId);
+
+                SqlCommand command = new SqlCommand("spDeleteSale", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@id", saleId);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+
+
+
+            }
+
+        }
+
+        public void UpdateSale(Sale sale)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand("spUpdateSale", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@SaleId", sale.Id);
+                command.Parameters.AddWithValue("@SaleType", sale.SaleType);
+                command.Parameters.AddWithValue("@ClientName", sale.ClientName);
+                command.Parameters.AddWithValue("@Date", sale.Date);
+                command.Parameters.AddWithValue("@Phone", sale.Phone);
+                command.Parameters.AddWithValue("@Reference", sale.Reference);
+                command.Parameters.AddWithValue("@Address", sale.Address);
+                command.Parameters.AddWithValue("@PaymentTypeName", sale.PaymentTypeName);
+                command.Parameters.AddWithValue("@Observation", sale.Observation);
+                command.Parameters.AddWithValue("@Channel", sale.Channel);
+                command.Parameters.AddWithValue("@PaymentConditionName", sale.PaymentConditionName);
+                command.Parameters.AddWithValue("@Total", sale.Total);
+                command.Parameters.AddWithValue("@CashPayment", sale.CashPayment ?? (object)DBNull.Value);
+                command.Parameters.AddWithValue("@CreditPayment", sale.CreditPayment ?? (object)DBNull.Value);
+                command.Parameters.AddWithValue("@UserName", sale.UserName);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+        public void DeleteProductsSalesBySalesId (int salesId)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand("spDeleteProductsSalesBySalesId", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@sales_id", salesId);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
         }
         
     }

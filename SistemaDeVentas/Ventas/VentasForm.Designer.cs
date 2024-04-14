@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dt_sales = new System.Windows.Forms.DataGridView();
             this.btn_add = new FontAwesome.Sharp.IconButton();
             this.btn_delete = new FontAwesome.Sharp.IconButton();
@@ -48,15 +48,15 @@
             this.dt_sales.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dt_sales.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dt_sales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dt_sales.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dt_sales.DefaultCellStyle = dataGridViewCellStyle3;
             this.dt_sales.Location = new System.Drawing.Point(22, 29);
             this.dt_sales.MultiSelect = false;
             this.dt_sales.Name = "dt_sales";
@@ -79,10 +79,10 @@
             this.btn_add.IconColor = System.Drawing.Color.Black;
             this.btn_add.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btn_add.IconSize = 40;
-            this.btn_add.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_add.Location = new System.Drawing.Point(859, 664);
+            this.btn_add.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btn_add.Location = new System.Drawing.Point(854, 664);
             this.btn_add.Name = "btn_add";
-            this.btn_add.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
+            this.btn_add.Padding = new System.Windows.Forms.Padding(0, 0, 30, 0);
             this.btn_add.Size = new System.Drawing.Size(279, 67);
             this.btn_add.TabIndex = 9;
             this.btn_add.Text = "Añadir";
@@ -99,14 +99,15 @@
             this.btn_delete.IconColor = System.Drawing.Color.Black;
             this.btn_delete.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btn_delete.IconSize = 40;
-            this.btn_delete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_delete.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btn_delete.Location = new System.Drawing.Point(554, 664);
             this.btn_delete.Name = "btn_delete";
-            this.btn_delete.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
+            this.btn_delete.Padding = new System.Windows.Forms.Padding(0, 0, 30, 0);
             this.btn_delete.Size = new System.Drawing.Size(279, 67);
             this.btn_delete.TabIndex = 10;
             this.btn_delete.Text = "Eliminar";
             this.btn_delete.UseVisualStyleBackColor = false;
+            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
             // 
             // btn_update
             // 
@@ -118,10 +119,10 @@
             this.btn_update.IconColor = System.Drawing.Color.Black;
             this.btn_update.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btn_update.IconSize = 40;
-            this.btn_update.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_update.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btn_update.Location = new System.Drawing.Point(244, 661);
             this.btn_update.Name = "btn_update";
-            this.btn_update.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
+            this.btn_update.Padding = new System.Windows.Forms.Padding(0, 0, 30, 0);
             this.btn_update.Size = new System.Drawing.Size(279, 67);
             this.btn_update.TabIndex = 11;
             this.btn_update.Text = "Actualizar";
@@ -136,6 +137,7 @@
             this.Controls.Add(this.btn_delete);
             this.Controls.Add(this.btn_update);
             this.Controls.Add(this.dt_sales);
+            this.MaximumSize = new System.Drawing.Size(1200, 825);
             this.Name = "VentasForm";
             this.Text = "VentasForm";
             this.Load += new System.EventHandler(this.VentasForm_Load);

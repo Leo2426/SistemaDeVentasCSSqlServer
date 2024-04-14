@@ -34,9 +34,13 @@
             // 
             // dt_deliverys
             // 
+            this.dt_deliverys.AllowUserToAddRows = false;
+            this.dt_deliverys.AllowUserToDeleteRows = false;
+            this.dt_deliverys.AllowUserToOrderColumns = true;
             this.dt_deliverys.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dt_deliverys.Location = new System.Drawing.Point(103, 96);
             this.dt_deliverys.Name = "dt_deliverys";
+            this.dt_deliverys.ReadOnly = true;
             this.dt_deliverys.RowHeadersWidth = 62;
             this.dt_deliverys.RowTemplate.Height = 28;
             this.dt_deliverys.Size = new System.Drawing.Size(996, 447);

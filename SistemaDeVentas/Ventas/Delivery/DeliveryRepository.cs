@@ -81,5 +81,19 @@ namespace SistemaDeVentas.Ventas.Delivery
             return deliveries;
         }
 
+        public void DeleteDeliveryBySalesId(int salesId)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand("spDeleteDeliveryBySalesId", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@sales_id", salesId);
+
+                connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
     }
 }

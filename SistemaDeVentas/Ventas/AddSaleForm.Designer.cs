@@ -659,6 +659,7 @@
             this.Controls.Add(this.txt_total);
             this.Name = "AddSaleForm";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.AddSaleForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dt_products)).EndInit();
             this.groupBox1.ResumeLayout(false);

@@ -116,8 +116,7 @@ namespace SistemaDeVentas.Ventas
                 MessageBox.Show("Debe agregar productos a la venta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
-            SaleRepository salerepo = new SaleRepository();
-            sale.Id = salerepo.GetLastSaleId() + 1;
+
             sale.SaleType = cb_type.Text;
             sale.ClientName = cb_client_name.Text;
             sale.Date = DateTime.Now;
@@ -130,7 +129,6 @@ namespace SistemaDeVentas.Ventas
             sale.PaymentConditionName = cb_payment_condition.Text;
             sale.Total = decimal.Parse(txt_total.Text);
             //parsear a decimal sino se puede que sea 0
-
             sale.CashPayment = string.IsNullOrWhiteSpace(txt_cash.Text) ? 0 : decimal.Parse(txt_cash.Text);
             sale.CreditPayment = string.IsNullOrWhiteSpace(txt_credit.Text) ? 0 : decimal.Parse(txt_credit.Text);
             sale.UserName = cb_sales_man.Text;
@@ -138,6 +136,8 @@ namespace SistemaDeVentas.Ventas
             var saleRepository = new SaleRepository();
             saleRepository.InsertSale(sale);
 
+            //agregar el id de la venta a la clase sale
+            sale.Id = saleRepository.GetLastSaleId();
 
             //insertar los productos de la venta
             var saledProducts = new List<ProductSaled>();
@@ -148,7 +148,7 @@ namespace SistemaDeVentas.Ventas
                 productSaled.ProductId = Convert.ToInt32(row.Cells["Id"].Value.ToString());
                 //se obtiene el id de la venta que se acaba de insertar
                 productSaled.Description = row.Cells["Description"].Value.ToString();
-                productSaled.SaleId = saleRepository.GetLastSaleId();
+                productSaled.SaleId = sale.Id;
                 productSaled.Code = row.Cells["Code"].Value.ToString();
                 productSaled.Quantity = int.Parse(row.Cells["Quantity"].Value.ToString());
                 productSaled.SalePrice = decimal.Parse(row.Cells["Price"].Value.ToString());
@@ -173,6 +173,10 @@ namespace SistemaDeVentas.Ventas
             {
                 generatePdf(saledProducts);
             }
+
+
+            //mostrar la venta recien agregada en un message box
+            MessageBox.Show(saleRepository.GetLastSaleId().ToString());
 
             //lanzar form de delivery
             var deliveryForm = new DeliveryForm(sale, saledProducts);
