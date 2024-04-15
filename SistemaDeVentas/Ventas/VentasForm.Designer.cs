@@ -33,6 +33,7 @@
             this.btn_add = new FontAwesome.Sharp.IconButton();
             this.btn_delete = new FontAwesome.Sharp.IconButton();
             this.dt_sales = new System.Windows.Forms.DataGridView();
+            this.btn_print = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)(this.dt_sales)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,8 +82,8 @@
             this.dt_sales.AllowUserToAddRows = false;
             this.dt_sales.AllowUserToDeleteRows = false;
             this.dt_sales.AllowUserToOrderColumns = true;
-            this.dt_sales.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.dt_sales.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dt_sales.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dt_sales.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
@@ -116,12 +117,33 @@
             this.dt_sales.Size = new System.Drawing.Size(1123, 607);
             this.dt_sales.TabIndex = 12;
             // 
+            // btn_print
+            // 
+            this.btn_print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_print.BackColor = System.Drawing.SystemColors.Control;
+            this.btn_print.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_print.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btn_print.IconChar = FontAwesome.Sharp.IconChar.Print;
+            this.btn_print.IconColor = System.Drawing.Color.Black;
+            this.btn_print.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btn_print.IconSize = 40;
+            this.btn_print.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btn_print.Location = new System.Drawing.Point(265, 668);
+            this.btn_print.Name = "btn_print";
+            this.btn_print.Padding = new System.Windows.Forms.Padding(0, 0, 30, 0);
+            this.btn_print.Size = new System.Drawing.Size(279, 67);
+            this.btn_print.TabIndex = 14;
+            this.btn_print.Text = "Imprimir";
+            this.btn_print.UseVisualStyleBackColor = false;
+            this.btn_print.Click += new System.EventHandler(this.btn_print_Click);
+            // 
             // VentasForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1178, 769);
             this.Controls.Add(this.btn_add);
+            this.Controls.Add(this.btn_print);
             this.Controls.Add(this.btn_delete);
             this.Controls.Add(this.dt_sales);
             this.Name = "VentasForm";
@@ -137,5 +159,6 @@
         private FontAwesome.Sharp.IconButton btn_add;
         private FontAwesome.Sharp.IconButton btn_delete;
         private System.Windows.Forms.DataGridView dt_sales;
+        private FontAwesome.Sharp.IconButton btn_print;
     }
 }

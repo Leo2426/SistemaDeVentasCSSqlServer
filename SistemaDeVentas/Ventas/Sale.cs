@@ -17,7 +17,7 @@ namespace SistemaDeVentas.Ventas
         public string Address { get; set; }
         public string PaymentTypeName { get; set; }
         //observation puede ser null
-        public string Observation { get; set; } = null;
+        public string Observation { get; set; }
         public string Channel { get; set; }
         public string PaymentConditionName { get; set; }
         public decimal Total { get; set; }

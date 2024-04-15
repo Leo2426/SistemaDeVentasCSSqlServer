@@ -7,6 +7,8 @@ using System.Drawing.Printing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using FontStyle = System.Drawing.FontStyle;
 
 namespace SistemaDeVentas.Print
 {
@@ -14,6 +16,7 @@ namespace SistemaDeVentas.Print
     {
         private Sale sale = new Sale();
         private List<ProductSaled> products = new List<ProductSaled>();
+        int HeightDocument = 510;
         //constructor
         public Ticket80mm(Sale sale, List <ProductSaled> productsSaled)
         {
@@ -29,9 +32,8 @@ namespace SistemaDeVentas.Print
 
             // Ancho y altura en puntos (1 pulgada = 72 puntos, 8 cm = aproximadamente 3.15 pulgadas)
             int Width = 330; // Convertir 8 cm a puntos
-            int Height = 800;
 
-            printDocument.DefaultPageSettings.PaperSize = new PaperSize("custom", Width, Height);
+            printDocument.DefaultPageSettings.PaperSize = new PaperSize("custom", Width, HeightDocument);
             printDocument.Print();
 
         }
@@ -108,6 +110,8 @@ namespace SistemaDeVentas.Print
             e.Graphics.DrawString(phoneValue, fontDetails, Brushes.Black, new PointF(100, y));
             y += 20;
 
+
+
             // Dirección
             string addressText = "Direccion: ";
             string addressValue = sale.Address;
@@ -115,6 +119,8 @@ namespace SistemaDeVentas.Print
             RectangleF addressRect = new RectangleF(100, y, maxWidth - 65, 100);
             e.Graphics.DrawString(addressValue, fontDetails, Brushes.Black, addressRect);
             y += (int)e.Graphics.MeasureString(addressValue, fontDetails, addressRect.Size).Height + 10;
+
+
 
             // Referencia
             string referenceText = "Referencia: ";
@@ -124,12 +130,15 @@ namespace SistemaDeVentas.Print
             e.Graphics.DrawString(referenceValue, fontDetails, Brushes.Black, referenceRect);
             y += (int)e.Graphics.MeasureString(referenceValue, fontDetails, referenceRect.Size).Height + 10;
 
+
+
             // Tipo de Pago
             string paymentTypeText = "Tipo de Pago: ";
             string paymentTypeValue = sale.PaymentTypeName;
             e.Graphics.DrawString(paymentTypeText, fontHeaders, Brushes.Black, new PointF(5, y));
             e.Graphics.DrawString(paymentTypeValue, fontDetails, Brushes.Black, new PointF(100, y));
             y += 20;
+
 
             // Observación
             string observationText = "Observacion: ";
@@ -138,6 +147,8 @@ namespace SistemaDeVentas.Print
             RectangleF observationRect = new RectangleF(100, y, maxWidth - 95, 100);
             e.Graphics.DrawString(observationValue, fontDetails, Brushes.Black, observationRect);
             y += (int)e.Graphics.MeasureString(observationValue, fontDetails, observationRect.Size).Height + 10;
+            //aumentar el tamano del documento
+
 
 
 
@@ -170,6 +181,9 @@ namespace SistemaDeVentas.Print
 
                 // Incrementa 'y' para la siguiente entrada, teniendo en cuenta el alto del texto
                 y += (int)(Math.Max(size.Height, 20)); // Usa el mayor de 'size.Height' o 20 para asegurar espacio suficiente
+                
+                //aumentar el tamano del documento
+
             }
 
             y += 10; // Espacio después de los productos
@@ -177,7 +191,12 @@ namespace SistemaDeVentas.Print
             e.Graphics.DrawString("Total", fontHeaders, Brushes.Black, new PointF(5, y));
             e.Graphics.DrawString(sale.Total.ToString(), fontDetails, Brushes.Black, new PointF(230, y));
 
-            // Se puede ajustar para asegurarse de que todo el texto encaje y se vea bien
+            //insertar numero de comprobante que es el sale.id
+            e.Graphics.DrawString("Comprobante N°: " + sale.Id, fontDetails, Brushes.Black, new PointF(5, y + 20));
+            HeightDocument += y;
+
+            //configurar el documento con la nueva altura
+            e.PageSettings.PaperSize = new PaperSize("custom", 330, HeightDocument);
         }
 
         private void loadLogo(PrintPageEventArgs e)

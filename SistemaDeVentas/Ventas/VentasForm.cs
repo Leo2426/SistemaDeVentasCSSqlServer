@@ -1,4 +1,5 @@
-﻿using SistemaDeVentas.Ventas.Delivery;
+﻿using SistemaDeVentas.Print;
+using SistemaDeVentas.Ventas.Delivery;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,39 +21,35 @@ namespace SistemaDeVentas.Ventas
 
         private void VentasForm2_Load(object sender, EventArgs e)
         {
-            dt_sales.Columns.Add("Id", "ID");
-            dt_sales.Columns.Add("SaleType", "Tipo de Venta");
-            dt_sales.Columns.Add("ClientName", "Cliente");
-            dt_sales.Columns.Add("Date", "Fecha");
-            dt_sales.Columns.Add("Phone", "Teléfono");
-            dt_sales.Columns.Add("Reference", "Referencia");
-            dt_sales.Columns.Add("Address", "Dirección");
-            dt_sales.Columns.Add("PaymentTypeName", "Tipo de Pago");
-            dt_sales.Columns.Add("Observation", "Observación");
-            dt_sales.Columns.Add("Channel", "Canal");
-            dt_sales.Columns.Add("PaymentConditionName", "Condición de Pago");
-            dt_sales.Columns.Add("Total", "Total");
-            dt_sales.Columns.Add("CashPayment", "Pago en Efectivo");
-            dt_sales.Columns.Add("CreditPayment", "Pago a Crédito");
-            dt_sales.Columns.Add("CreditDays", "Días de Crédito");
-            dt_sales.Columns.Add("UserName", "Vendedor");
             loadSales();
         }
 
 
         private void loadSales()
         {
-            //limpiar las ventas
-            dt_sales.Rows.Clear();
-
             //cargar las ventas
             var saleRepository = new SaleRepository();
             var sales = saleRepository.GetAllSales();
 
-            foreach (var sale in sales)
-            {
-                dt_sales.Rows.Add(sale.Id, sale.SaleType, sale.ClientName, sale.Date, sale.Phone, sale.Reference, sale.Address, sale.PaymentTypeName, sale.Observation, sale.Channel, sale.PaymentConditionName, sale.Total, sale.CashPayment, sale.CreditPayment,sale.CreditDays, sale.UserName);
-            }
+           dt_sales.DataSource = sales;
+
+            //renombrar columnas
+            dt_sales.Columns["Id"].HeaderText = "Id";
+            dt_sales.Columns["SaleType"].HeaderText = "Tipo de venta";
+            dt_sales.Columns["ClientName"].HeaderText = "Cliente";
+            dt_sales.Columns["Date"].HeaderText = "Fecha";
+            dt_sales.Columns["Phone"].HeaderText = "Teléfono";
+            dt_sales.Columns["Reference"].HeaderText = "Referencia";
+            dt_sales.Columns["Address"].HeaderText = "Dirección";
+            dt_sales.Columns["PaymentTypeName"].HeaderText = "Tipo de pago";
+            dt_sales.Columns["Observation"].HeaderText = "Observación";
+            dt_sales.Columns["Channel"].HeaderText = "Canal";
+            dt_sales.Columns["PaymentConditionName"].HeaderText = "Condición de pago";
+            dt_sales.Columns["Total"].HeaderText = "Total";
+            dt_sales.Columns["CashPayment"].HeaderText = "Pago en efectivo";
+            dt_sales.Columns["CreditPayment"].HeaderText = "Pago a crédito";
+            dt_sales.Columns["CreditDays"].HeaderText = "Días de crédito";
+            dt_sales.Columns["UserName"].HeaderText = "Usuario";
 
         }
 
@@ -100,5 +97,21 @@ namespace SistemaDeVentas.Ventas
 
         }
 
+        private void btn_print_Click(object sender, EventArgs e)
+        {
+            //Imprimir la venta seleccionada
+            if (dt_sales.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Seleccione una venta para imprimir");
+                return;
+            }
+
+            var sale = (Sale)dt_sales.CurrentRow.DataBoundItem;
+            var productSaledRepository = new SaleRepository();
+            var productsSaled = productSaledRepository.getAllProductsWithSaleId(sale.Id);
+
+            var saleTicket = new Ticket80mm(sale, productsSaled);
+            saleTicket.CreateTicket80mm();
+        }
     }
 }
