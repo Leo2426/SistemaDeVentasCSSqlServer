@@ -28,7 +28,7 @@
     <ProductName>Sistema de Ventas</ProductName>
     <PublisherName>Entersoft Publiser</PublisherName>
     <SuiteName>Entersoft Suite Name</SuiteName>
-    <ApplicationRevision>12</ApplicationRevision>
+    <ApplicationRevision>13</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -277,11 +277,23 @@
     <Compile Include="Clientes\UpdateClientForm.Designer.cs">
       <DependentUpon>UpdateClientForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Configuration\AddSizeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configuration\AddSizeForm.Designer.cs">
+      <DependentUpon>AddSizeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Configuration\ConfigurationForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Configuration\ConfigurationForm.Designer.cs">
       <DependentUpon>ConfigurationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration\DeleteSizeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configuration\DeleteSizeForm.Designer.cs">
+      <DependentUpon>DeleteSizeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Home\HomeForm.cs">
       <SubType>Form</SubType>
@@ -396,8 +408,14 @@
     <EmbeddedResource Include="Clientes\UpdateClientForm.resx">
       <DependentUpon>UpdateClientForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Configuration\AddSizeForm.resx">
+      <DependentUpon>AddSizeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Configuration\ConfigurationForm.resx">
       <DependentUpon>ConfigurationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Configuration\DeleteSizeForm.resx">
+      <DependentUpon>DeleteSizeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Home\HomeForm.resx">
       <DependentUpon>HomeForm.cs</DependentUpon>

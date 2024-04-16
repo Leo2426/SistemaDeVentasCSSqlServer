@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemaDeVentas.Clientes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -30,10 +31,25 @@ namespace SistemaDeVentas.Productos
             cb_sizes.DataSource = sizes;
             cb_sizes.DisplayMember = "SizeName";
             cb_sizes.ValueMember = "Id";
+
+            //valor para mostrar en el combobox es (en blanco)
+            cb_sizes.Text = "(en blanco)";
+
         }
 
         private void btn_add_client_Click(object sender, EventArgs e)
         {
+
+            //validar que el cliente este en la coleccion de clientes
+            var size = (Size)cb_sizes.SelectedItem;
+            if (size == null)
+            {
+                MessageBox.Show("La talla no es válida", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+
+
             //add product
             var product = new Product
             {
@@ -48,14 +64,9 @@ namespace SistemaDeVentas.Productos
             
             var productRepository = new ProductRepository();
             productRepository.AddProduct(product);
-            MessageBox.Show("Producto añadido correctamente");
             this.Close();
 
         }
 
-        private void cb_sizes_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            MessageBox.Show(cb_sizes.Text);
-        }
     }
 }

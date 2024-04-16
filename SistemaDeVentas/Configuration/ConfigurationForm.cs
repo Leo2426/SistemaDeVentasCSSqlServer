@@ -16,5 +16,19 @@ namespace SistemaDeVentas.Configuration
         {
             InitializeComponent();
         }
+
+        private void btn_add_size_Click(object sender, EventArgs e)
+        {
+            //lanzar form para agregar talla
+            var addSizeForm = new AddSizeForm();
+            addSizeForm.ShowDialog();
+        }
+
+        private void btn_delete_size_Click(object sender, EventArgs e)
+        {
+            //lanzar form para eliminar talla
+            var deleteSizeForm = new DeleteSizeForm();
+            deleteSizeForm.ShowDialog();
+        }
     }
 }

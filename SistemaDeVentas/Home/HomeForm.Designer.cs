@@ -29,15 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.sistemadeventasdbDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sistemadeventasdbDataSet = new SistemaDeVentas.sistemadeventasdbDataSet();
             this.label2 = new System.Windows.Forms.Label();
             this.lbl_total_sales = new System.Windows.Forms.Label();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
-            this.txt_total = new System.Windows.Forms.TextBox();
-            this.txt_cash = new System.Windows.Forms.TextBox();
+            this.dt_sales = new System.Windows.Forms.DataGridView();
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.lbl_date = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.sistemadeventasdbDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sistemadeventasdbDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dt_sales)).BeginInit();
             this.SuspendLayout();
             // 
             // sistemadeventasdbDataSetBindingSource
@@ -63,44 +65,58 @@
             // 
             this.lbl_total_sales.AutoSize = true;
             this.lbl_total_sales.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_total_sales.Location = new System.Drawing.Point(47, 113);
+            this.lbl_total_sales.Location = new System.Drawing.Point(45, 101);
             this.lbl_total_sales.Name = "lbl_total_sales";
             this.lbl_total_sales.Size = new System.Drawing.Size(126, 46);
             this.lbl_total_sales.TabIndex = 2;
             this.lbl_total_sales.Text = "label3";
             // 
-            // maskedTextBox1
+            // dt_sales
             // 
-            this.maskedTextBox1.Location = new System.Drawing.Point(367, 210);
-            this.maskedTextBox1.Mask = "99999.99";
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(89, 26);
-            this.maskedTextBox1.TabIndex = 3;
-            this.maskedTextBox1.TextChanged += new System.EventHandler(this.maskedTextBox1_TextChanged);
+            this.dt_sales.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dt_sales.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dt_sales.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dt_sales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dt_sales.Location = new System.Drawing.Point(366, 368);
+            this.dt_sales.Name = "dt_sales";
+            this.dt_sales.RowHeadersWidth = 62;
+            this.dt_sales.RowTemplate.Height = 28;
+            this.dt_sales.Size = new System.Drawing.Size(758, 253);
+            this.dt_sales.TabIndex = 3;
             // 
-            // txt_total
+            // monthCalendar1
             // 
-            this.txt_total.Location = new System.Drawing.Point(367, 293);
-            this.txt_total.Name = "txt_total";
-            this.txt_total.Size = new System.Drawing.Size(100, 26);
-            this.txt_total.TabIndex = 4;
-            this.txt_total.Text = "100";
+            this.monthCalendar1.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.monthCalendar1.Location = new System.Drawing.Point(42, 368);
+            this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.TabIndex = 5;
+            this.monthCalendar1.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateSelected);
             // 
-            // txt_cash
+            // lbl_date
             // 
-            this.txt_cash.Location = new System.Drawing.Point(499, 293);
-            this.txt_cash.Name = "txt_cash";
-            this.txt_cash.Size = new System.Drawing.Size(100, 26);
-            this.txt_cash.TabIndex = 4;
+            this.lbl_date.AutoSize = true;
+            this.lbl_date.Location = new System.Drawing.Point(362, 329);
+            this.lbl_date.Name = "lbl_date";
+            this.lbl_date.Size = new System.Drawing.Size(51, 20);
+            this.lbl_date.TabIndex = 6;
+            this.lbl_date.Text = "label1";
             // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1054, 655);
-            this.Controls.Add(this.txt_cash);
-            this.Controls.Add(this.txt_total);
-            this.Controls.Add(this.maskedTextBox1);
+            this.ClientSize = new System.Drawing.Size(1178, 769);
+            this.Controls.Add(this.lbl_date);
+            this.Controls.Add(this.monthCalendar1);
+            this.Controls.Add(this.dt_sales);
             this.Controls.Add(this.lbl_total_sales);
             this.Controls.Add(this.label2);
             this.Name = "HomeForm";
@@ -108,6 +124,7 @@
             this.Load += new System.EventHandler(this.HomeForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.sistemadeventasdbDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sistemadeventasdbDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dt_sales)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -118,8 +135,8 @@
         private sistemadeventasdbDataSet sistemadeventasdbDataSet;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lbl_total_sales;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
-        private System.Windows.Forms.TextBox txt_total;
-        private System.Windows.Forms.TextBox txt_cash;
+        private System.Windows.Forms.DataGridView dt_sales;
+        private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.Label lbl_date;
     }
 }

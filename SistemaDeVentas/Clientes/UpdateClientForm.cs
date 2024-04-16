@@ -105,5 +105,9 @@ namespace SistemaDeVentas.Clientes
             cb_district.SelectedIndex = 0;
         }
 
+        private void btn_add_client_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

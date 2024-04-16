@@ -39,7 +39,7 @@ namespace SistemaDeVentas.Productos
             dt_products.Columns["Cost"].HeaderText = "Costo";
             dt_products.Columns["Price"].HeaderText = "Precio";
             dt_products.Columns["MinimumStock"].HeaderText = "Stock mínimo";
-            dt_products.Columns["InitialStock"].HeaderText = "Stock inicial";
+            dt_products.Columns["InitialStock"].HeaderText = "Stock";
             dt_products.Columns["SizesId"].HeaderText = "Talla";
 
             //dar formato a las columnas de color
@@ -104,7 +104,7 @@ namespace SistemaDeVentas.Productos
 
         }
 
-        private void formating()
+        public void formating()
         {
          
             //dar formato a las columnas de color si la resta de stock inicial y stock minimo es menor a 2
@@ -113,7 +113,7 @@ namespace SistemaDeVentas.Productos
             {
                 var initialStock = Convert.ToInt32(row.Cells["InitialStock"].Value);
                 var minimumStock = Convert.ToInt32(row.Cells["MinimumStock"].Value);
-                if (initialStock - minimumStock <= 5)
+                if (initialStock - minimumStock <= 3)
                 {
                    //toda la fila
                    row.DefaultCellStyle.BackColor = Color.Red;
@@ -123,6 +123,11 @@ namespace SistemaDeVentas.Productos
             }
 
             
+        }
+
+        private void dt_products_VisibleChanged(object sender, EventArgs e)
+        {
+            formating();
         }
     }
 }

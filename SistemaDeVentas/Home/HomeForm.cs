@@ -43,9 +43,20 @@ namespace SistemaDeVentas.Home
             lbl_total_sales.Text = totalSales.ToString();
         }
 
-        private void maskedTextBox1_TextChanged(object sender, EventArgs e)
+        private void monthCalendar1_DateSelected(object sender, DateRangeEventArgs e)
         {
-            txt_cash.Text = maskedTextBox1.Text;
+            //colocar en el label el valor de la fecha seleccionada
+            lbl_date.Text = monthCalendar1.SelectionStart.ToString("dd/MM/yyyy");
+
+            //cargar las ventas de la fecha seleccionada
+            loadSalesByDate();
+        }
+
+        private void loadSalesByDate()
+        {
+            var saleRepository = new SaleRepository();
+            var sales = saleRepository.getSalesbyDate(monthCalendar1.SelectionStart.Day.ToString(),monthCalendar1.SelectionStart.Month.ToString(), monthCalendar1.SelectionStart.Year.ToString());
+            dt_sales.DataSource = sales;
         }
     }
 }

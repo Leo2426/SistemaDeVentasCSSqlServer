@@ -267,5 +267,47 @@ namespace SistemaDeVentas.Ventas
             }
         }
         
+
+        public List<Sale> getSalesbyDate (string day, string month, string year)
+        {
+            List<Sale> sales = new List<Sale>();
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand("spGetSalesByDate", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@Day", day);
+                command.Parameters.AddWithValue("@Month", month);
+                command.Parameters.AddWithValue("@Year", year);
+
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Sale sale = new Sale()
+                        {
+                            Id = int.Parse(reader["id"].ToString()),
+                            SaleType = reader["sale_type"].ToString(),
+                            Date = DateTime.Parse(reader["date"].ToString()),
+                            Phone = reader["phone"].ToString(),
+                            Reference = reader["reference"].ToString(),
+                            Address = reader["address"].ToString(),
+                            Observation = reader["observation"].ToString(),
+                            Channel = reader["channel"].ToString(),
+                            Total = decimal.Parse(reader["total"].ToString()),
+                            CashPayment = reader["cash_payment"] == DBNull.Value ? 0 : (decimal?)decimal.Parse(reader["cash_payment"].ToString()),
+                            CreditPayment = reader["credit_payment"] == DBNull.Value ? 0 : (decimal?)decimal.Parse(reader["credit_payment"].ToString()),
+                            CreditDays = reader["credit_days"] == DBNull.Value ? 0 : int.Parse(reader["credit_days"].ToString()),
+
+                        };
+                        sales.Add(sale);
+                    }
+                }
+            }
+            return sales;
+        }
+
     }
 }

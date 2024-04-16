@@ -49,9 +49,8 @@ public class Size
         }
 
         // Constructor con todos los parámetros, opcional dependiendo de tus necesidades
-        public Size(int id, string sizeName)
+        public Size( string sizeName)
         {
-            Id = id;
             SizeName = sizeName;
         }
     }
