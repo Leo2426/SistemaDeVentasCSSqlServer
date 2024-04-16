@@ -54,9 +54,9 @@ namespace SistemaDeVentas.Print
             Font fontDetails = new Font("Trebuchet MS", 8, FontStyle.Regular);
 
             loadLogo(e);
-
-
             int y = 120; // Posición inicial Y para el primer texto
+
+            //insertar numero de comprobante que es el sale.id
 
             // Calcular el punto central del texto para el título
             string title = "MARCAS ORIGINALES";
@@ -71,7 +71,8 @@ namespace SistemaDeVentas.Print
             // Calcular el punto central del texto para los detalles
             string details = "Modelos únicos y Exclusivos \r\n" +
                 "INSTAGRAM : @Marcas_Origanales\r\n" +
-                "WHATSAPP: 902 409 961\r\n";
+                "WHATSAPP: 902 409 961\r\n" +
+                "Comprobante N°: " + sale.Id;
             SizeF detailsSize = e.Graphics.MeasureString(details, fontDetails);
 
             float detailsX = (e.PageBounds.Width - detailsSize.Width) / 2; // Centrado
@@ -191,8 +192,7 @@ namespace SistemaDeVentas.Print
             e.Graphics.DrawString("Total", fontHeaders, Brushes.Black, new PointF(5, y));
             e.Graphics.DrawString(sale.Total.ToString(), fontDetails, Brushes.Black, new PointF(230, y));
 
-            //insertar numero de comprobante que es el sale.id
-            e.Graphics.DrawString("Comprobante N°: " + sale.Id, fontDetails, Brushes.Black, new PointF(5, y + 20));
+
             HeightDocument += y;
 
             //configurar el documento con la nueva altura

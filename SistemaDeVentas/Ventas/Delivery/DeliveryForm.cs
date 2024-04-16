@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemaDeVentas.Print;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -63,8 +64,15 @@ namespace SistemaDeVentas.Ventas.Delivery
             //insertar el delivery
             var deliveryRepository = new DeliveryRepository();
             deliveryRepository.InsertDelivery(delivery);
-            MessageBox.Show("Delivery insertado correctamente");
             this.Close();
+            
+            //preguntar si desea imprimir el ticket
+            var result = MessageBox.Show("¿Desea imprimir el ticket de delivery?", "Imprimir ticket", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                var ticketDelivery = new TicketDelivery(delivery);
+                ticketDelivery.createTicketDelivery();
+            }
         }
     }
 }

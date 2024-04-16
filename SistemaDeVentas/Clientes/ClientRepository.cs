@@ -176,5 +176,37 @@ namespace SistemaDeVentas.Clientes
                 throw new Exception("Error al buscar cliente: " + ex.Message);
             }
         }
+
+
+        public Client getLasClient()
+        {
+
+            // Obtener el último cliente insertado
+            try
+            {
+                SqlConnection connection = new SqlConnection(connectionString);
+                SqlCommand command = new SqlCommand("spGetLastClient", connection);
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                Client client = new Client();
+                while (reader.Read())
+                {
+                    client.Id = Convert.ToInt32(reader["id"]);
+                    client.Name = reader["name"].ToString();
+                    client.Address = reader["address"].ToString();
+                    client.Document = reader["document"].ToString();
+                    client.Phone = reader["phone"].ToString();
+                    client.Reference = reader["reference"].ToString();
+                }
+                connection.Close();
+                return client;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener último cliente: " + ex.Message);
+            }
+        }
+
     }
 }

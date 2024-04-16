@@ -291,8 +291,8 @@
     </Compile>
     <Compile Include="Login\User.cs" />
     <Compile Include="Login\UserRepository.cs" />
-    <Compile Include="Print\SaleTicket.cs" />
     <Compile Include="Print\Ticket80mm.cs" />
+    <Compile Include="Print\TicketDelivery.cs" />
     <Compile Include="Productos\AddProductForm.cs">
       <SubType>Form</SubType>
     </Compile>

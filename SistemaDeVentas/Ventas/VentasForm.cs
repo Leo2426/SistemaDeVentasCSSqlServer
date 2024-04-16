@@ -86,9 +86,7 @@ namespace SistemaDeVentas.Ventas
             if (result == DialogResult.Yes)
             {
                 //seleccionar la venta del grid
-                var sale = new Sale();
-                sale.Id = (int)dt_sales.CurrentRow.Cells[0].Value;  
-
+                var sale = (Sale)dt_sales.CurrentRow.DataBoundItem;
                 var saleRepository = new SaleRepository();
                 saleRepository.DeleteSale(sale.Id);
                 loadSales();
@@ -106,12 +104,20 @@ namespace SistemaDeVentas.Ventas
                 return;
             }
 
-            var sale = (Sale)dt_sales.CurrentRow.DataBoundItem;
-            var productSaledRepository = new SaleRepository();
-            var productsSaled = productSaledRepository.getAllProductsWithSaleId(sale.Id);
 
-            var saleTicket = new Ticket80mm(sale, productsSaled);
-            saleTicket.CreateTicket80mm();
+            //preguntar si esta seguro de imprimir la venta
+            var result = MessageBox.Show("¿Está seguro de imprimir la venta?", "Imprimir Venta", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                //seleccionar la venta del grid
+                var sale = (Sale)dt_sales.CurrentRow.DataBoundItem;
+                var productSaledRepository = new SaleRepository();
+                var productsSaled = productSaledRepository.getAllProductsWithSaleId(sale.Id);
+
+                var saleTicket = new Ticket80mm(sale, productsSaled);
+                saleTicket.CreateTicket80mm();
+            }
+
         }
     }
 }

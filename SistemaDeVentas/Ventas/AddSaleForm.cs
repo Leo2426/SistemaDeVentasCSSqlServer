@@ -70,6 +70,19 @@ namespace SistemaDeVentas.Ventas
             cb_client_name.DataSource = clients;
             cb_client_name.DisplayMember = "Name";
             cb_client_name.ValueMember = "Name";
+
+            //si no hay clientes mostrar un mensaje
+            if (clients.Count == 0)
+            {
+                MessageBox.Show("No hay clientes registrados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+            //si hay clientes selecccionar last cliente
+            if (clients.Count > 0)
+            {
+                cb_client_name.Text =  clientRepository.getLasClient().Name;
+            }
+
         }
 
 
@@ -114,6 +127,12 @@ namespace SistemaDeVentas.Ventas
 
         private void btn_add_Click(object sender, EventArgs e)
         {
+            DialogResult dialogResult = MessageBox.Show("¿Imprimir ticket de Venta?", "Ticket de venta", MessageBoxButtons.YesNoCancel);
+            if (dialogResult == DialogResult.Cancel)
+            {
+                return;
+            }
+
             //validar que hayan productos
             if (dt_products.Rows.Count == 0)
             {
@@ -187,19 +206,16 @@ namespace SistemaDeVentas.Ventas
 
 
            //generar ticket de venta si el usuario lo desea por confimacion de messagebox
-            DialogResult dialogResult = MessageBox.Show("¿Imprimir ticket de Venta?", "Ticket de venta", MessageBoxButtons.YesNo);
+            
             if (dialogResult == DialogResult.Yes)
             {
                 Ticket80mm ticket80Mm = new Ticket80mm(sale, saledProducts);
                 ticket80Mm.CreateTicket80mm();
             }
 
-            ////mostrar la venta recien agregada en un message box
-            //MessageBox.Show(saleRepository.GetLastSaleId().ToString());
-
-            ////lanzar form de delivery
-            //var deliveryForm = new DeliveryForm(sale, saledProducts);
-            //deliveryForm.ShowDialog();
+            //lanzar form de delivery
+            var deliveryForm = new DeliveryForm(sale, saledProducts);
+            deliveryForm.ShowDialog();
 
         }
 
