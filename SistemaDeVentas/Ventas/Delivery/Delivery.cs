@@ -18,7 +18,7 @@ namespace SistemaDeVentas.Ventas.Delivery
         public string PaymentCondition { get; set; }
         public string Phone { get; set; }
         public decimal Amount { get; set; }
-        public decimal Amount_due { get; set; }
+        public decimal? Amount_due { get; set; }
         public List<ProductSaled> products { get; set; }
         public string Date { get; set; }
         public int SaleId { get; set; }

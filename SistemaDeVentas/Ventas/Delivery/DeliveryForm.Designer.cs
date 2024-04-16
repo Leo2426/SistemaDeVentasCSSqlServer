@@ -50,7 +50,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.txt_saldo_a_cobrar = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbl_title = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dt_products)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,6 +59,7 @@
             this.txt_name.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_name.Location = new System.Drawing.Point(53, 135);
             this.txt_name.Name = "txt_name";
+            this.txt_name.ReadOnly = true;
             this.txt_name.Size = new System.Drawing.Size(228, 31);
             this.txt_name.TabIndex = 26;
             // 
@@ -67,6 +68,7 @@
             this.txt_date.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_date.Location = new System.Drawing.Point(312, 135);
             this.txt_date.Name = "txt_date";
+            this.txt_date.ReadOnly = true;
             this.txt_date.Size = new System.Drawing.Size(228, 31);
             this.txt_date.TabIndex = 28;
             // 
@@ -104,6 +106,7 @@
             // 
             this.txt_phone.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_phone.Location = new System.Drawing.Point(53, 216);
+            this.txt_phone.MaxLength = 9;
             this.txt_phone.Name = "txt_phone";
             this.txt_phone.Size = new System.Drawing.Size(228, 31);
             this.txt_phone.TabIndex = 26;
@@ -166,6 +169,8 @@
             this.dt_products.ReadOnly = true;
             this.dt_products.RowHeadersWidth = 62;
             this.dt_products.RowTemplate.Height = 28;
+            this.dt_products.ShowCellErrors = false;
+            this.dt_products.ShowEditingIcon = false;
             this.dt_products.Size = new System.Drawing.Size(487, 97);
             this.dt_products.TabIndex = 48;
             // 
@@ -235,6 +240,7 @@
             this.txt_amount.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_amount.Location = new System.Drawing.Point(53, 600);
             this.txt_amount.Name = "txt_amount";
+            this.txt_amount.ReadOnly = true;
             this.txt_amount.Size = new System.Drawing.Size(228, 31);
             this.txt_amount.TabIndex = 26;
             // 
@@ -255,6 +261,8 @@
             this.txt_saldo_a_cobrar.Name = "txt_saldo_a_cobrar";
             this.txt_saldo_a_cobrar.Size = new System.Drawing.Size(228, 31);
             this.txt_saldo_a_cobrar.TabIndex = 26;
+            this.txt_saldo_a_cobrar.TextChanged += new System.EventHandler(this.txt_saldo_a_cobrar_TextChanged);
+            this.txt_saldo_a_cobrar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_saldo_a_cobrar_KeyPress);
             // 
             // button1
             // 
@@ -267,22 +275,22 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // label1
+            // lbl_title
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(45, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(395, 44);
-            this.label1.TabIndex = 50;
-            this.label1.Text = "Registro de Delivery N";
+            this.lbl_title.AutoSize = true;
+            this.lbl_title.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_title.Location = new System.Drawing.Point(45, 35);
+            this.lbl_title.Name = "lbl_title";
+            this.lbl_title.Size = new System.Drawing.Size(395, 44);
+            this.lbl_title.TabIndex = 50;
+            this.lbl_title.Text = "Registro de Delivery N";
             // 
             // DeliveryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(595, 768);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lbl_title);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.cb_payment_condition);
             this.Controls.Add(this.dt_products);
@@ -306,6 +314,7 @@
             this.Controls.Add(this.label4);
             this.Name = "DeliveryForm";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.DeliveryForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dt_products)).EndInit();
             this.ResumeLayout(false);
@@ -335,6 +344,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txt_saldo_a_cobrar;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl_title;
     }
 }

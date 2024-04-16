@@ -18,6 +18,7 @@ namespace SistemaDeVentas.Ventas.Delivery
         {
             InitializeComponent();
             this.delivery = new Delivery(sale, products);
+            this.delivery.Amount_due = null;
         }
 
         private void DeliveryForm_Load(object sender, EventArgs e)
@@ -46,6 +47,9 @@ namespace SistemaDeVentas.Ventas.Delivery
                 dt_products.Rows.Add(product.Description, product.Quantity,product.SalePrice);
             }
 
+
+            //cargar el titulo con el numero de venta
+            lbl_title.Text = "Delivery de venta N " + delivery.SaleId;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -57,7 +61,7 @@ namespace SistemaDeVentas.Ventas.Delivery
             delivery.Instructions = txt_instructions.Text;
             delivery.Phone = txt_phone.Text;
             delivery.Amount = decimal.Parse(txt_amount.Text);
-            delivery.Amount_due = decimal.Parse(txt_saldo_a_cobrar.Text);
+            delivery.Amount_due = string.IsNullOrWhiteSpace(txt_saldo_a_cobrar.Text) ? 0 : decimal.Parse(txt_saldo_a_cobrar.Text);
             delivery.PaymentCondition = cb_payment_condition.SelectedItem.ToString();
             delivery.Date = txt_date.Text;
 
@@ -73,6 +77,51 @@ namespace SistemaDeVentas.Ventas.Delivery
                 var ticketDelivery = new TicketDelivery(delivery);
                 ticketDelivery.createTicketDelivery();
             }
+        }
+
+        private void txt_saldo_a_cobrar_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            if (!Char.IsDigit(ch) && ch != 8 && ch != 46)
+            {
+                e.Handled = true;
+            }
+
+            //que solo acepte el punto 1 vez y que solo haya 2 decimales
+            if (ch == 46 && txt_saldo_a_cobrar.Text.IndexOf('.') != -1)
+            {
+                e.Handled = true;
+            }
+
+            //que solo acepte 2 decimales
+            if (txt_saldo_a_cobrar.Text.IndexOf('.') != -1 && txt_saldo_a_cobrar.Text.Substring(txt_saldo_a_cobrar.Text.IndexOf('.')).Length > 2)
+            {
+                e.Handled = true;
+            }
+
+            //permitir el backspace
+            if (e.KeyChar == (char)Keys.Back)
+            {
+                e.Handled = false;
+            }
+
+            //que no acepte primero el punto
+            if (txt_saldo_a_cobrar.Text.Length == 0 && ch == 46)
+            {
+                e.Handled = true;
+            }
+
+
+        }
+
+        private void txt_saldo_a_cobrar_TextChanged(object sender, EventArgs e)
+        {
+            //validar que el saldo no sea mayor al monto
+            if (txt_saldo_a_cobrar.Text !=""  && decimal.Parse(txt_saldo_a_cobrar.Text) > decimal.Parse(txt_amount.Text))
+            {
+                txt_saldo_a_cobrar.Text = txt_amount.Text;
+            }
+
         }
     }
 }
