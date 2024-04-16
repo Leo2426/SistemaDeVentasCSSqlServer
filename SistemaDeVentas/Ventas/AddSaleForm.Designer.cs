@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btn_add = new System.Windows.Forms.Button();
             this.cb_sales_man = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -102,6 +102,7 @@
             // 
             this.cb_sales_man.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cb_sales_man.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cb_sales_man.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_sales_man.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cb_sales_man.FormattingEnabled = true;
             this.cb_sales_man.Location = new System.Drawing.Point(851, 156);
@@ -203,7 +204,7 @@
             // 
             // cb_payment_type
             // 
-            this.cb_payment_type.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cb_payment_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_payment_type.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cb_payment_type.FormattingEnabled = true;
             this.cb_payment_type.Location = new System.Drawing.Point(324, 156);
@@ -302,15 +303,15 @@
             this.dt_products.Name = "dt_products";
             this.dt_products.ReadOnly = true;
             this.dt_products.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dt_products.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dt_products.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dt_products.RowHeadersWidth = 62;
             this.dt_products.RowTemplate.Height = 28;
             this.dt_products.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -717,6 +718,9 @@
             this.Controls.Add(this.txt_credit);
             this.Controls.Add(this.txt_cash);
             this.Controls.Add(this.txt_total);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1199, 996);
+            this.MinimumSize = new System.Drawing.Size(1199, 996);
             this.Name = "AddSaleForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

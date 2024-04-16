@@ -127,6 +127,22 @@ namespace SistemaDeVentas.Ventas
 
         private void btn_add_Click(object sender, EventArgs e)
         {
+            //validar que el cliente no este vacio
+            if (string.IsNullOrWhiteSpace(cb_client_name.Text))
+            {
+                MessageBox.Show("Debe seleccionar un cliente", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            //validar que el cliente este en la coleccion de clientes
+            var client = (Client)cb_client_name.SelectedItem;
+            if (client == null)
+            {
+                MessageBox.Show("Cliente no encontrado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+
             DialogResult dialogResult = MessageBox.Show("¿Imprimir ticket de Venta?", "Ticket de venta", MessageBoxButtons.YesNoCancel);
             if (dialogResult == DialogResult.Cancel)
             {
