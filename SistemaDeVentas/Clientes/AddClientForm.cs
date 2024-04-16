@@ -22,6 +22,13 @@ namespace SistemaDeVentas.Clientes
         private void btn_add_client_Click(object sender, EventArgs e)
         {
 
+            //validar que el nombre no este vacio
+            if (txt_name.Text == "")
+            {
+                MessageBox.Show("El nombre no puede estar vacío");
+                return;
+            }
+
             ClientRepository clientRepository = new ClientRepository();
             Client client = new Client();
             client.Name = txt_name.Text;
@@ -33,7 +40,6 @@ namespace SistemaDeVentas.Clientes
             client.Province = cb_province.Text;
             client.District = cb_district.Text;
             clientRepository.InsertClient(client);
-            MessageBox.Show("Cliente insertado correctamente");
             this.Close();
 
         }

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btn_add = new System.Windows.Forms.Button();
             this.cb_sales_man = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -133,7 +133,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(285, 41);
+            this.label2.Location = new System.Drawing.Point(799, 43);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(109, 26);
             this.label2.TabIndex = 34;
@@ -142,7 +142,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(549, 42);
+            this.label4.Location = new System.Drawing.Point(542, 44);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(97, 26);
             this.label4.TabIndex = 32;
@@ -151,9 +151,9 @@
             // txt_reference
             // 
             this.txt_reference.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_reference.Location = new System.Drawing.Point(290, 71);
+            this.txt_reference.Location = new System.Drawing.Point(804, 74);
             this.txt_reference.Name = "txt_reference";
-            this.txt_reference.Size = new System.Drawing.Size(228, 30);
+            this.txt_reference.Size = new System.Drawing.Size(234, 30);
             this.txt_reference.TabIndex = 1;
             this.txt_reference.TabStop = false;
             // 
@@ -170,9 +170,9 @@
             // txt_address
             // 
             this.txt_address.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_address.Location = new System.Drawing.Point(554, 71);
+            this.txt_address.Location = new System.Drawing.Point(547, 74);
             this.txt_address.Name = "txt_address";
-            this.txt_address.Size = new System.Drawing.Size(228, 30);
+            this.txt_address.Size = new System.Drawing.Size(225, 30);
             this.txt_address.TabIndex = 2;
             this.txt_address.TabStop = false;
             // 
@@ -209,7 +209,7 @@
             this.cb_payment_type.FormattingEnabled = true;
             this.cb_payment_type.Location = new System.Drawing.Point(324, 156);
             this.cb_payment_type.Name = "cb_payment_type";
-            this.cb_payment_type.Size = new System.Drawing.Size(228, 34);
+            this.cb_payment_type.Size = new System.Drawing.Size(249, 34);
             this.cb_payment_type.TabIndex = 38;
             this.cb_payment_type.TabStop = false;
             // 
@@ -238,7 +238,7 @@
             // txt_observation
             // 
             this.txt_observation.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_observation.Location = new System.Drawing.Point(600, 420);
+            this.txt_observation.Location = new System.Drawing.Point(600, 423);
             this.txt_observation.Name = "txt_observation";
             this.txt_observation.Size = new System.Drawing.Size(502, 31);
             this.txt_observation.TabIndex = 1;
@@ -248,7 +248,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(596, 385);
+            this.label10.Location = new System.Drawing.Point(596, 388);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(123, 26);
             this.label10.TabIndex = 34;
@@ -283,7 +283,7 @@
             this.dtp_date.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtp_date.Location = new System.Drawing.Point(594, 158);
             this.dtp_date.Name = "dtp_date";
-            this.dtp_date.Size = new System.Drawing.Size(228, 31);
+            this.dtp_date.Size = new System.Drawing.Size(225, 31);
             this.dtp_date.TabIndex = 40;
             this.dtp_date.TabStop = false;
             // 
@@ -303,15 +303,15 @@
             this.dt_products.Name = "dt_products";
             this.dt_products.ReadOnly = true;
             this.dt_products.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dt_products.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dt_products.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dt_products.RowHeadersWidth = 62;
             this.dt_products.RowTemplate.Height = 28;
             this.dt_products.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -523,7 +523,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(806, 42);
+            this.label15.Location = new System.Drawing.Point(378, 44);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(90, 26);
             this.label15.TabIndex = 45;
@@ -532,9 +532,10 @@
             // txt_phone
             // 
             this.txt_phone.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_phone.Location = new System.Drawing.Point(811, 71);
+            this.txt_phone.Location = new System.Drawing.Point(383, 74);
+            this.txt_phone.MaxLength = 9;
             this.txt_phone.Name = "txt_phone";
-            this.txt_phone.Size = new System.Drawing.Size(228, 30);
+            this.txt_phone.Size = new System.Drawing.Size(143, 30);
             this.txt_phone.TabIndex = 3;
             this.txt_phone.TabStop = false;
             // 
@@ -610,7 +611,7 @@
             "NOTA DE VENTA"});
             this.cb_client_name.Location = new System.Drawing.Point(27, 70);
             this.cb_client_name.Name = "cb_client_name";
-            this.cb_client_name.Size = new System.Drawing.Size(196, 33);
+            this.cb_client_name.Size = new System.Drawing.Size(296, 33);
             this.cb_client_name.TabIndex = 38;
             this.cb_client_name.TabStop = false;
             this.cb_client_name.SelectedIndexChanged += new System.EventHandler(this.cb_client_name_SelectedIndexChanged);
@@ -622,9 +623,9 @@
             this.btn_add_client.IconColor = System.Drawing.Color.Black;
             this.btn_add_client.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btn_add_client.IconSize = 30;
-            this.btn_add_client.Location = new System.Drawing.Point(229, 69);
+            this.btn_add_client.Location = new System.Drawing.Point(324, 68);
             this.btn_add_client.Name = "btn_add_client";
-            this.btn_add_client.Size = new System.Drawing.Size(43, 34);
+            this.btn_add_client.Size = new System.Drawing.Size(48, 35);
             this.btn_add_client.TabIndex = 44;
             this.btn_add_client.TabStop = false;
             this.btn_add_client.UseVisualStyleBackColor = true;

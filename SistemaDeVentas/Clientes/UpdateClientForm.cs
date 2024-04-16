@@ -60,7 +60,7 @@ namespace SistemaDeVentas.Clientes
             cb_district.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
-        private void btn_add_client_Click(object sender, EventArgs e)
+        private void btn_edit_client_Click(object sender, EventArgs e)
         {
             client.Name = txt_name.Text;
             client.Address = txt_address.Text;
@@ -104,5 +104,6 @@ namespace SistemaDeVentas.Clientes
             }
             cb_district.SelectedIndex = 0;
         }
+
     }
 }

@@ -28,133 +28,146 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dt_clients = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btn_update = new FontAwesome.Sharp.IconButton();
-            this.btn_delete = new FontAwesome.Sharp.IconButton();
-            this.btn_add_client = new FontAwesome.Sharp.IconButton();
-            this.iconButton1 = new FontAwesome.Sharp.IconButton();
             this.txt_search = new System.Windows.Forms.TextBox();
+            this.btn_add = new FontAwesome.Sharp.IconButton();
+            this.btn_print = new FontAwesome.Sharp.IconButton();
+            this.iconButton2 = new FontAwesome.Sharp.IconButton();
+            this.btn_search = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)(this.dt_clients)).BeginInit();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dt_clients
             // 
             this.dt_clients.AllowUserToAddRows = false;
             this.dt_clients.AllowUserToDeleteRows = false;
+            this.dt_clients.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dt_clients.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dt_clients.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dt_clients.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dt_clients.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dt_clients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dt_clients.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dt_clients.Location = new System.Drawing.Point(0, 0);
+            this.dt_clients.Location = new System.Drawing.Point(36, 57);
             this.dt_clients.MultiSelect = false;
             this.dt_clients.Name = "dt_clients";
             this.dt_clients.ReadOnly = true;
             this.dt_clients.RowHeadersWidth = 62;
             this.dt_clients.RowTemplate.Height = 28;
             this.dt_clients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dt_clients.Size = new System.Drawing.Size(1212, 525);
+            this.dt_clients.ShowCellErrors = false;
+            this.dt_clients.ShowEditingIcon = false;
+            this.dt_clients.Size = new System.Drawing.Size(1119, 597);
             this.dt_clients.TabIndex = 0;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.dt_clients);
-            this.panel1.Location = new System.Drawing.Point(3, 91);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1212, 525);
-            this.panel1.TabIndex = 1;
-            // 
-            // btn_update
-            // 
-            this.btn_update.BackColor = System.Drawing.SystemColors.Control;
-            this.btn_update.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_update.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btn_update.IconChar = FontAwesome.Sharp.IconChar.Upload;
-            this.btn_update.IconColor = System.Drawing.Color.Black;
-            this.btn_update.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btn_update.IconSize = 40;
-            this.btn_update.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_update.Location = new System.Drawing.Point(306, 639);
-            this.btn_update.Name = "btn_update";
-            this.btn_update.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
-            this.btn_update.Size = new System.Drawing.Size(279, 67);
-            this.btn_update.TabIndex = 2;
-            this.btn_update.Text = "Actualizar";
-            this.btn_update.UseVisualStyleBackColor = false;
-            this.btn_update.Click += new System.EventHandler(this.btn_update_Click);
-            // 
-            // btn_delete
-            // 
-            this.btn_delete.BackColor = System.Drawing.SystemColors.Control;
-            this.btn_delete.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_delete.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btn_delete.IconChar = FontAwesome.Sharp.IconChar.CircleMinus;
-            this.btn_delete.IconColor = System.Drawing.Color.Black;
-            this.btn_delete.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btn_delete.IconSize = 40;
-            this.btn_delete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_delete.Location = new System.Drawing.Point(611, 639);
-            this.btn_delete.Name = "btn_delete";
-            this.btn_delete.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
-            this.btn_delete.Size = new System.Drawing.Size(279, 67);
-            this.btn_delete.TabIndex = 2;
-            this.btn_delete.Text = "Eliminar";
-            this.btn_delete.UseVisualStyleBackColor = false;
-            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
-            // 
-            // btn_add_client
-            // 
-            this.btn_add_client.BackColor = System.Drawing.SystemColors.Control;
-            this.btn_add_client.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_add_client.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btn_add_client.IconChar = FontAwesome.Sharp.IconChar.PlusCircle;
-            this.btn_add_client.IconColor = System.Drawing.Color.Black;
-            this.btn_add_client.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btn_add_client.IconSize = 40;
-            this.btn_add_client.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_add_client.Location = new System.Drawing.Point(920, 639);
-            this.btn_add_client.Name = "btn_add_client";
-            this.btn_add_client.Padding = new System.Windows.Forms.Padding(30, 0, 0, 0);
-            this.btn_add_client.Size = new System.Drawing.Size(279, 67);
-            this.btn_add_client.TabIndex = 2;
-            this.btn_add_client.Text = "Añadir";
-            this.btn_add_client.UseVisualStyleBackColor = false;
-            this.btn_add_client.Click += new System.EventHandler(this.btn_add_Click);
-            // 
-            // iconButton1
-            // 
-            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.SearchDollar;
-            this.iconButton1.IconColor = System.Drawing.Color.Black;
-            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton1.Location = new System.Drawing.Point(644, 12);
-            this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Size = new System.Drawing.Size(63, 59);
-            this.iconButton1.TabIndex = 3;
-            this.iconButton1.UseVisualStyleBackColor = true;
-            this.iconButton1.Click += new System.EventHandler(this.iconButton1_Click);
             // 
             // txt_search
             // 
-            this.txt_search.Location = new System.Drawing.Point(128, 28);
+            this.txt_search.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_search.Location = new System.Drawing.Point(36, 12);
             this.txt_search.Name = "txt_search";
-            this.txt_search.Size = new System.Drawing.Size(484, 26);
+            this.txt_search.Size = new System.Drawing.Size(484, 31);
             this.txt_search.TabIndex = 4;
+            // 
+            // btn_add
+            // 
+            this.btn_add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_add.BackColor = System.Drawing.SystemColors.Control;
+            this.btn_add.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_add.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btn_add.IconChar = FontAwesome.Sharp.IconChar.PlusCircle;
+            this.btn_add.IconColor = System.Drawing.Color.Black;
+            this.btn_add.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btn_add.IconSize = 40;
+            this.btn_add.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btn_add.Location = new System.Drawing.Point(876, 676);
+            this.btn_add.Name = "btn_add";
+            this.btn_add.Padding = new System.Windows.Forms.Padding(0, 0, 30, 0);
+            this.btn_add.Size = new System.Drawing.Size(279, 67);
+            this.btn_add.TabIndex = 15;
+            this.btn_add.Text = "Añadir";
+            this.btn_add.UseVisualStyleBackColor = false;
+            this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
+            // 
+            // btn_print
+            // 
+            this.btn_print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_print.BackColor = System.Drawing.SystemColors.Control;
+            this.btn_print.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_print.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btn_print.IconChar = FontAwesome.Sharp.IconChar.Upload;
+            this.btn_print.IconColor = System.Drawing.Color.Black;
+            this.btn_print.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btn_print.IconSize = 40;
+            this.btn_print.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btn_print.Location = new System.Drawing.Point(281, 676);
+            this.btn_print.Name = "btn_print";
+            this.btn_print.Padding = new System.Windows.Forms.Padding(0, 0, 30, 0);
+            this.btn_print.Size = new System.Drawing.Size(279, 67);
+            this.btn_print.TabIndex = 16;
+            this.btn_print.Text = "Actualizar";
+            this.btn_print.UseVisualStyleBackColor = false;
+            this.btn_print.Click += new System.EventHandler(this.btn_update_Click);
+            // 
+            // iconButton2
+            // 
+            this.iconButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.iconButton2.BackColor = System.Drawing.SystemColors.Control;
+            this.iconButton2.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconButton2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.iconButton2.IconChar = FontAwesome.Sharp.IconChar.CircleMinus;
+            this.iconButton2.IconColor = System.Drawing.Color.Black;
+            this.iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButton2.IconSize = 40;
+            this.iconButton2.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.iconButton2.Location = new System.Drawing.Point(576, 676);
+            this.iconButton2.Name = "iconButton2";
+            this.iconButton2.Padding = new System.Windows.Forms.Padding(0, 0, 30, 0);
+            this.iconButton2.Size = new System.Drawing.Size(279, 67);
+            this.iconButton2.TabIndex = 17;
+            this.iconButton2.Text = "Eliminar";
+            this.iconButton2.UseVisualStyleBackColor = false;
+            this.iconButton2.Click += new System.EventHandler(this.btn_delete_Click);
+            // 
+            // btn_search
+            // 
+            this.btn_search.FlatAppearance.BorderSize = 0;
+            this.btn_search.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlassPlus;
+            this.btn_search.IconColor = System.Drawing.Color.Black;
+            this.btn_search.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btn_search.IconSize = 30;
+            this.btn_search.Location = new System.Drawing.Point(537, 10);
+            this.btn_search.Name = "btn_search";
+            this.btn_search.Size = new System.Drawing.Size(43, 34);
+            this.btn_search.TabIndex = 45;
+            this.btn_search.TabStop = false;
+            this.btn_search.UseVisualStyleBackColor = true;
+            this.btn_search.Click += new System.EventHandler(this.iconButton1_Click);
             // 
             // ClientsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1221, 718);
+            this.ClientSize = new System.Drawing.Size(1178, 769);
+            this.Controls.Add(this.btn_search);
+            this.Controls.Add(this.btn_add);
+            this.Controls.Add(this.btn_print);
+            this.Controls.Add(this.iconButton2);
+            this.Controls.Add(this.dt_clients);
             this.Controls.Add(this.txt_search);
-            this.Controls.Add(this.iconButton1);
-            this.Controls.Add(this.btn_add_client);
-            this.Controls.Add(this.btn_delete);
-            this.Controls.Add(this.btn_update);
-            this.Controls.Add(this.panel1);
             this.Name = "ClientsForm";
             this.Text = "ClientForm";
             this.Load += new System.EventHandler(this.ClientForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dt_clients)).EndInit();
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -163,11 +176,10 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dt_clients;
-        private System.Windows.Forms.Panel panel1;
-        private FontAwesome.Sharp.IconButton btn_update;
-        private FontAwesome.Sharp.IconButton btn_delete;
-        private FontAwesome.Sharp.IconButton btn_add_client;
-        private FontAwesome.Sharp.IconButton iconButton1;
         private System.Windows.Forms.TextBox txt_search;
+        private FontAwesome.Sharp.IconButton btn_add;
+        private FontAwesome.Sharp.IconButton btn_print;
+        private FontAwesome.Sharp.IconButton iconButton2;
+        private FontAwesome.Sharp.IconButton btn_search;
     }
 }
