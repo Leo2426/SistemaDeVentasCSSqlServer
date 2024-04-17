@@ -125,6 +125,7 @@
             this.txt_unit_price.Name = "txt_unit_price";
             this.txt_unit_price.Size = new System.Drawing.Size(141, 31);
             this.txt_unit_price.TabIndex = 4;
+            this.txt_unit_price.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_unit_price_KeyPress);
             // 
             // txt_description
             // 
@@ -141,6 +142,7 @@
             this.txt_unit_cost.Name = "txt_unit_cost";
             this.txt_unit_cost.Size = new System.Drawing.Size(147, 31);
             this.txt_unit_cost.TabIndex = 3;
+            this.txt_unit_cost.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_unit_cost_KeyPress);
             // 
             // txt_code
             // 
@@ -157,6 +159,7 @@
             this.txt_initial_stock.Name = "txt_initial_stock";
             this.txt_initial_stock.Size = new System.Drawing.Size(145, 31);
             this.txt_initial_stock.TabIndex = 5;
+            this.txt_initial_stock.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_initial_stock_KeyPress);
             // 
             // label2
             // 
@@ -175,6 +178,7 @@
             this.txt_minimum_stock.Name = "txt_minimum_stock";
             this.txt_minimum_stock.Size = new System.Drawing.Size(141, 31);
             this.txt_minimum_stock.TabIndex = 6;
+            this.txt_minimum_stock.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_minimum_stock_KeyPress);
             // 
             // label7
             // 
@@ -222,6 +226,7 @@
             this.MinimumSize = new System.Drawing.Size(474, 727);
             this.Name = "AddProductForm";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.AddProductForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

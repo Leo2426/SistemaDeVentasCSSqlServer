@@ -18,7 +18,6 @@ namespace SistemaDeVentas.Ventas.Delivery
         {
             InitializeComponent();
             this.delivery = new Delivery(sale, products);
-            this.delivery.Amount_due = null;
         }
 
         private void DeliveryForm_Load(object sender, EventArgs e)

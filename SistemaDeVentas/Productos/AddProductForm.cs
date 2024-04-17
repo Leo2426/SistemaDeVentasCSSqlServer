@@ -1,4 +1,5 @@
 ﻿using SistemaDeVentas.Clientes;
+using SistemaDeVentas.Shared;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -68,5 +69,44 @@ namespace SistemaDeVentas.Productos
 
         }
 
+        private void txt_unit_cost_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            GlobalClass.validateOnlyNumbersAndDecimalKeyPress(e, txt_unit_cost);
+        }
+
+        private void txt_unit_price_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            GlobalClass.validateOnlyNumbersAndDecimalKeyPress(e, txt_unit_price);
+        }
+
+        private void txt_initial_stock_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //solo ingresar numeros
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8)
+            {
+                e.Handled = true;
+            }
+
+            //permitir el backspace
+            if (e.KeyChar == (char)Keys.Back)
+            {
+                e.Handled = false;
+            }
+        }
+
+        private void txt_minimum_stock_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //solo ingresar numeros
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8)
+            {
+                e.Handled = true;
+            }
+
+            //permitir el backspace
+            if (e.KeyChar == (char)Keys.Back)
+            {
+                e.Handled = false;
+            }
+        }
     }
 }

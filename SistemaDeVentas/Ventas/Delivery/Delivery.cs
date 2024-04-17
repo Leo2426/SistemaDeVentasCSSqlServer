@@ -33,6 +33,7 @@ namespace SistemaDeVentas.Ventas.Delivery
             this.products = products;
             this.Phone = sale.Phone;
             this.Amount = sale.Total;
+            this.Amount_due = sale.CreditPayment;
         }
 
         public Delivery()

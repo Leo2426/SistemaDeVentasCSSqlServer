@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemaDeVentas.Shared;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -47,6 +48,46 @@ namespace SistemaDeVentas.Productos
             productRepository.UpdateProduct(_product);
             MessageBox.Show("Producto actualizado correctamente");
             this.Close();
+        }
+
+        private void txt_initial_stock_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //solo admite numeros
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+            //permitir el backspace
+            if (e.KeyChar == (char)Keys.Back)
+            {
+                e.Handled = false;
+            }
+        }
+
+        private void txt_minimum_stock_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //solo admite numeros
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+            //permitir el backspace
+            if (e.KeyChar == (char)Keys.Back)
+            {
+                e.Handled = false;
+            }
+        }
+
+        private void txt_unit_cost_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            GlobalClass.validateOnlyNumbersAndDecimalKeyPress(e, txt_unit_cost);
+        }
+
+        private void txt_unit_price_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            GlobalClass.validateOnlyNumbersAndDecimalKeyPress(e, txt_unit_price);
         }
     }
 }

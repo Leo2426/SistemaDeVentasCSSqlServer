@@ -163,13 +163,6 @@ namespace SistemaDeVentas.Ventas
                 return;
             }
 
-            //validar que dias de credito no este vacio si es que esta visible
-            if (txt_days_credit.Visible && string.IsNullOrWhiteSpace(txt_days_credit.Text))
-            {
-                MessageBox.Show("Debe ingresar los días de crédito", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return;
-            }
-
 
             sale.SaleType = cb_type.Text;
             sale.ClientName = cb_client_name.Text;
@@ -468,29 +461,7 @@ namespace SistemaDeVentas.Ventas
 
         private void txt_cash_KeyPress(object sender, KeyPressEventArgs e)
         {
-            char ch = e.KeyChar;
-            if (!Char.IsDigit(ch) && ch != 8 && ch != 46)
-            {
-                e.Handled = true;
-            }
-
-            //que solo acepte el punto 1 vez y que solo haya 2 decimales
-            if (ch == 46 && txt_cash.Text.IndexOf('.') != -1)
-            {
-                e.Handled = true;
-            }
-
-            //que solo acepte 2 decimales
-            if (txt_cash.Text.IndexOf('.') != -1 && txt_cash.Text.Substring(txt_cash.Text.IndexOf('.')).Length > 2)
-            {
-                e.Handled = true;
-            }
-
-            //permitir el backspace
-            if (e.KeyChar == (char)Keys.Back)
-            {
-                e.Handled = false;
-            }
+            GlobalClass.validateOnlyNumbersAndDecimalKeyPress( e, txt_cash);
 
         }
 
@@ -516,7 +487,7 @@ namespace SistemaDeVentas.Ventas
         private void txt_days_credit_KeyPress(object sender, KeyPressEventArgs e)
         {
             char ch = e.KeyChar;
-            if (!Char.IsDigit(ch) && ch != 8 && ch != 46)
+            if (!Char.IsDigit(ch) && ch != 8 && ch != 44)
             {
                 e.Handled = true;
             }
@@ -528,8 +499,8 @@ namespace SistemaDeVentas.Ventas
             }
 
 
-            //que no acepte el .
-            if (ch == 46)
+            //que no acepte la , al principio
+            if (ch == 44)
             {
                 e.Handled = true;
             }

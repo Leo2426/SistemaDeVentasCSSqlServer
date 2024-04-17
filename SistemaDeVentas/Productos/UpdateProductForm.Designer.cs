@@ -112,9 +112,9 @@
             this.label2.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(53, 386);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(123, 26);
+            this.label2.Size = new System.Drawing.Size(61, 26);
             this.label2.TabIndex = 59;
-            this.label2.Text = "Stock Inicial";
+            this.label2.Text = "Stock";
             // 
             // label5
             // 
@@ -143,6 +143,7 @@
             this.txt_minimum_stock.Name = "txt_minimum_stock";
             this.txt_minimum_stock.Size = new System.Drawing.Size(141, 31);
             this.txt_minimum_stock.TabIndex = 54;
+            this.txt_minimum_stock.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_minimum_stock_KeyPress);
             // 
             // txt_initial_stock
             // 
@@ -151,6 +152,7 @@
             this.txt_initial_stock.Name = "txt_initial_stock";
             this.txt_initial_stock.Size = new System.Drawing.Size(145, 31);
             this.txt_initial_stock.TabIndex = 53;
+            this.txt_initial_stock.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_initial_stock_KeyPress);
             // 
             // label1
             // 
@@ -169,6 +171,7 @@
             this.txt_unit_price.Name = "txt_unit_price";
             this.txt_unit_price.Size = new System.Drawing.Size(141, 31);
             this.txt_unit_price.TabIndex = 52;
+            this.txt_unit_price.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_unit_price_KeyPress);
             // 
             // txt_description
             // 
@@ -185,6 +188,7 @@
             this.txt_unit_cost.Name = "txt_unit_cost";
             this.txt_unit_cost.Size = new System.Drawing.Size(147, 31);
             this.txt_unit_cost.TabIndex = 51;
+            this.txt_unit_cost.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_unit_cost_KeyPress);
             // 
             // txt_code
             // 
