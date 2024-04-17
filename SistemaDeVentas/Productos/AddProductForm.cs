@@ -40,6 +40,23 @@ namespace SistemaDeVentas.Productos
 
         private void btn_add_client_Click(object sender, EventArgs e)
         {
+            //validar que los campos no esten vacios
+            if (string.IsNullOrEmpty(txt_code.Text) || string.IsNullOrEmpty(txt_description.Text) || string.IsNullOrEmpty(txt_unit_cost.Text) || string.IsNullOrEmpty(txt_unit_price.Text) || string.IsNullOrEmpty(txt_minimum_stock.Text) || string.IsNullOrEmpty(txt_initial_stock.Text) || cb_sizes.SelectedItem == null)
+            {
+                MessageBox.Show("Todos los campos son obligatorios", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            //validar que el codigo no se repita
+            var productRepository1 = new ProductRepository();
+            var product1 = productRepository1.GetProductByCode(txt_code.Text);
+            if (product1.Code != null)
+            {
+                MessageBox.Show("El código ya existe", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+
 
             //validar que el cliente este en la coleccion de clientes
             var size = (Size)cb_sizes.SelectedItem;
