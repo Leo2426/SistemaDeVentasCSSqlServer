@@ -25,6 +25,7 @@ namespace SistemaDeVentas.Ventas
         public decimal? CreditPayment { get; set; }
         public int CreditDays { get; set; }
         public string UserName { get; set; }
+        public string District { get; set; }
 
     }
 }

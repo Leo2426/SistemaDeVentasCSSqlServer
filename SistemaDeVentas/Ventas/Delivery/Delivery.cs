@@ -19,6 +19,7 @@ namespace SistemaDeVentas.Ventas.Delivery
         public string Phone { get; set; }
         public decimal Amount { get; set; }
         public decimal? Amount_due { get; set; }
+        public string District { get; set; }
         public List<ProductSaled> products { get; set; }
         public string Date { get; set; }
         public int SaleId { get; set; }
@@ -34,6 +35,7 @@ namespace SistemaDeVentas.Ventas.Delivery
             this.Phone = sale.Phone;
             this.Amount = sale.Total;
             this.Amount_due = sale.CreditPayment;
+            this.District = sale.District;
         }
 
         public Delivery()

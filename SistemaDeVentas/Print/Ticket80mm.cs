@@ -115,7 +115,7 @@ namespace SistemaDeVentas.Print
 
             // Dirección
             string addressText = "Direccion: ";
-            string addressValue = sale.Address;
+            string addressValue = sale.District + " " + sale.Address;
             e.Graphics.DrawString(addressText, fontHeaders, Brushes.Black, new PointF(5, y));
             RectangleF addressRect = new RectangleF(100, y, maxWidth - 65, 100);
             e.Graphics.DrawString(addressValue, fontDetails, Brushes.Black, addressRect);

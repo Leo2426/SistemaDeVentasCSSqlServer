@@ -54,8 +54,11 @@ namespace SistemaDeVentas.Ventas
             dt_products.Columns["Cost"].HeaderText = "Costo";
             dt_products.Columns["Price"].HeaderText = "Precio";
             dt_products.Columns["MinimumStock"].HeaderText = "Stock mínimo";
-            dt_products.Columns["InitialStock"].HeaderText = "Stock inicial";
+            dt_products.Columns["InitialStock"].HeaderText = "Stock";
             dt_products.Columns["SizesId"].HeaderText = "Talla";
+
+            //ocultar stock minimo
+            dt_products.Columns["MinimumStock"].Visible = false;
 
 
         }

@@ -50,7 +50,7 @@ namespace SistemaDeVentas.Print
 
             graphics.DrawString("NOMBRE: " + delivery.ClientName, font, new SolidBrush(Color.Black), startX, startY);
             graphics.DrawString("CELULAR: " + delivery.Phone, font, new SolidBrush(Color.Black), startX, startY + offset);
-            graphics.DrawString("DIRECCIÓN: " + delivery.Address, font, new SolidBrush(Color.Black), startX, startY + offset * 2);
+            graphics.DrawString("DIRECCIÓN: " + delivery.District + " " + delivery.Address, font, new SolidBrush(Color.Black), startX, startY + offset * 2);
             graphics.DrawString("REFERENCIA: " + delivery.Reference, font, new SolidBrush(Color.Black), startX, startY + offset * 3);
             graphics.DrawString("INSTRUCCIONES: " + delivery.Instructions, font, new SolidBrush(Color.Black), startX, startY + offset * 4);
             graphics.DrawString("PRODUCTOS: ", font, new SolidBrush(Color.Black), startX, startY + offset * 5);

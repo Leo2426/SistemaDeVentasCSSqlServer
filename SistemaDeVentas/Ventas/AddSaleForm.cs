@@ -56,6 +56,7 @@ namespace SistemaDeVentas.Ventas
             cb_sales_man.DataSource = users;
             cb_sales_man.DisplayMember = "Name";
             cb_sales_man.ValueMember = "Name";
+            cb_sales_man.Text = GlobalClass.Username;
 
             //cargar canal por defecto y tipo de comprobante por defecto
             cb_chanel.Text = "WHATSAPP";
@@ -180,7 +181,16 @@ namespace SistemaDeVentas.Ventas
             sale.CreditPayment = string.IsNullOrWhiteSpace(txt_credit.Text) ? 0 : decimal.Parse(txt_credit.Text);
             sale.CreditDays = string.IsNullOrWhiteSpace(txt_days_credit.Text) ? 0 : int.Parse(txt_days_credit.Text);
             sale.UserName = cb_sales_man.Text;
+            sale.District = client.District;
 
+
+
+            //if si el combobox tiene como valor CREDITO entonces el credit payment es igual al total
+            if (cb_payment_condition.Text == "CREDITO")
+            {
+                sale.CreditPayment = sale.Total;
+            }
+            
             var saleRepository = new SaleRepository();
             saleRepository.InsertSale(sale);
 

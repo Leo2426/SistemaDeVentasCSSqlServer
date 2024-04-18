@@ -87,7 +87,7 @@
             this.panel1.Controls.Add(this.iconPictureBox1);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(270, 887);
+            this.panel1.Size = new System.Drawing.Size(270, 926);
             this.panel1.TabIndex = 2;
             // 
             // lbl_user
@@ -274,14 +274,14 @@
             this.principal_panel.Location = new System.Drawing.Point(270, 165);
             this.principal_panel.Margin = new System.Windows.Forms.Padding(0);
             this.principal_panel.Name = "principal_panel";
-            this.principal_panel.Size = new System.Drawing.Size(1196, 722);
+            this.principal_panel.Size = new System.Drawing.Size(1196, 761);
             this.principal_panel.TabIndex = 3;
             // 
             // PrincipalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1457, 886);
+            this.ClientSize = new System.Drawing.Size(1457, 925);
             this.Controls.Add(this.lbl_heading);
             this.Controls.Add(this.principal_panel);
             this.Controls.Add(this.panel1);

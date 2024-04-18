@@ -50,6 +50,7 @@ namespace SistemaDeVentas.Ventas
 
            dt_sales.DataSource = sales;
 
+            dt_sales.Columns["District"].Visible = false;
         }
 
         private void btn_add_Click(object sender, EventArgs e)
