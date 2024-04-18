@@ -13,6 +13,8 @@ namespace SistemaDeVentas.Shared
         public static string Username { get; set; }
         public static Product SelectedProduct { get; set; }
 
+        public static string SymbolCurrency { get; } = "S/";
+
         public static bool isProductSelectProperly { get; set; } = false;
 
         public static void validateOnlyNumbersAndDecimalKeyPress(KeyPressEventArgs e, TextBox textBox)

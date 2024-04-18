@@ -32,8 +32,9 @@
             this.btn_delete_size = new System.Windows.Forms.Button();
             this.btn_add_size = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btn_edit_user = new System.Windows.Forms.Button();
+            this.btn_add_client = new System.Windows.Forms.Button();
+            this.btn_delete = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -43,16 +44,16 @@
             this.groupBox1.Controls.Add(this.btn_delete_size);
             this.groupBox1.Controls.Add(this.btn_add_size);
             this.groupBox1.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(74, 78);
+            this.groupBox1.Location = new System.Drawing.Point(49, 76);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(878, 103);
+            this.groupBox1.Size = new System.Drawing.Size(1067, 103);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tallas";
             // 
             // btn_delete_size
             // 
-            this.btn_delete_size.Location = new System.Drawing.Point(482, 42);
+            this.btn_delete_size.Location = new System.Drawing.Point(412, 42);
             this.btn_delete_size.Name = "btn_delete_size";
             this.btn_delete_size.Size = new System.Drawing.Size(282, 37);
             this.btn_delete_size.TabIndex = 0;
@@ -72,33 +73,43 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button4);
-            this.groupBox2.Controls.Add(this.button3);
+            this.groupBox2.Controls.Add(this.btn_delete);
+            this.groupBox2.Controls.Add(this.btn_edit_user);
+            this.groupBox2.Controls.Add(this.btn_add_client);
             this.groupBox2.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(74, 223);
+            this.groupBox2.Location = new System.Drawing.Point(49, 221);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(878, 103);
+            this.groupBox2.Size = new System.Drawing.Size(1067, 103);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Usuarios";
             // 
-            // button4
+            // btn_edit_user
             // 
-            this.button4.Location = new System.Drawing.Point(482, 44);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(282, 37);
-            this.button4.TabIndex = 0;
-            this.button4.Text = "button1";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btn_edit_user.Location = new System.Drawing.Point(412, 44);
+            this.btn_edit_user.Name = "btn_edit_user";
+            this.btn_edit_user.Size = new System.Drawing.Size(282, 37);
+            this.btn_edit_user.TabIndex = 0;
+            this.btn_edit_user.Text = "Editar";
+            this.btn_edit_user.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btn_add_client
             // 
-            this.button3.Location = new System.Drawing.Point(56, 44);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(282, 37);
-            this.button3.TabIndex = 0;
-            this.button3.Text = "button1";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btn_add_client.Location = new System.Drawing.Point(56, 44);
+            this.btn_add_client.Name = "btn_add_client";
+            this.btn_add_client.Size = new System.Drawing.Size(282, 37);
+            this.btn_add_client.TabIndex = 0;
+            this.btn_add_client.Text = "Agregar";
+            this.btn_add_client.UseVisualStyleBackColor = true;
+            // 
+            // btn_delete
+            // 
+            this.btn_delete.Location = new System.Drawing.Point(779, 44);
+            this.btn_delete.Name = "btn_delete";
+            this.btn_delete.Size = new System.Drawing.Size(282, 37);
+            this.btn_delete.TabIndex = 0;
+            this.btn_delete.Text = "Eliminar";
+            this.btn_delete.UseVisualStyleBackColor = true;
             // 
             // ConfigurationForm
             // 
@@ -121,7 +132,8 @@
         private System.Windows.Forms.Button btn_delete_size;
         private System.Windows.Forms.Button btn_add_size;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btn_edit_user;
+        private System.Windows.Forms.Button btn_add_client;
+        private System.Windows.Forms.Button btn_delete;
     }
 }

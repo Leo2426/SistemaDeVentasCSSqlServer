@@ -142,10 +142,10 @@ namespace SistemaDeVentas.Productos
 
         //obtener un producto por codigo
         public Product GetProductByCode(string code)
-            {
+        {
             Product product = new Product();
             using (var connection = new SqlConnection(Conexion.stringConexion))
-                {
+            {
                 var cmd = new SqlCommand("spGetProductByCode", connection)
                 {
                     CommandType = CommandType.StoredProcedure
@@ -155,9 +155,9 @@ namespace SistemaDeVentas.Productos
 
                 connection.Open();
                 using (var reader = cmd.ExecuteReader())
-                    {
+                {
                     while (reader.Read())
-                        {
+                    {
                         product = new Product
                         {
                             Id = int.Parse(reader["id"].ToString()),
@@ -173,10 +173,45 @@ namespace SistemaDeVentas.Productos
                 }
             }
             return product;
-            }
-        
         }
 
 
- }
+
+        public Product getLastProductAdded()
+        {
+            Product product = new Product();
+            using (var connection = new SqlConnection(Conexion.stringConexion))
+            {
+                var cmd = new SqlCommand("spGetLastProductAdded", connection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                connection.Open();
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        product = new Product
+                        {
+                            Id = int.Parse(reader["id"].ToString()),
+                            Code = reader["code"].ToString(),
+                            Description = reader["description"].ToString(),
+                            Cost = decimal.Parse(reader["cost"].ToString()),
+                            Price = decimal.Parse(reader["price"].ToString()),
+                            MinimumStock = int.Parse(reader["minimum_stock"].ToString()),
+                            InitialStock = int.Parse(reader["initial_stock"].ToString()),
+                            SizesId = (reader["size"].ToString())
+                        };
+                    }
+                }
+            }
+            return product;
+        }
+
+
+    }
+
+
+}
 

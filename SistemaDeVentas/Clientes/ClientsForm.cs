@@ -107,5 +107,13 @@ namespace SistemaDeVentas.Clientes
 
         }
 
+        private void txt_search_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //si presiona enter buscar
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                btn_search.PerformClick();
+            }
+        }
     }
 }

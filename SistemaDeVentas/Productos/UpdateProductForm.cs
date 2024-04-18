@@ -29,6 +29,21 @@ namespace SistemaDeVentas.Productos
             txt_unit_price.Text = _product.Price.ToString();
             txt_minimum_stock.Text = _product.MinimumStock.ToString();
             txt_initial_stock.Text = _product.InitialStock.ToString();
+
+
+            //cargar tallas
+            LoadSizes();
+
+        }
+
+        private void LoadSizes()
+        {
+            //cargar tallas
+            var sizeRepository = new SizeRepository();
+            var sizes = sizeRepository.GetAllSizes();
+            cb_sizes.DataSource = sizes;
+            cb_sizes.DisplayMember = "SizeName";
+            cb_sizes.ValueMember = "Id";
             cb_sizes.Text = _product.SizesId;
 
         }
@@ -89,5 +104,6 @@ namespace SistemaDeVentas.Productos
         {
             GlobalClass.validateOnlyNumbersAndDecimalKeyPress(e, txt_unit_price);
         }
+
     }
 }

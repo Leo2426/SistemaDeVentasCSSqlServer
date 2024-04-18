@@ -30,7 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dt_products = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbl_title = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dt_products)).BeginInit();
             this.SuspendLayout();
             // 
@@ -39,7 +39,8 @@
             this.dt_products.AllowUserToAddRows = false;
             this.dt_products.AllowUserToDeleteRows = false;
             this.dt_products.AllowUserToOrderColumns = true;
-            this.dt_products.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
+            this.dt_products.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dt_products.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dt_products.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dt_products.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dt_products.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -52,32 +53,32 @@
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dt_products.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dt_products.Location = new System.Drawing.Point(42, 95);
+            this.dt_products.Location = new System.Drawing.Point(42, 113);
             this.dt_products.MultiSelect = false;
             this.dt_products.Name = "dt_products";
             this.dt_products.ReadOnly = true;
             this.dt_products.RowHeadersWidth = 62;
             this.dt_products.RowTemplate.Height = 28;
             this.dt_products.ShowEditingIcon = false;
-            this.dt_products.Size = new System.Drawing.Size(1029, 551);
+            this.dt_products.Size = new System.Drawing.Size(1018, 262);
             this.dt_products.TabIndex = 0;
             // 
-            // label1
+            // lbl_title
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Trebuchet MS", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(35, 35);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(396, 40);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "SELECCIONAR PRODUCTO";
+            this.lbl_title.AutoSize = true;
+            this.lbl_title.Font = new System.Drawing.Font("Trebuchet MS", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_title.Location = new System.Drawing.Point(35, 41);
+            this.lbl_title.Name = "lbl_title";
+            this.lbl_title.Size = new System.Drawing.Size(396, 40);
+            this.lbl_title.TabIndex = 1;
+            this.lbl_title.Text = "SELECCIONAR PRODUCTO";
             // 
             // ProductsWithSalesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1102, 691);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(1089, 417);
+            this.Controls.Add(this.lbl_title);
             this.Controls.Add(this.dt_products);
             this.Name = "ProductsWithSalesForm";
             this.ShowIcon = false;
@@ -91,6 +92,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dt_products;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl_title;
     }
 }

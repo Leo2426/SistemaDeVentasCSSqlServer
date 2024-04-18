@@ -30,6 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dt_deliverys = new System.Windows.Forms.DataGridView();
+            this.btn_print = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)(this.dt_deliverys)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,22 +55,43 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dt_deliverys.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dt_deliverys.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dt_deliverys.Location = new System.Drawing.Point(41, 103);
+            this.dt_deliverys.Location = new System.Drawing.Point(41, 25);
             this.dt_deliverys.Name = "dt_deliverys";
             this.dt_deliverys.ReadOnly = true;
             this.dt_deliverys.RowHeadersWidth = 62;
             this.dt_deliverys.RowTemplate.Height = 28;
-            this.dt_deliverys.Size = new System.Drawing.Size(1101, 498);
+            this.dt_deliverys.Size = new System.Drawing.Size(1101, 577);
             this.dt_deliverys.TabIndex = 0;
+            // 
+            // btn_print
+            // 
+            this.btn_print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_print.BackColor = System.Drawing.SystemColors.Control;
+            this.btn_print.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_print.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btn_print.IconChar = FontAwesome.Sharp.IconChar.Print;
+            this.btn_print.IconColor = System.Drawing.Color.Black;
+            this.btn_print.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btn_print.IconSize = 40;
+            this.btn_print.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btn_print.Location = new System.Drawing.Point(863, 645);
+            this.btn_print.Name = "btn_print";
+            this.btn_print.Padding = new System.Windows.Forms.Padding(0, 0, 30, 0);
+            this.btn_print.Size = new System.Drawing.Size(279, 67);
+            this.btn_print.TabIndex = 15;
+            this.btn_print.Text = "Imprimir";
+            this.btn_print.UseVisualStyleBackColor = false;
+            this.btn_print.Click += new System.EventHandler(this.btn_print_Click);
             // 
             // ShowDeliveryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1178, 769);
+            this.Controls.Add(this.btn_print);
             this.Controls.Add(this.dt_deliverys);
             this.Name = "ShowDeliveryForm";
-            this.Text = "ShowDeliveryForm";
+            this.ShowIcon = false;
             this.Load += new System.EventHandler(this.ShowDeliveryForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dt_deliverys)).EndInit();
             this.ResumeLayout(false);
@@ -79,5 +101,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dt_deliverys;
+        private FontAwesome.Sharp.IconButton btn_print;
     }
 }

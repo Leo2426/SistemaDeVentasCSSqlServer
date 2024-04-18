@@ -65,10 +65,11 @@
             this.btn_add_client.TabIndex = 63;
             this.btn_add_client.Text = "Actualizar";
             this.btn_add_client.UseVisualStyleBackColor = true;
+            this.btn_add_client.Click += new System.EventHandler(this.btn_update_product_click);
             // 
             // cb_sizes
             // 
-            this.cb_sizes.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.cb_sizes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_sizes.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cb_sizes.FormattingEnabled = true;
             this.cb_sizes.Location = new System.Drawing.Point(58, 501);
@@ -224,6 +225,7 @@
             this.MinimumSize = new System.Drawing.Size(474, 727);
             this.Name = "UpdateProductForm";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.UpdateProductForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

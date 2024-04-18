@@ -88,5 +88,14 @@ namespace SistemaDeVentas.Ventas
             dt_products.DataSource = products;
 
         }
+
+        private void txt_search_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //si presiona enter que busque
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                btn_search.PerformClick();
+            }
+        }
     }
 }

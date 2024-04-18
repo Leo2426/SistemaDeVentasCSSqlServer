@@ -87,6 +87,7 @@
             this.MinimumSize = new System.Drawing.Size(493, 367);
             this.Name = "AddSizeForm";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.ResumeLayout(false);
             this.PerformLayout();
 

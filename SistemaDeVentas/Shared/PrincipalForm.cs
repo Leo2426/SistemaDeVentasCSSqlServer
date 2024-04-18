@@ -28,9 +28,19 @@ namespace SistemaDeVentas.Shared
 
         private void PrincipalForm_Load(object sender, EventArgs e)
         {
+            lbl_user.Text = GlobalClass.Username;
             lbl_heading.Text = "Home";
             //dar click al boton home
             btn_home.PerformClick();
+
+            //desabilitar boton configuracion si no eres admin
+            if (GlobalClass.Username != "admin")
+            {
+                //bloquear iconbutton5
+                iconButton5.Enabled = false;
+                iconButton5.ForeColor = Color.Gray;
+            }
+
         }
 
         private void btn_home_Click(object sender, EventArgs e)
@@ -53,7 +63,7 @@ namespace SistemaDeVentas.Shared
            
                 configForm(new ClientsForm());
 
-            else if (currentButton.Text == "Configuración")
+            else if (currentButton.Text == "Config")
 
                 configForm(new ConfigurationForm());
 

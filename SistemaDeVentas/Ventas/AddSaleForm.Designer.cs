@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btn_add = new System.Windows.Forms.Button();
             this.cb_sales_man = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -80,6 +80,7 @@
             this.txt_days_credit = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.btn_add_product = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)(this.dt_products)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txt_quantity)).BeginInit();
@@ -303,15 +304,15 @@
             this.dt_products.Name = "dt_products";
             this.dt_products.ReadOnly = true;
             this.dt_products.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dt_products.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dt_products.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dt_products.RowHeadersWidth = 62;
             this.dt_products.RowTemplate.Height = 28;
             this.dt_products.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -328,6 +329,7 @@
             this.groupBox1.Controls.Add(this.txt_size);
             this.groupBox1.Controls.Add(this.txt_product_price);
             this.groupBox1.Controls.Add(this.label18);
+            this.groupBox1.Controls.Add(this.btn_add_product);
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.label19);
             this.groupBox1.Controls.Add(this.txt_product_name);
@@ -426,10 +428,10 @@
             // txt_product_name
             // 
             this.txt_product_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_product_name.Location = new System.Drawing.Point(255, 71);
+            this.txt_product_name.Location = new System.Drawing.Point(252, 73);
             this.txt_product_name.Name = "txt_product_name";
             this.txt_product_name.ReadOnly = true;
-            this.txt_product_name.Size = new System.Drawing.Size(235, 30);
+            this.txt_product_name.Size = new System.Drawing.Size(196, 30);
             this.txt_product_name.TabIndex = 45;
             this.txt_product_name.TabStop = false;
             // 
@@ -449,7 +451,7 @@
             this.btn_search.IconColor = System.Drawing.Color.Black;
             this.btn_search.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btn_search.IconSize = 30;
-            this.btn_search.Location = new System.Drawing.Point(192, 72);
+            this.btn_search.Location = new System.Drawing.Point(192, 69);
             this.btn_search.Name = "btn_search";
             this.btn_search.Size = new System.Drawing.Size(43, 34);
             this.btn_search.TabIndex = 44;
@@ -460,7 +462,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(251, 42);
+            this.label12.Location = new System.Drawing.Point(247, 45);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(92, 26);
             this.label12.TabIndex = 1;
@@ -479,7 +481,7 @@
             // 
             this.txt_product_code.AllowDrop = true;
             this.txt_product_code.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_product_code.Location = new System.Drawing.Point(26, 72);
+            this.txt_product_code.Location = new System.Drawing.Point(26, 71);
             this.txt_product_code.Name = "txt_product_code";
             this.txt_product_code.Size = new System.Drawing.Size(160, 30);
             this.txt_product_code.TabIndex = 1;
@@ -686,6 +688,21 @@
             this.label17.TabIndex = 47;
             this.label17.Text = "INGRESAR VENTA";
             // 
+            // btn_add_product
+            // 
+            this.btn_add_product.FlatAppearance.BorderSize = 0;
+            this.btn_add_product.IconChar = FontAwesome.Sharp.IconChar.PlusCircle;
+            this.btn_add_product.IconColor = System.Drawing.Color.Black;
+            this.btn_add_product.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btn_add_product.IconSize = 30;
+            this.btn_add_product.Location = new System.Drawing.Point(454, 71);
+            this.btn_add_product.Name = "btn_add_product";
+            this.btn_add_product.Size = new System.Drawing.Size(48, 34);
+            this.btn_add_product.TabIndex = 44;
+            this.btn_add_product.TabStop = false;
+            this.btn_add_product.UseVisualStyleBackColor = true;
+            this.btn_add_product.Click += new System.EventHandler(this.btn_add_product_Click);
+            // 
             // AddSaleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -790,5 +807,6 @@
         private System.Windows.Forms.TextBox txt_product_stock;
         private System.Windows.Forms.Label label18;
         private System.Drawing.Printing.PrintDocument printDocument1;
+        private FontAwesome.Sharp.IconButton btn_add_product;
     }
 }

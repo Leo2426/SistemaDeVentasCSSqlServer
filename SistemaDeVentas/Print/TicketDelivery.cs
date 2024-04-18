@@ -31,8 +31,8 @@ namespace SistemaDeVentas.Print
             printDocument.PrintPage += Print;
 
             // Ancho y altura en puntos (1 pulgada = 72 puntos, 8 cm = aproximadamente 3.15 pulgadas)
-            int Width = cmToPoints(10);
-            int Height = cmToPoints(6.2);
+            int Width = cmToPoints(7);
+            int Height = cmToPoints(5);
             printDocument.DefaultPageSettings.PaperSize = new PaperSize("custom", Width, Height);
             printDocument.Print();
                 
@@ -46,7 +46,7 @@ namespace SistemaDeVentas.Print
             float fontHeight = font.GetHeight();
             int startX = 3;
             int startY = 3;
-            int offset = 20;
+            int offset = 14;
 
             graphics.DrawString("NOMBRE: " + delivery.ClientName, font, new SolidBrush(Color.Black), startX, startY);
             graphics.DrawString("CELULAR: " + delivery.Phone, font, new SolidBrush(Color.Black), startX, startY + offset);
@@ -56,9 +56,11 @@ namespace SistemaDeVentas.Print
             graphics.DrawString("PRODUCTOS: ", font, new SolidBrush(Color.Black), startX, startY + offset * 5);
 
             // Definir el alto de la caja de productos
-            int productBoxHeight = cmToPoints(1.8); // Ejemplo para una caja de 2 cm de alto
+            int productBoxHeight = cmToPoints(1.5); // Ejemplo para una caja de 2 cm de alto
             Rectangle productBox = new Rectangle(startX, startY + offset * 6, printDocument.DefaultPageSettings.PaperSize.Width - startX * 2, productBoxHeight);
             graphics.DrawRectangle(new Pen(Color.Black), productBox);
+
+            productBoxHeight -= 10; // Para que el texto no toque los bordes de la caja
 
             // Colocar los productos dentro de la caja, separados por "-" y la cantidad
             string productsLine = "";

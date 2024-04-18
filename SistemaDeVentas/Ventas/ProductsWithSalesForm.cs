@@ -26,6 +26,8 @@ namespace SistemaDeVentas.Ventas
             var saleRepository = new SaleRepository();
             var products = saleRepository.getAllProductsWithSaleId(sale.Id);
             dt_products.DataSource = products;
+
+            lbl_title.Text = "Productos de la venta N " + sale.Id;
         }
     }
 }

@@ -309,5 +309,80 @@ namespace SistemaDeVentas.Ventas
             return sales;
         }
 
+        public List<Sale> GetSalesBetweenDates(DateTime startDate, DateTime endDate)
+        {
+            List<Sale> sales = new List<Sale>();
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand("spGetSalesBetweenDates", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@StartDate", startDate);
+                command.Parameters.AddWithValue("@EndDate", endDate);
+
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Sale sale = new Sale()
+                        {
+                            Id = int.Parse(reader["id"].ToString()),
+                            Date = DateTime.Parse(reader["date"].ToString()),
+                            PaymentTypeName = reader["payment_type"].ToString(),
+                            PaymentConditionName = reader["payment_condition"].ToString(),
+                            ClientName = reader["name"].ToString(),
+                            Total = decimal.Parse(reader["total"].ToString()),
+                        };
+                        sales.Add(sale);
+                    }
+                }
+            }
+            return sales;
+        }
+
+        public List<Sale> searchSalesByTerm(string term)
+        {
+            List<Sale> sales = new List<Sale>();
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand("spSearchSalesByTerm", connection);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("@Term", term);
+
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Sale sale = new Sale()
+                        {
+                            Id = int.Parse(reader["id"].ToString()),
+                            SaleType = reader["sale_type"].ToString(),
+                            Date = DateTime.Parse(reader["date"].ToString()),
+                            Phone = reader["phone"].ToString(),
+                            Reference = reader["reference"].ToString(),
+                            Address = reader["address"].ToString(),
+                            Observation = reader["observation"].ToString(),
+                            Channel = reader["channel"].ToString(),
+                            Total = decimal.Parse(reader["total"].ToString()),
+                            CashPayment = reader["cash_payment"] == DBNull.Value ? 0 : (decimal?)decimal.Parse(reader["cash_payment"].ToString()),
+                            CreditPayment = reader["credit_payment"] == DBNull.Value ? 0 : (decimal?)decimal.Parse(reader["credit_payment"].ToString()),
+                            CreditDays = reader["credit_days"] == DBNull.Value ? 0 : int.Parse(reader["credit_days"].ToString()),
+                            ClientName = reader["client_name"].ToString(),
+                            PaymentTypeName = reader["payment_type"].ToString(),
+                            PaymentConditionName = reader["payment_condition"].ToString(),
+                            UserName = reader["user_name"].ToString()
+                        };
+                        sales.Add(sale);
+                    }
+                }
+            }
+            return sales;
+        }
+
     }
 }

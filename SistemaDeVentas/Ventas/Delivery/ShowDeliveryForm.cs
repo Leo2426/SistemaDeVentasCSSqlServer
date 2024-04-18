@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemaDeVentas.Print;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -41,6 +42,59 @@ namespace SistemaDeVentas.Ventas.Delivery
             }
 
 
+        }
+
+        private void btn_print_Click(object sender, EventArgs e)
+        {
+            //validar que se haya seleccionado un delivery
+            if (dt_deliverys.CurrentRow == null)
+            {
+                MessageBox.Show("Debe seleccionar un delivery");
+                return;
+            }
+
+
+
+            try
+            {
+                //preguntar si esta seguro de imprimir el delivey
+                var result = MessageBox.Show("¿Está seguro de imprimir el delivery?", "Imprimir delivery", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    //obtener el delivery seleccionado
+                    var selectedRow = dt_deliverys.CurrentRow;
+                    var delivery = new Delivery();
+                    delivery.ClientName = selectedRow.Cells["ClientName"].Value.ToString();
+                    delivery.Date = selectedRow.Cells["Date"].Value.ToString();
+                    delivery.Address = selectedRow.Cells["Address"].Value.ToString();
+                    delivery.Reference = selectedRow.Cells["Reference"].Value.ToString();
+                    delivery.Instructions = selectedRow.Cells["Instructions"].Value.ToString();
+                    delivery.PaymentCondition = selectedRow.Cells["PaymentCondition"].Value.ToString();
+                    delivery.Phone = selectedRow.Cells["Phone"].Value.ToString();
+                    delivery.Amount = decimal.Parse(selectedRow.Cells["Amount"].Value.ToString());
+                    delivery.Amount_due = decimal.Parse(selectedRow.Cells["Amount_due"].Value.ToString());
+                    delivery.SaleId = int.Parse(selectedRow.Cells["SaleId"].Value.ToString());
+
+                    //obtener los productos del delivery
+                    var productSaledRepository = new SaleRepository();
+                    var products = productSaledRepository.getAllProductsWithSaleId(delivery.SaleId);
+                    delivery.products = products;
+
+                    //imprimir el delivery
+                    var ticketDelivery = new TicketDelivery(delivery);
+                    ticketDelivery.createTicketDelivery();
+
+                    //mensaje de impresion exitosa
+                    MessageBox.Show("Delivery impreso correctamente");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al imprimir el delivery: " + ex.Message);
+            }
+        
+            
         }
     }
 }

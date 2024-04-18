@@ -32,11 +32,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.sistemadeventasdbDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sistemadeventasdbDataSet = new SistemaDeVentas.sistemadeventasdbDataSet();
-            this.label2 = new System.Windows.Forms.Label();
             this.lbl_total_sales = new System.Windows.Forms.Label();
             this.dt_sales = new System.Windows.Forms.DataGridView();
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
-            this.lbl_date = new System.Windows.Forms.Label();
+            this.dt_start = new System.Windows.Forms.DateTimePicker();
+            this.dt_end = new System.Windows.Forms.DateTimePicker();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.sistemadeventasdbDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sistemadeventasdbDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dt_sales)).BeginInit();
@@ -52,27 +54,23 @@
             this.sistemadeventasdbDataSet.DataSetName = "sistemadeventasdbDataSet";
             this.sistemadeventasdbDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(38, 51);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(116, 20);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Ventas Totales";
-            // 
             // lbl_total_sales
             // 
+            this.lbl_total_sales.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_total_sales.AutoSize = true;
-            this.lbl_total_sales.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_total_sales.Location = new System.Drawing.Point(45, 101);
+            this.lbl_total_sales.Font = new System.Drawing.Font("Trebuchet MS", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_total_sales.Location = new System.Drawing.Point(646, 114);
             this.lbl_total_sales.Name = "lbl_total_sales";
-            this.lbl_total_sales.Size = new System.Drawing.Size(126, 46);
+            this.lbl_total_sales.Size = new System.Drawing.Size(132, 49);
             this.lbl_total_sales.TabIndex = 2;
             this.lbl_total_sales.Text = "label3";
             // 
             // dt_sales
             // 
+            this.dt_sales.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dt_sales.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dt_sales.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dt_sales.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -85,40 +83,71 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dt_sales.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dt_sales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dt_sales.Location = new System.Drawing.Point(366, 368);
+            this.dt_sales.Location = new System.Drawing.Point(31, 229);
             this.dt_sales.Name = "dt_sales";
             this.dt_sales.RowHeadersWidth = 62;
             this.dt_sales.RowTemplate.Height = 28;
-            this.dt_sales.Size = new System.Drawing.Size(758, 253);
+            this.dt_sales.Size = new System.Drawing.Size(1125, 435);
             this.dt_sales.TabIndex = 3;
             // 
-            // monthCalendar1
+            // dt_start
             // 
-            this.monthCalendar1.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.monthCalendar1.Location = new System.Drawing.Point(42, 368);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 5;
-            this.monthCalendar1.DateSelected += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateSelected);
+            this.dt_start.Location = new System.Drawing.Point(31, 137);
+            this.dt_start.Name = "dt_start";
+            this.dt_start.Size = new System.Drawing.Size(200, 26);
+            this.dt_start.TabIndex = 7;
+            this.dt_start.ValueChanged += new System.EventHandler(this.dt_start_ValueChanged);
             // 
-            // lbl_date
+            // dt_end
             // 
-            this.lbl_date.AutoSize = true;
-            this.lbl_date.Location = new System.Drawing.Point(362, 329);
-            this.lbl_date.Name = "lbl_date";
-            this.lbl_date.Size = new System.Drawing.Size(51, 20);
-            this.lbl_date.TabIndex = 6;
-            this.lbl_date.Text = "label1";
+            this.dt_end.Location = new System.Drawing.Point(295, 137);
+            this.dt_end.Name = "dt_end";
+            this.dt_end.Size = new System.Drawing.Size(200, 26);
+            this.dt_end.TabIndex = 7;
+            this.dt_end.ValueChanged += new System.EventHandler(this.dt_start_ValueChanged);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Trebuchet MS", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(24, 32);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(325, 40);
+            this.label17.TabIndex = 49;
+            this.label17.Text = "REPORTE DE VENTAS";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(26, 108);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(122, 26);
+            this.label1.TabIndex = 49;
+            this.label1.Text = "Fecha Inicio";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(290, 108);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(100, 26);
+            this.label3.TabIndex = 49;
+            this.label3.Text = "Fecha Fin";
             // 
             // HomeForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1178, 769);
-            this.Controls.Add(this.lbl_date);
-            this.Controls.Add(this.monthCalendar1);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this.dt_end);
+            this.Controls.Add(this.dt_start);
             this.Controls.Add(this.dt_sales);
             this.Controls.Add(this.lbl_total_sales);
-            this.Controls.Add(this.label2);
             this.Name = "HomeForm";
             this.ShowIcon = false;
             this.Load += new System.EventHandler(this.HomeForm_Load);
@@ -133,10 +162,12 @@
         #endregion
         private System.Windows.Forms.BindingSource sistemadeventasdbDataSetBindingSource;
         private sistemadeventasdbDataSet sistemadeventasdbDataSet;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lbl_total_sales;
         private System.Windows.Forms.DataGridView dt_sales;
-        private System.Windows.Forms.MonthCalendar monthCalendar1;
-        private System.Windows.Forms.Label lbl_date;
+        private System.Windows.Forms.DateTimePicker dt_start;
+        private System.Windows.Forms.DateTimePicker dt_end;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
     }
 }

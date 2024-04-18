@@ -41,9 +41,6 @@ namespace SistemaDeVentas.Productos
             dt_products.Columns["MinimumStock"].HeaderText = "Stock mínimo";
             dt_products.Columns["InitialStock"].HeaderText = "Stock";
             dt_products.Columns["SizesId"].HeaderText = "Talla";
-
-            //dar formato a las columnas de color
-            formating();
            
 
 
@@ -93,10 +90,7 @@ namespace SistemaDeVentas.Productos
             //search product
             var productRepository = new ProductRepository();
             var products = productRepository.SearchProduct(txt_search.Text);
-            
-            //borrar los productos actuales
-            dt_products.DataSource = null;
-            //cargar los productos encontrados            
+                      
             dt_products.DataSource = products;
 
 
@@ -125,9 +119,13 @@ namespace SistemaDeVentas.Productos
             
         }
 
-        private void dt_products_VisibleChanged(object sender, EventArgs e)
+        private void txt_search_KeyPress(object sender, KeyPressEventArgs e)
         {
-            formating();
+            //si presiona enter buscar
+            if (e.KeyChar == (char)13)
+            {
+                btn_search.PerformClick();
+            }
         }
     }
 }

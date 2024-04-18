@@ -33,6 +33,7 @@
             this.sistemadeventasdbDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sistemadeventasdbDataSet = new SistemaDeVentas.sistemadeventasdbDataSet();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbl_user = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.iconButton5 = new FontAwesome.Sharp.IconButton();
@@ -74,6 +75,7 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel1.Controls.Add(this.lbl_user);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.iconButton5);
@@ -85,8 +87,19 @@
             this.panel1.Controls.Add(this.iconPictureBox1);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(270, 938);
+            this.panel1.Size = new System.Drawing.Size(270, 887);
             this.panel1.TabIndex = 2;
+            // 
+            // lbl_user
+            // 
+            this.lbl_user.Font = new System.Drawing.Font("Trebuchet MS", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_user.ForeColor = System.Drawing.Color.White;
+            this.lbl_user.Location = new System.Drawing.Point(3, 125);
+            this.lbl_user.Name = "lbl_user";
+            this.lbl_user.Size = new System.Drawing.Size(264, 53);
+            this.lbl_user.TabIndex = 0;
+            this.lbl_user.Text = "label1";
+            this.lbl_user.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel3
             // 
@@ -121,7 +134,7 @@
             this.iconButton5.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.iconButton5.Size = new System.Drawing.Size(270, 104);
             this.iconButton5.TabIndex = 3;
-            this.iconButton5.Text = "Configuración";
+            this.iconButton5.Text = "Config";
             this.iconButton5.UseVisualStyleBackColor = false;
             this.iconButton5.Click += new System.EventHandler(this.btn_home_Click);
             // 
@@ -246,7 +259,7 @@
             this.iconPictureBox1.IconColor = System.Drawing.Color.White;
             this.iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconPictureBox1.IconSize = 87;
-            this.iconPictureBox1.Location = new System.Drawing.Point(87, 51);
+            this.iconPictureBox1.Location = new System.Drawing.Point(94, 51);
             this.iconPictureBox1.Name = "iconPictureBox1";
             this.iconPictureBox1.Size = new System.Drawing.Size(87, 87);
             this.iconPictureBox1.TabIndex = 0;
@@ -261,14 +274,14 @@
             this.principal_panel.Location = new System.Drawing.Point(270, 165);
             this.principal_panel.Margin = new System.Windows.Forms.Padding(0);
             this.principal_panel.Name = "principal_panel";
-            this.principal_panel.Size = new System.Drawing.Size(1196, 773);
+            this.principal_panel.Size = new System.Drawing.Size(1196, 722);
             this.principal_panel.TabIndex = 3;
             // 
             // PrincipalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1457, 937);
+            this.ClientSize = new System.Drawing.Size(1457, 886);
             this.Controls.Add(this.lbl_heading);
             this.Controls.Add(this.principal_panel);
             this.Controls.Add(this.panel1);
@@ -302,5 +315,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel principal_panel;
         private FontAwesome.Sharp.IconButton iconButton5;
+        private System.Windows.Forms.Label lbl_user;
     }
 }

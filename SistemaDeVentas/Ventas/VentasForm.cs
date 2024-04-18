@@ -22,19 +22,8 @@ namespace SistemaDeVentas.Ventas
         private void VentasForm2_Load(object sender, EventArgs e)
         {
             loadSales();
-        }
-
-
-        private void loadSales()
-        {
-            //cargar las ventas
-            var saleRepository = new SaleRepository();
-            var sales = saleRepository.GetAllSales();
-
-           dt_sales.DataSource = sales;
-
             //renombrar columnas
-            dt_sales.Columns["Id"].HeaderText = "Id";
+            dt_sales.Columns["Id"].HeaderText = "Correlativo";
             dt_sales.Columns["SaleType"].HeaderText = "Tipo de venta";
             dt_sales.Columns["ClientName"].HeaderText = "Cliente";
             dt_sales.Columns["Date"].HeaderText = "Fecha";
@@ -50,6 +39,16 @@ namespace SistemaDeVentas.Ventas
             dt_sales.Columns["CreditPayment"].HeaderText = "Pago a crédito";
             dt_sales.Columns["CreditDays"].HeaderText = "Días de crédito";
             dt_sales.Columns["UserName"].HeaderText = "Usuario";
+        }
+
+
+        private void loadSales()
+        {
+            //cargar las ventas
+            var saleRepository = new SaleRepository();
+            var sales = saleRepository.GetAllSales();
+
+           dt_sales.DataSource = sales;
 
         }
 
@@ -62,6 +61,13 @@ namespace SistemaDeVentas.Ventas
 
         private void dt_sales_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            //validar que se haya seleccionado una venta
+            if (dt_sales.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Seleccione una venta para ver los productos");
+                return;
+            }
+
             //obtener la venta seleccionada y mostrar los productos
             var sale = (Sale)dt_sales.CurrentRow.DataBoundItem;
             var productsWithSalesForm = new ProductsWithSalesForm(sale);
@@ -118,6 +124,33 @@ namespace SistemaDeVentas.Ventas
                 saleTicket.CreateTicket80mm();
             }
 
+        }
+
+        private void btn_search_Click(object sender, EventArgs e)
+        {
+            if(string.IsNullOrEmpty(txt_search.Text))
+            {
+                loadSales();
+                return;
+            }
+
+
+            //cargar las ventas del resultado de la busqueda
+            var saleRepository = new SaleRepository();
+            var sales = saleRepository.searchSalesByTerm(txt_search.Text);
+            dt_sales.DataSource = sales;
+
+            
+
+        }
+
+        private void txt_search_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //si presiona enter buscar
+            if (e.KeyChar == (char)13)
+            {
+                btn_search.PerformClick();
+            }
         }
     }
 }

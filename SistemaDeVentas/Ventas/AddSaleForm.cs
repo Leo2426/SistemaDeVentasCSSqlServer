@@ -166,7 +166,7 @@ namespace SistemaDeVentas.Ventas
 
             sale.SaleType = cb_type.Text;
             sale.ClientName = cb_client_name.Text;
-            sale.Date = DateTime.Now;
+            sale.Date = dtp_date.Value;
             sale.Phone = txt_phone.Text;
             sale.Reference = txt_reference.Text;
             sale.Address = txt_address.Text;
@@ -509,7 +509,37 @@ namespace SistemaDeVentas.Ventas
 
         }
 
+        private void btn_add_product_Click(object sender, EventArgs e)
+        {
+            //lanzar el formulario de agregar producto
+            var addProductForm = new AddProductForm();
+            addProductForm.ShowDialog();
 
+            //cargar el ultimo producto agregado
+            var productRepository = new ProductRepository();
+            var product = productRepository.getLastProductAdded();
+            if (product != null)
+            {
+                txt_product_name.Text = product.Description;
+                txt_product_code.Text = product.Code;
+                txt_product_code.ReadOnly = true;
+                txt_product_price.Text = product.Price.ToString();
+                txt_size.Text = product.SizesId;
+                txt_product_stock.Text = product.InitialStock.ToString();
+                txt_quantity.Text = "1";
+
+                //establecer maximo stock
+                txt_quantity.Maximum = int.Parse(product.InitialStock.ToString());
+
+                //agregar al global class
+                GlobalClass.SelectedProduct = product;
+
+            }
+
+           
+
+
+        }
     }
 }
 

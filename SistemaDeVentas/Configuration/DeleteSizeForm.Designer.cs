@@ -89,6 +89,7 @@
             this.MinimumSize = new System.Drawing.Size(493, 367);
             this.Name = "DeleteSizeForm";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.UpdateSizeForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

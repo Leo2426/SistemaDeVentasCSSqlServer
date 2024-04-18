@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txt_name = new System.Windows.Forms.TextBox();
             this.txt_date = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -109,7 +109,7 @@
             this.txt_phone.MaxLength = 9;
             this.txt_phone.Name = "txt_phone";
             this.txt_phone.Size = new System.Drawing.Size(228, 31);
-            this.txt_phone.TabIndex = 26;
+            this.txt_phone.TabIndex = 1;
             // 
             // label6
             // 
@@ -137,7 +137,7 @@
             this.txt_address.Location = new System.Drawing.Point(312, 216);
             this.txt_address.Name = "txt_address";
             this.txt_address.Size = new System.Drawing.Size(228, 31);
-            this.txt_address.TabIndex = 26;
+            this.txt_address.TabIndex = 2;
             // 
             // txt_reference
             // 
@@ -145,7 +145,7 @@
             this.txt_reference.Location = new System.Drawing.Point(53, 297);
             this.txt_reference.Name = "txt_reference";
             this.txt_reference.Size = new System.Drawing.Size(228, 31);
-            this.txt_reference.TabIndex = 26;
+            this.txt_reference.TabIndex = 3;
             // 
             // dt_products
             // 
@@ -154,15 +154,15 @@
             this.dt_products.AllowUserToOrderColumns = true;
             this.dt_products.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dt_products.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dt_products.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Trebuchet MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dt_products.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dt_products.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dt_products.Location = new System.Drawing.Point(54, 453);
             this.dt_products.Name = "dt_products";
@@ -205,7 +205,7 @@
             this.cb_payment_condition.Location = new System.Drawing.Point(312, 297);
             this.cb_payment_condition.Name = "cb_payment_condition";
             this.cb_payment_condition.Size = new System.Drawing.Size(228, 34);
-            this.cb_payment_condition.TabIndex = 38;
+            this.cb_payment_condition.TabIndex = 4;
             // 
             // label10
             // 
@@ -223,7 +223,7 @@
             this.txt_instructions.Location = new System.Drawing.Point(54, 381);
             this.txt_instructions.Name = "txt_instructions";
             this.txt_instructions.Size = new System.Drawing.Size(487, 31);
-            this.txt_instructions.TabIndex = 26;
+            this.txt_instructions.TabIndex = 5;
             // 
             // label11
             // 
@@ -262,6 +262,7 @@
             this.txt_saldo_a_cobrar.ReadOnly = true;
             this.txt_saldo_a_cobrar.Size = new System.Drawing.Size(228, 31);
             this.txt_saldo_a_cobrar.TabIndex = 26;
+            this.txt_saldo_a_cobrar.TabStop = false;
             this.txt_saldo_a_cobrar.TextChanged += new System.EventHandler(this.txt_saldo_a_cobrar_TextChanged);
             this.txt_saldo_a_cobrar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_saldo_a_cobrar_KeyPress);
             // 
@@ -271,7 +272,7 @@
             this.button1.Location = new System.Drawing.Point(312, 677);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(228, 42);
-            this.button1.TabIndex = 49;
+            this.button1.TabIndex = 6;
             this.button1.Text = "Generar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);

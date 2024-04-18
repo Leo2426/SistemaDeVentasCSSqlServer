@@ -30,5 +30,6 @@ namespace SistemaDeVentas.Configuration
             var deleteSizeForm = new DeleteSizeForm();
             deleteSizeForm.ShowDialog();
         }
+
     }
 }

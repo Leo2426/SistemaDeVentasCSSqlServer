@@ -45,11 +45,13 @@
             this.txt_search.Name = "txt_search";
             this.txt_search.Size = new System.Drawing.Size(495, 31);
             this.txt_search.TabIndex = 10;
+            this.txt_search.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_search_KeyPress);
             // 
             // dt_products
             // 
             this.dt_products.AllowUserToAddRows = false;
             this.dt_products.AllowUserToDeleteRows = false;
+            this.dt_products.AllowUserToOrderColumns = true;
             this.dt_products.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -75,9 +77,9 @@
             this.dt_products.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dt_products.ShowCellErrors = false;
             this.dt_products.ShowEditingIcon = false;
+            this.dt_products.ShowRowErrors = false;
             this.dt_products.Size = new System.Drawing.Size(1101, 593);
             this.dt_products.TabIndex = 0;
-            this.dt_products.VisibleChanged += new System.EventHandler(this.dt_products_VisibleChanged);
             // 
             // btn_search
             // 

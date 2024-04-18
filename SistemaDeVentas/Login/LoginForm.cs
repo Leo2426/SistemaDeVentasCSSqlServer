@@ -20,14 +20,22 @@ namespace SistemaDeVentas.Login
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
+            //agregar autocomplete a el cb_usuarios
+            UserRepository userRepository = new UserRepository();
+            var users = userRepository.getAllUsers();
 
-        }
+            cb_users.DataSource = users;
+            cb_users.DisplayMember = "Username";
+            cb_users.ValueMember = "Id";
+            cb_users.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cb_users.AutoCompleteSource = AutoCompleteSource.ListItems;
+                }
 
         private void iconButton1_Click(object sender, EventArgs e)
         {
             UserRepository userRepository = new UserRepository();
             User user = new User();
-            user.Username = textBox1.Text;
+            user.Username = cb_users.Text;
             user.Password = textBox2.Text;
             if (userRepository.Login(user))
             {
