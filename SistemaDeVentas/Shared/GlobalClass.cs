@@ -10,6 +10,7 @@ namespace SistemaDeVentas.Shared
 {
     public static class GlobalClass
     {
+
         public static string Username { get; set; }
         public static Product SelectedProduct { get; set; }
 
