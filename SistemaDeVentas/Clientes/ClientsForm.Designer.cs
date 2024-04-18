@@ -143,10 +143,11 @@
             // btn_search
             // 
             this.btn_search.FlatAppearance.BorderSize = 0;
+            this.btn_search.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_search.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlassPlus;
             this.btn_search.IconColor = System.Drawing.Color.Black;
             this.btn_search.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btn_search.IconSize = 30;
+            this.btn_search.IconSize = 25;
             this.btn_search.Location = new System.Drawing.Point(537, 10);
             this.btn_search.Name = "btn_search";
             this.btn_search.Size = new System.Drawing.Size(43, 34);

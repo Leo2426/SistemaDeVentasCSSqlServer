@@ -39,6 +39,7 @@ namespace SistemaDeVentas.Ventas
             dt_sales.Columns["CreditPayment"].HeaderText = "Pago a crédito";
             dt_sales.Columns["CreditDays"].HeaderText = "Días de crédito";
             dt_sales.Columns["UserName"].HeaderText = "Usuario";
+            dt_sales.Columns["Profit"].HeaderText = "Ganancia";
         }
 
 

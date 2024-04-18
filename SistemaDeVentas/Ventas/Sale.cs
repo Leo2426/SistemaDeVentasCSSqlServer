@@ -1,4 +1,5 @@
-﻿using System;
+﻿using iText.Layout.Properties;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,7 @@ namespace SistemaDeVentas.Ventas
         public int CreditDays { get; set; }
         public string UserName { get; set; }
         public string District { get; set; }
+        public decimal Profit { get; set; }
 
     }
 }

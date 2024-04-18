@@ -55,6 +55,7 @@
             this.txt_size = new System.Windows.Forms.TextBox();
             this.txt_product_price = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
+            this.btn_add_product = new FontAwesome.Sharp.IconButton();
             this.label14 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.txt_product_name = new System.Windows.Forms.TextBox();
@@ -80,7 +81,6 @@
             this.txt_days_credit = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
-            this.btn_add_product = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)(this.dt_products)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txt_quantity)).BeginInit();
@@ -407,6 +407,21 @@
             this.label18.TabIndex = 1;
             this.label18.Text = "Stock";
             // 
+            // btn_add_product
+            // 
+            this.btn_add_product.FlatAppearance.BorderSize = 0;
+            this.btn_add_product.IconChar = FontAwesome.Sharp.IconChar.PlusCircle;
+            this.btn_add_product.IconColor = System.Drawing.Color.Black;
+            this.btn_add_product.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btn_add_product.IconSize = 25;
+            this.btn_add_product.Location = new System.Drawing.Point(454, 71);
+            this.btn_add_product.Name = "btn_add_product";
+            this.btn_add_product.Size = new System.Drawing.Size(48, 34);
+            this.btn_add_product.TabIndex = 44;
+            this.btn_add_product.TabStop = false;
+            this.btn_add_product.UseVisualStyleBackColor = true;
+            this.btn_add_product.Click += new System.EventHandler(this.btn_add_product_Click);
+            // 
             // label14
             // 
             this.label14.AutoSize = true;
@@ -450,7 +465,7 @@
             this.btn_search.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlassPlus;
             this.btn_search.IconColor = System.Drawing.Color.Black;
             this.btn_search.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btn_search.IconSize = 30;
+            this.btn_search.IconSize = 25;
             this.btn_search.Location = new System.Drawing.Point(192, 69);
             this.btn_search.Name = "btn_search";
             this.btn_search.Size = new System.Drawing.Size(43, 34);
@@ -510,7 +525,7 @@
             this.btn_add_product_to_dt.IconChar = FontAwesome.Sharp.IconChar.PlusCircle;
             this.btn_add_product_to_dt.IconColor = System.Drawing.Color.Green;
             this.btn_add_product_to_dt.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btn_add_product_to_dt.IconSize = 55;
+            this.btn_add_product_to_dt.IconSize = 50;
             this.btn_add_product_to_dt.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.btn_add_product_to_dt.Location = new System.Drawing.Point(990, 492);
             this.btn_add_product_to_dt.Name = "btn_add_product_to_dt";
@@ -624,7 +639,7 @@
             this.btn_add_client.IconChar = FontAwesome.Sharp.IconChar.PlusCircle;
             this.btn_add_client.IconColor = System.Drawing.Color.Black;
             this.btn_add_client.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btn_add_client.IconSize = 30;
+            this.btn_add_client.IconSize = 25;
             this.btn_add_client.Location = new System.Drawing.Point(324, 68);
             this.btn_add_client.Name = "btn_add_client";
             this.btn_add_client.Size = new System.Drawing.Size(48, 35);
@@ -687,21 +702,6 @@
             this.label17.Size = new System.Drawing.Size(268, 40);
             this.label17.TabIndex = 47;
             this.label17.Text = "INGRESAR VENTA";
-            // 
-            // btn_add_product
-            // 
-            this.btn_add_product.FlatAppearance.BorderSize = 0;
-            this.btn_add_product.IconChar = FontAwesome.Sharp.IconChar.PlusCircle;
-            this.btn_add_product.IconColor = System.Drawing.Color.Black;
-            this.btn_add_product.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btn_add_product.IconSize = 30;
-            this.btn_add_product.Location = new System.Drawing.Point(454, 71);
-            this.btn_add_product.Name = "btn_add_product";
-            this.btn_add_product.Size = new System.Drawing.Size(48, 34);
-            this.btn_add_product.TabIndex = 44;
-            this.btn_add_product.TabStop = false;
-            this.btn_add_product.UseVisualStyleBackColor = true;
-            this.btn_add_product.Click += new System.EventHandler(this.btn_add_product_Click);
             // 
             // AddSaleForm
             // 

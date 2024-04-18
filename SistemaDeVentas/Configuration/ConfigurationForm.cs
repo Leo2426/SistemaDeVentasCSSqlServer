@@ -31,5 +31,27 @@ namespace SistemaDeVentas.Configuration
             deleteSizeForm.ShowDialog();
         }
 
+        private void btn_add_client_Click(object sender, EventArgs e)
+        {
+            //lanzar form para agregar usuario
+            var userForm = new User.AddUserForm();
+            userForm.ShowDialog();
+
+        }
+
+        private void btn_delete_Click(object sender, EventArgs e)
+        {
+            //cargar form para eliminar usuario
+            var deleteUserForm = new User.DeleteUserForm();
+            deleteUserForm.ShowDialog();
+
+        }
+
+        private void btn_update_Click(object sender, EventArgs e)
+        {
+            //lanzar form para actualizar usuario
+            var updateUserForm = new User.UpdateUserForm();
+            updateUserForm.ShowDialog();
+        }
     }
 }

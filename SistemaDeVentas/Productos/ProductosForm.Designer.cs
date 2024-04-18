@@ -86,8 +86,8 @@
             this.btn_search.FlatAppearance.BorderSize = 0;
             this.btn_search.IconChar = FontAwesome.Sharp.IconChar.MagnifyingGlassPlus;
             this.btn_search.IconColor = System.Drawing.Color.Black;
-            this.btn_search.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btn_search.IconSize = 30;
+            this.btn_search.IconFont = FontAwesome.Sharp.IconFont.Solid;
+            this.btn_search.IconSize = 25;
             this.btn_search.Location = new System.Drawing.Point(537, 12);
             this.btn_search.Name = "btn_search";
             this.btn_search.Size = new System.Drawing.Size(43, 34);

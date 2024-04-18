@@ -102,6 +102,7 @@ namespace SistemaDeVentas.Ventas
             dt_products.Columns.Add("Id", "Id");
             dt_products.Columns.Add("Code", "Código");
             dt_products.Columns.Add("Description", "Descripción");
+            dt_products.Columns.Add("Cost", "Costo");
             dt_products.Columns.Add("Price", "Precio");
             dt_products.Columns.Add("Size", "Talla");
             dt_products.Columns.Add("Quantity", "Cantidad");
@@ -182,7 +183,21 @@ namespace SistemaDeVentas.Ventas
             sale.CreditDays = string.IsNullOrWhiteSpace(txt_days_credit.Text) ? 0 : int.Parse(txt_days_credit.Text);
             sale.UserName = cb_sales_man.Text;
             sale.District = client.District;
+            //calcular el profit el total de la suma de los precios de los productos menos el total de la suma de los costos de los productos
+            //calcular el costo total que es la suma de los costos de los productos del datagridview
+            decimal totalCost = 0;
+            foreach (DataGridViewRow row in dt_products.Rows)
+            {
+                if (row.Cells["Cost"].Value != null && row.Cells["Quantity"].Value != null)
+                {
+                    decimal costo = Convert.ToDecimal(row.Cells["Cost"].Value);
+                    int cantidad = Convert.ToInt32(row.Cells["Quantity"].Value);
+                    totalCost += costo * cantidad;
+                }
+            }
 
+            sale.Profit = sale.Total - totalCost;
+            
 
 
             //if si el combobox tiene como valor CREDITO entonces el credit payment es igual al total
@@ -329,7 +344,7 @@ namespace SistemaDeVentas.Ventas
             }
 
             //agregar producto a la lista de productos
-            dt_products.Rows.Add(GlobalClass.SelectedProduct.Id, txt_product_code.Text, txt_product_name.Text, txt_product_price.Text, txt_size.Text, txt_quantity.Text);
+            dt_products.Rows.Add(GlobalClass.SelectedProduct.Id, txt_product_code.Text, txt_product_name.Text, GlobalClass.SelectedProduct.Cost, txt_product_price.Text, txt_size.Text, txt_quantity.Text);
 
             GlobalClass.SelectedProduct = null;
 

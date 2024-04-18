@@ -32,7 +32,7 @@ namespace SistemaDeVentas.Ventas
         {
 
             var productRepository = new ProductRepository();
-            var products = productRepository.GetAllProducts();
+            var products = productRepository.getAllProductsWithSock();
 
             //si la no hay productos mostrar mensaje
             if (products.Count == 0)
@@ -59,6 +59,17 @@ namespace SistemaDeVentas.Ventas
 
             //ocultar stock minimo
             dt_products.Columns["MinimumStock"].Visible = false;
+
+            //ocultar productos con inital stock = 0 
+            foreach (DataGridViewRow row in dt_products.Rows)
+            {
+                if (row.Cells["InitialStock"].Value.ToString() == "0")
+                {
+                    row.Visible = false;
+                }
+            }
+
+
 
 
         }

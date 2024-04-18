@@ -25,6 +25,7 @@ namespace SistemaDeVentas.Ventas.Delivery
             var deliveryRepository = new DeliveryRepository();
             var deliveries = deliveryRepository.GetAllDeliveries();
 
+            dt_deliverys.Columns.Add("SaleId", "Correlativo");
             dt_deliverys.Columns.Add("ClientName", "Cliente");
             dt_deliverys.Columns.Add("Date", "Fecha");
             dt_deliverys.Columns.Add("Address", "Dirección");
@@ -34,11 +35,11 @@ namespace SistemaDeVentas.Ventas.Delivery
             dt_deliverys.Columns.Add("Phone", "Teléfono");
             dt_deliverys.Columns.Add("Amount", "Monto");
             dt_deliverys.Columns.Add("Amount_due", "Saldo a cobrar");
-            dt_deliverys.Columns.Add("SaleId", "Id venta");
+
             
             foreach (var delivery in deliveries)
             {
-                dt_deliverys.Rows.Add(delivery.ClientName, delivery.Date, delivery.Address, delivery.Reference, delivery.Instructions, delivery.PaymentCondition, delivery.Phone, delivery.Amount, delivery.Amount_due, delivery.SaleId);
+                dt_deliverys.Rows.Add(delivery.SaleId, delivery.ClientName, delivery.Date, delivery.Address, delivery.Reference, delivery.Instructions, delivery.PaymentCondition, delivery.Phone, delivery.Amount, delivery.Amount_due);
             }
 
 

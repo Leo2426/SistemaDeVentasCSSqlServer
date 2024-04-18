@@ -30,6 +30,14 @@ namespace SistemaDeVentas.Home
             //valor por defect de dt_end sea 1 dia mas
             dt_end.Value = dt_end.Value.AddDays(1);
 
+            //si el usuario actual no es administrador ocultar el lbl_profit y lbl_total_sales
+            if (GlobalClass.Username != "admin")
+            {
+                lbl_profit.Visible = false;
+                lbl_total_sales.Visible = false;
+            }
+
+
         }
 
         private void loadDataGrid()
@@ -59,6 +67,7 @@ namespace SistemaDeVentas.Home
             dt_sales.Columns["CreditDays"].Visible = false;
             dt_sales.Columns["UserName"].Visible = false;
             dt_sales.Columns["Channel"].Visible = false;
+            dt_sales.Columns["District"].Visible = false;
 
             //renombrar columnas
             dt_sales.Columns["Id"].HeaderText = "Correlativo";
@@ -67,6 +76,7 @@ namespace SistemaDeVentas.Home
             dt_sales.Columns["PaymentTypeName"].HeaderText = "Tipo de pago";
             dt_sales.Columns["PaymentConditionName"].HeaderText = "Condición de pago";
             dt_sales.Columns["Total"].HeaderText = "Total";
+            dt_sales.Columns["Profit"].HeaderText = "Ganancia";
 
             //reordenar columnas
             dt_sales.Columns["Id"].DisplayIndex = 0;
@@ -84,8 +94,9 @@ namespace SistemaDeVentas.Home
             var total = dt_sales.Rows.Cast<DataGridViewRow>().Sum(x => Convert.ToDecimal(x.Cells["Total"].Value));
             lbl_total_sales.Text = "Total de ventas: " + GlobalClass.SymbolCurrency + total.ToString();
 
-
-
+            //sumar todas las ganancias y mostrarlo en el lbl_total_profit
+            var totalProfit = dt_sales.Rows.Cast<DataGridViewRow>().Sum(x => Convert.ToDecimal(x.Cells["Profit"].Value));
+            lbl_profit.Text = "Ganancia Total: " + GlobalClass.SymbolCurrency + totalProfit.ToString();
         }
     }
 }

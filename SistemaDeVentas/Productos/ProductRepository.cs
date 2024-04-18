@@ -210,6 +210,40 @@ namespace SistemaDeVentas.Productos
         }
 
 
+        public List<Product> getAllProductsWithSock()
+        {
+            //traer todos los productos con stock
+            List<Product> products = new List<Product>();
+            using (var connection = new SqlConnection(Conexion.stringConexion))
+            {
+                var cmd = new SqlCommand("spGetAllProductsWithStock", connection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                connection.Open();
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        products.Add(new Product
+                        {
+                            Id = int.Parse(reader["id"].ToString()),
+                            Code = reader["code"].ToString(),
+                            Description = reader["description"].ToString(),
+                            Cost = decimal.Parse(reader["cost"].ToString()),
+                            Price = decimal.Parse(reader["price"].ToString()),
+                            MinimumStock = int.Parse(reader["minimum_stock"].ToString()),
+                            InitialStock = int.Parse(reader["initial_stock"].ToString()),
+                            SizesId = (reader["size_name"].ToString())
+                        });
+                    }
+                }
+            }
+            return products;
+        }
+
+
     }
 
 

@@ -28,7 +28,7 @@
     <ProductName>Sistema de Ventas</ProductName>
     <PublisherName>Entersoft Publiser</PublisherName>
     <SuiteName>Entersoft Suite Name</SuiteName>
-    <ApplicationRevision>25</ApplicationRevision>
+    <ApplicationRevision>27</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -353,6 +353,28 @@
     <Compile Include="Ubication\DistrictRepository.cs" />
     <Compile Include="Ubication\Province.cs" />
     <Compile Include="Ubication\ProvinceRepository.cs" />
+    <Compile Include="User\AddUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User\AddUserForm.Designer.cs">
+      <DependentUpon>AddUserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User\DeleteUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User\DeleteUserForm.Designer.cs">
+      <DependentUpon>DeleteUserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User\Rol.cs" />
+    <Compile Include="User\RolRepository.cs" />
+    <Compile Include="User\UpdateUserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="User\UpdateUserForm.Designer.cs">
+      <DependentUpon>UpdateUserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="User\User.cs" />
+    <Compile Include="User\UserRepository.cs" />
     <Compile Include="Ventas\AddSaleForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -444,6 +466,15 @@
     </Compile>
     <EmbeddedResource Include="Shared\PrincipalForm.resx">
       <DependentUpon>PrincipalForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\AddUserForm.resx">
+      <DependentUpon>AddUserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\DeleteUserForm.resx">
+      <DependentUpon>DeleteUserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="User\UpdateUserForm.resx">
+      <DependentUpon>UpdateUserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ventas\AddSaleForm.resx">
       <DependentUpon>AddSaleForm.cs</DependentUpon>

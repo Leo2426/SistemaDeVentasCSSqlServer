@@ -41,6 +41,7 @@ namespace SistemaDeVentas.Ventas
                 command.Parameters.AddWithValue("@CreditPayment", sale.CreditPayment ?? (object)DBNull.Value);
                 command.Parameters.AddWithValue("@CreditDays", sale.CreditDays);
                 command.Parameters.AddWithValue("@UserName", sale.UserName);
+                command.Parameters.AddWithValue("@Profit", sale.Profit);
 
                 connection.Open();
                 command.ExecuteNonQuery();
@@ -84,7 +85,9 @@ namespace SistemaDeVentas.Ventas
                             CashPayment = reader["cash_payment"] == DBNull.Value ? 0 : (decimal?)decimal.Parse(reader["cash_payment"].ToString()),
                             CreditPayment = reader["credit_payment"] == DBNull.Value ? 0 : (decimal?)decimal.Parse(reader["credit_payment"].ToString()),
                             CreditDays = reader["credit_days"] == DBNull.Value ? 0 : int.Parse(reader["credit_days"].ToString()),
-                            UserName = reader["UserName"].ToString()
+                            UserName = reader["UserName"].ToString(),
+                            Profit = decimal.Parse(reader["profit"].ToString())
+
 
                         };
                         sales.Add(sale);
@@ -333,6 +336,7 @@ namespace SistemaDeVentas.Ventas
                             PaymentTypeName = reader["payment_type"].ToString(),
                             PaymentConditionName = reader["payment_condition"].ToString(),
                             ClientName = reader["name"].ToString(),
+                            Profit = decimal.Parse(reader["profit"].ToString()),
                             Total = decimal.Parse(reader["total"].ToString()),
                         };
                         sales.Add(sale);
@@ -375,7 +379,8 @@ namespace SistemaDeVentas.Ventas
                             ClientName = reader["client_name"].ToString(),
                             PaymentTypeName = reader["payment_type"].ToString(),
                             PaymentConditionName = reader["payment_condition"].ToString(),
-                            UserName = reader["user_name"].ToString()
+                            UserName = reader["user_name"].ToString(),
+                            Profit = decimal.Parse(reader["profit"].ToString())
                         };
                         sales.Add(sale);
                     }
