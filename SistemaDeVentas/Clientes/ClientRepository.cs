@@ -17,41 +17,58 @@ namespace SistemaDeVentas.Clientes
     public class ClientRepository
     {
         private string connectionString = Conexion.stringConexion;
-       public void InsertClient(Client client)
+        public void InsertClient(Client client)
         {
-            // Insertar cliente en base de datos usan conexion de Conexion.cs
-
+            // Insertar cliente en base de datos usando conexión de Conexion.cs
 
             try
             {
                 SqlConnection connection = new SqlConnection(connectionString);
 
-                SqlCommand command = new SqlCommand("spInsertClient", connection);
-                command.CommandType = System.Data.CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@name", client.Name);
-                command.Parameters.AddWithValue("@address", client.Address);
-                command.Parameters.AddWithValue("@document", client.Document);
-                command.Parameters.AddWithValue("@phone", client.Phone);
-                command.Parameters.AddWithValue("@reference", client.Reference);
-                command.Parameters.AddWithValue("@department", client.Department);
-                command.Parameters.AddWithValue("@province", client.Province);
-                command.Parameters.AddWithValue("@district", client.District);
+                // Creamos la consulta SQL para insertar directamente en la base de datos
+                string query = @"
+            DECLARE @DepartmentID INT, @ProvinceID INT, @DistrictID INT;
+
+            SELECT @DepartmentID = id FROM departments WHERE name = @Department;
+            SELECT @ProvinceID = id FROM provinces WHERE name = @Province AND departments_id = @DepartmentID;
+            SELECT @DistrictID = id FROM districts WHERE name = @District AND provinces_id = @ProvinceID;
+
+            IF (@DepartmentID IS NOT NULL AND @ProvinceID IS NOT NULL AND @DistrictID IS NOT NULL)
+            BEGIN
+                INSERT INTO clients (name, address, document, phone, reference, departments_id, provinces_id, districts_id) 
+                VALUES (@Name, @Address, @Document, @Phone, @Reference, @DepartmentID, @ProvinceID, @DistrictID);
+            END
+            ELSE
+            BEGIN
+                THROW 51000, 'No se pudo insertar el cliente debido a una incompatibilidad en los datos de ubicación.', 1;
+            END";
+
+                SqlCommand command = new SqlCommand(query, connection);
+                command.CommandType = System.Data.CommandType.Text;
+
+                // Agregamos los parámetros necesarios para la consulta
+                command.Parameters.AddWithValue("@Name", client.Name);
+                command.Parameters.AddWithValue("@Address", client.Address);
+                command.Parameters.AddWithValue("@Document", client.Document);
+                command.Parameters.AddWithValue("@Phone", client.Phone);
+                command.Parameters.AddWithValue("@Reference", client.Reference);
+                command.Parameters.AddWithValue("@Department", client.Department);
+                command.Parameters.AddWithValue("@Province", client.Province);
+                command.Parameters.AddWithValue("@District", client.District);
+
                 connection.Open();
-                command.ExecuteNonQuery();
+                command.ExecuteNonQuery();  // Ejecutar la consulta
                 command.Dispose();
 
-
                 connection.Close();
-             
-
             }
             catch (Exception ex)
             {
                 throw new Exception("Error al insertar cliente: " + ex.Message);
             }
-
         }
- 
+
+
         public List<Client> GetAllClients()
         {
             // Obtener todos los clientes de la base de datos

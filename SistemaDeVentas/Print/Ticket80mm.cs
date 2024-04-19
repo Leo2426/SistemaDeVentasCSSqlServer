@@ -2,6 +2,7 @@
 using SistemaDeVentas.Ventas;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Linq;
@@ -32,6 +33,10 @@ namespace SistemaDeVentas.Print
 
             // Ancho y altura en puntos (1 pulgada = 72 puntos, 8 cm = aproximadamente 3.15 pulgadas)
             int Width = 330; // Convertir 8 cm a puntos
+
+
+            //seleccionar impresora del app.config
+            printDocument.PrinterSettings.PrinterName = ConfigurationManager.AppSettings["printerTicket"];
 
             printDocument.DefaultPageSettings.PaperSize = new PaperSize("custom", Width, HeightDocument);
             printDocument.Print();

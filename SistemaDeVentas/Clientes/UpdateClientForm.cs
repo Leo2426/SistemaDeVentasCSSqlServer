@@ -109,5 +109,32 @@ namespace SistemaDeVentas.Clientes
         {
 
         }
+
+        private void cb_department_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            //cargar datos de province repository a cb_province
+            ProvinceRepository provinceRepository = new ProvinceRepository();
+            List<Province> provinces = provinceRepository.GetProvincesByDepartment(cb_department.Text);
+            cb_province.Items.Clear();
+            foreach (Province province in provinces)
+            {
+                cb_province.Items.Add(province.Name);
+            }
+            cb_province.SelectedIndex = 0;
+
+        }
+
+        private void cb_province_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            //cargo datos de district repository a cb_district
+            DistrictRepository districtRepository = new DistrictRepository();
+            List<District> districts = districtRepository.GetDistrictsByProvince(cb_province.Text);
+            cb_district.Items.Clear();
+            foreach (District district in districts)
+            {
+                cb_district.Items.Add(district.Name);
+            }
+            cb_district.SelectedIndex = 0;
+        }
     }
 }

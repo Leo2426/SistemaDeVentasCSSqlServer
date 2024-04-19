@@ -60,6 +60,7 @@
             this.dt_deliverys.ReadOnly = true;
             this.dt_deliverys.RowHeadersWidth = 62;
             this.dt_deliverys.RowTemplate.Height = 28;
+            this.dt_deliverys.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dt_deliverys.Size = new System.Drawing.Size(1101, 577);
             this.dt_deliverys.TabIndex = 0;
             // 

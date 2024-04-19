@@ -85,8 +85,6 @@ namespace SistemaDeVentas.Ventas.Delivery
                     var ticketDelivery = new TicketDelivery(delivery);
                     ticketDelivery.createTicketDelivery();
 
-                    //mensaje de impresion exitosa
-                    MessageBox.Show("Delivery impreso correctamente");
 
                 }
             }

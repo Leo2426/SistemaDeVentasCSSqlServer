@@ -86,6 +86,7 @@
             this.cb_province.Name = "cb_province";
             this.cb_province.Size = new System.Drawing.Size(325, 34);
             this.cb_province.TabIndex = 63;
+            this.cb_province.SelectedIndexChanged += new System.EventHandler(this.cb_province_SelectedIndexChanged_1);
             // 
             // cb_department
             // 
@@ -96,6 +97,7 @@
             this.cb_department.Name = "cb_department";
             this.cb_department.Size = new System.Drawing.Size(325, 34);
             this.cb_department.TabIndex = 62;
+            this.cb_department.SelectedIndexChanged += new System.EventHandler(this.cb_department_SelectedIndexChanged_1);
             // 
             // label3
             // 

@@ -4,6 +4,7 @@ using SistemaDeVentas.Ventas;
 using SistemaDeVentas.Ventas.Delivery;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Linq;
@@ -33,6 +34,13 @@ namespace SistemaDeVentas.Print
             // Ancho y altura en puntos (1 pulgada = 72 puntos, 8 cm = aproximadamente 3.15 pulgadas)
             int Width = cmToPoints(7);
             int Height = cmToPoints(5);
+
+            //seleccionar la impresora del app.config
+            printDocument.PrinterSettings.PrinterName = ConfigurationManager.AppSettings["printerDelivery"];
+
+            //imprimir de vertical
+            printDocument.DefaultPageSettings.Landscape = false;
+
             printDocument.DefaultPageSettings.PaperSize = new PaperSize("custom", Width, Height);
             printDocument.Print();
                 
