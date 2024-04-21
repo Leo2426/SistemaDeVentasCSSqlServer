@@ -39,6 +39,9 @@
             this.dt_products.AllowUserToAddRows = false;
             this.dt_products.AllowUserToDeleteRows = false;
             this.dt_products.AllowUserToOrderColumns = true;
+            this.dt_products.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dt_products.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dt_products.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dt_products.BorderStyle = System.Windows.Forms.BorderStyle.None;

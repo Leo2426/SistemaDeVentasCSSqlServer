@@ -28,6 +28,24 @@ namespace SistemaDeVentas.Ventas
             dt_products.DataSource = products;
 
             lbl_title.Text = "Productos de la venta N " + sale.Id;
+
+            //renombrar columnas
+            dt_products.Columns["Description"].HeaderText = "Descripción";
+            dt_products.Columns["Quantity"].HeaderText = "Cantidad";
+            dt_products.Columns["SalePrice"].HeaderText = "Precio de venta";
+            dt_products.Columns["Code"].HeaderText = "Código";
+            dt_products.Columns["Size"].HeaderText = "Talla";
+
+            //reordenar que el codigo vaya primero
+            dt_products.Columns["Code"].DisplayIndex = 0;
+
+
+            //ocultar SaleId
+            dt_products.Columns["SaleId"].Visible = false;
+            dt_products.Columns["ProductId"].Visible = false;
+
+
+            
         }
     }
 }
