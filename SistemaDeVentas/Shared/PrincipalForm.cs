@@ -28,13 +28,13 @@ namespace SistemaDeVentas.Shared
 
         private void PrincipalForm_Load(object sender, EventArgs e)
         {
-            lbl_user.Text = GlobalClass.Username;
+            lbl_user.Text = GlobalClass.ActualUser.Name;
             lbl_heading.Text = "Home";
             //dar click al boton home
             btn_home.PerformClick();
 
             //desabilitar boton configuracion si no eres admin
-            if (GlobalClass.Username != "admin")
+            if (GlobalClass.ActualUser.Rol != "ADMINISTRADOR")
             {
                 //bloquear iconbutton5
                 iconButton5.Enabled = false;

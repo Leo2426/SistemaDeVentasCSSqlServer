@@ -56,7 +56,7 @@ namespace SistemaDeVentas.Ventas
             cb_sales_man.DataSource = users;
             cb_sales_man.DisplayMember = "Name";
             cb_sales_man.ValueMember = "Name";
-            cb_sales_man.Text = GlobalClass.Username;
+            cb_sales_man.Text = GlobalClass.ActualUser.Name;
 
             //cargar canal por defecto y tipo de comprobante por defecto
             cb_chanel.Text = "WHATSAPP";

@@ -1,4 +1,6 @@
-﻿using SistemaDeVentas.Productos;
+﻿using SistemaDeVentas.Login;
+using SistemaDeVentas.Productos;
+using SistemaDeVentas.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +13,9 @@ namespace SistemaDeVentas.Shared
     public static class GlobalClass
     {
 
-        public static string Username { get; set; }
+        
         public static Product SelectedProduct { get; set; }
-
+        public static User.User ActualUser { get; set; } = new User.User();
         public static string SymbolCurrency { get; } = "S/";
 
         public static bool isProductSelectProperly { get; set; } = false;

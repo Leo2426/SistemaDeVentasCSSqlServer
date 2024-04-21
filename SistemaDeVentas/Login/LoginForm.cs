@@ -1,4 +1,5 @@
 ﻿using SistemaDeVentas.Shared;
+using SistemaDeVentas.User;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,21 +26,25 @@ namespace SistemaDeVentas.Login
             var users = userRepository.getAllUsers();
 
             cb_users.DataSource = users;
-            cb_users.DisplayMember = "Username";
+            cb_users.DisplayMember = "Name";
             cb_users.ValueMember = "Id";
             cb_users.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cb_users.AutoCompleteSource = AutoCompleteSource.ListItems;
-                }
+        }
 
         private void iconButton1_Click(object sender, EventArgs e)
         {
             UserRepository userRepository = new UserRepository();
-            User user = new User();
-            user.Username = cb_users.Text;
+            User.User user = new User.User();
+            user.Name = cb_users.Text;
             user.Password = textBox2.Text;
             if (userRepository.Login(user))
             {
-                GlobalClass.Username = user.Username;
+                GlobalClass.ActualUser.Name = user.Name;
+                
+                GlobalClass.ActualUser.Rol = userRepository.getRol(user.Name);
+
+
                 PrincipalForm principalForm = new PrincipalForm();
                 this.Hide();
                 principalForm.ShowDialog();

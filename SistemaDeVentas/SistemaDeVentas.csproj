@@ -301,8 +301,6 @@
     <Compile Include="Home\HomeForm.Designer.cs">
       <DependentUpon>HomeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login\User.cs" />
-    <Compile Include="Login\UserRepository.cs" />
     <Compile Include="Print\Ticket80mm.cs" />
     <Compile Include="Print\TicketDelivery.cs" />
     <Compile Include="Productos\AddProductForm.cs">

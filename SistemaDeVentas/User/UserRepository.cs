@@ -138,5 +138,52 @@ namespace SistemaDeVentas.User
                 throw ex;
             }
         }
+
+
+        public bool Login(User user)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (var command = new SqlCommand("SELECT * FROM users WHERE user_name = @Username AND password = @Password", connection))
+                {
+                    command.Parameters.AddWithValue("@Username", user.Name);
+                    command.Parameters.AddWithValue("@Password", user.Password);
+                    using (var reader = command.ExecuteReader())
+                    {
+                        return reader.HasRows;
+                    }
+                }
+            }
+        }
+
+        internal string getRol(string name)
+        {
+          
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (var command = new SqlCommand(@"
+     	        SELECT name
+	            FROM users
+	            inner join rols on users.rols_id = rols.id
+	            where users.user_name = @Username", connection))
+                {
+                    command.Parameters.AddWithValue("@Username", name);
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return reader["name"].ToString();
+                        }
+                        else
+                        {
+                            return "";
+                        }
+                    }
+                }   
+            }
+
+        }
     }
 }
