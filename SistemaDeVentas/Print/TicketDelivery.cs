@@ -27,7 +27,10 @@ namespace SistemaDeVentas.Print
 
         public void createTicketDelivery()
         {
-            // Imprimir ticket que tenga 8 cm de ancho 
+
+
+            //seleccionar la impresora del app.config
+            printDocument.PrinterSettings.PrinterName = ConfigurationManager.AppSettings["printerDelivery"];
 
             printDocument.PrintPage += Print;
 
@@ -35,15 +38,9 @@ namespace SistemaDeVentas.Print
             int Width = cmToPoints(7);
             int Height = cmToPoints(5);
 
-            //seleccionar la impresora del app.config
-            printDocument.PrinterSettings.PrinterName = ConfigurationManager.AppSettings["printerDelivery"];
-
-            //imprimir de vertical
-            printDocument.DefaultPageSettings.Landscape = false;
-
             printDocument.DefaultPageSettings.PaperSize = new PaperSize("custom", Width, Height);
             printDocument.Print();
-                
+
         }
 
 
@@ -51,7 +48,6 @@ namespace SistemaDeVentas.Print
         {
             Graphics graphics = e.Graphics;
             Font font = new Font("Trebuchet MS", 8);
-            float fontHeight = font.GetHeight();
             int startX = 3;
             int startY = 3;
             int offset = 14;
@@ -64,25 +60,33 @@ namespace SistemaDeVentas.Print
             graphics.DrawString("PRODUCTOS: ", font, new SolidBrush(Color.Black), startX, startY + offset * 5);
 
             // Definir el alto de la caja de productos
-            int productBoxHeight = cmToPoints(1.5); // Ejemplo para una caja de 2 cm de alto
-            Rectangle productBox = new Rectangle(startX, startY + offset * 6, printDocument.DefaultPageSettings.PaperSize.Width - startX * 2, productBoxHeight);
+            int productBoxHeight = cmToPoints(1.5);
+            Rectangle productBox = new Rectangle(startX, startY + offset * 6, printDocument.DefaultPageSettings.PaperSize.Width - startX * 10, productBoxHeight);
             graphics.DrawRectangle(new Pen(Color.Black), productBox);
 
-            productBoxHeight -= 10; // Para que el texto no toque los bordes de la caja
-
-            // Colocar los productos dentro de la caja, separados por "-" y la cantidad
+            // Colocar los productos dentro de la caja
             string productsLine = "";
             foreach (var product in delivery.products)
             {
                 productsLine += " - " + product.Quantity + "x" + product.Description + "\n";
             }
-            graphics.DrawString(productsLine, font, new SolidBrush(Color.Black),productBox);
+            graphics.DrawString(productsLine, font, new SolidBrush(Color.Black), productBox);
 
-            // Continuar con el resto de los datos
-            graphics.DrawString("CONDICIÓN PAGO: " + delivery.PaymentCondition, font, new SolidBrush(Color.Black), startX, startY + offset * 7 + productBoxHeight);
-            graphics.DrawString("MONTO: S/ " + delivery.Amount, font, new SolidBrush(Color.Black), startX, startY + offset * 8 + productBoxHeight);
-            graphics.DrawString("SALDO A COBRAR: S/ " + delivery.Amount_due, font, new SolidBrush(Color.Black), startX, startY + offset * 9 + productBoxHeight);
+            // Dibuja el monto y saldo a cobrar al lado
+            string amountText = "MONTO: S/ " + delivery.Amount;
+            string amountDueText = "S. A COBRAR: S/ " + delivery.Amount_due;
+
+            // Obtener el ancho del texto MONTO
+            SizeF amountTextSize = graphics.MeasureString(amountText, font);
+            int amountTextWidth = (int)amountTextSize.Width;
+
+            // Dibujar MONTO
+            graphics.DrawString(amountText, font, new SolidBrush(Color.Black), startX, startY + offset * 7 + productBoxHeight);
+
+            // Dibujar SALDO A COBRAR justo al lado
+            graphics.DrawString(amountDueText, font, new SolidBrush(Color.Black), startX + amountTextWidth + 10, startY + offset * 7 + productBoxHeight);  // Ajusta el '10' si se necesita más espacio entre textos
         }
+
 
         private int cmToPoints(double cm)
         {

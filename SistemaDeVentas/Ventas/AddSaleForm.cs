@@ -247,9 +247,16 @@ namespace SistemaDeVentas.Ventas
                 ticket80Mm.CreateTicket80mm();
             }
 
-            //lanzar form de delivery
-            var deliveryForm = new DeliveryForm(sale, saledProducts);
-            deliveryForm.ShowDialog();
+
+            //preguntar si quiere delivery
+            DialogResult dialogResultDelivery = MessageBox.Show("¿Desea generar un delivery?", "Delivery", MessageBoxButtons.YesNo);
+            if (dialogResultDelivery == DialogResult.Yes)
+            {
+                //lanzar form de delivery
+                var deliveryForm = new DeliveryForm(sale, saledProducts);
+                deliveryForm.ShowDialog();
+            }
+
 
         }
 

@@ -26,22 +26,21 @@ namespace SistemaDeVentas.Clientes
                 SqlConnection connection = new SqlConnection(connectionString);
 
                 // Creamos la consulta SQL para insertar directamente en la base de datos
-                string query = @"
-            DECLARE @DepartmentID INT, @ProvinceID INT, @DistrictID INT;
+                string query = @"DECLARE @DepartmentID VARCHAR(10), @ProvinceID VARCHAR(10), @DistrictID VARCHAR(10);
 
-            SELECT @DepartmentID = id FROM departments WHERE name = @Department;
-            SELECT @ProvinceID = id FROM provinces WHERE name = @Province AND departments_id = @DepartmentID;
-            SELECT @DistrictID = id FROM districts WHERE name = @District AND provinces_id = @ProvinceID;
+        SELECT @DepartmentID = id FROM departments WHERE name = @Department;
+        SELECT @ProvinceID = id FROM provinces WHERE name = @Province AND departments_id = @DepartmentID;
+        SELECT @DistrictID = id FROM districts WHERE name = @District AND provinces_id = @ProvinceID;
 
-            IF (@DepartmentID IS NOT NULL AND @ProvinceID IS NOT NULL AND @DistrictID IS NOT NULL)
-            BEGIN
-                INSERT INTO clients (name, address, document, phone, reference, departments_id, provinces_id, districts_id) 
-                VALUES (@Name, @Address, @Document, @Phone, @Reference, @DepartmentID, @ProvinceID, @DistrictID);
-            END
-            ELSE
-            BEGIN
-                THROW 51000, 'No se pudo insertar el cliente debido a una incompatibilidad en los datos de ubicación.', 1;
-            END";
+        IF (@DepartmentID IS NOT NULL AND @ProvinceID IS NOT NULL AND @DistrictID IS NOT NULL)
+        BEGIN
+            INSERT INTO clients (name, address, document, phone, reference, departments_id, provinces_id, districts_id) 
+            VALUES (@Name, @Address, @Document, @Phone, @Reference, @DepartmentID, @ProvinceID, @DistrictID);
+        END
+        ELSE
+        BEGIN
+            RAISERROR('No se pudo insertar el cliente debido a una incompatibilidad en los datos de ubicación.', 16, 1);
+        END";
 
                 SqlCommand command = new SqlCommand(query, connection);
                 command.CommandType = System.Data.CommandType.Text;
@@ -58,7 +57,6 @@ namespace SistemaDeVentas.Clientes
 
                 connection.Open();
                 command.ExecuteNonQuery();  // Ejecutar la consulta
-                command.Dispose();
 
                 connection.Close();
             }
@@ -67,6 +65,7 @@ namespace SistemaDeVentas.Clientes
                 throw new Exception("Error al insertar cliente: " + ex.Message);
             }
         }
+
 
 
         public List<Client> GetAllClients()

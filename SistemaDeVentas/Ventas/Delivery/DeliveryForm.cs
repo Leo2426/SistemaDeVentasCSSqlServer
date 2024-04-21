@@ -59,7 +59,7 @@ namespace SistemaDeVentas.Ventas.Delivery
             delivery.Reference = txt_reference.Text;
             delivery.Instructions = txt_instructions.Text;
             delivery.Phone = txt_phone.Text;
-            delivery.Amount = decimal.Parse(txt_amount.Text);
+            delivery.Amount = string.IsNullOrWhiteSpace(txt_amount.Text) ? 0 : decimal.Parse(txt_amount.Text);
             delivery.Amount_due = string.IsNullOrWhiteSpace(txt_saldo_a_cobrar.Text) ? 0 : decimal.Parse(txt_saldo_a_cobrar.Text);
             delivery.PaymentCondition = cb_payment_condition.SelectedItem.ToString();
             delivery.Date = txt_date.Text;
@@ -70,12 +70,8 @@ namespace SistemaDeVentas.Ventas.Delivery
             this.Close();
             
             //preguntar si desea imprimir el ticket
-            var result = MessageBox.Show("¿Desea imprimir el ticket de delivery?", "Imprimir ticket", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                var ticketDelivery = new TicketDelivery(delivery);
-                ticketDelivery.createTicketDelivery();
-            }
+            var ticketDelivery = new TicketDelivery(delivery);
+            ticketDelivery.createTicketDelivery();
         }
 
         private void txt_saldo_a_cobrar_KeyPress(object sender, KeyPressEventArgs e)

@@ -36,7 +36,7 @@ namespace SistemaDeVentas.Clientes
             client.Document = txt_document.Text;
             client.Phone = txt_phone.Text;
             client.Reference = txt_reference.Text;
-            client.Department = cb_department.Text;
+            client.Department = cb_department.Text.Trim();
             client.Province = cb_province.Text;
             client.District = cb_district.Text;
             clientRepository.InsertClient(client);

@@ -48,6 +48,8 @@ namespace SistemaDeVentas.Login
             }
             else
             {
+                textBox2.Text = "";
+                textBox2.Focus();
                 MessageBox.Show("Usuario o contraseña incorrectos");
             }
         }
