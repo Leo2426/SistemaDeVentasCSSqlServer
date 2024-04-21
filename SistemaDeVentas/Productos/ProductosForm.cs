@@ -75,6 +75,15 @@ namespace SistemaDeVentas.Productos
             //delete product
             var product = (Product)dt_products.CurrentRow.DataBoundItem;
             var productRepository = new ProductRepository();
+            
+            //Comprobar si el producto tiene ventas
+            if (productRepository.ProductHasSales(product.Id))
+            {
+                MessageBox.Show("No se puede eliminar el producto porque tiene ventas asociadas", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            
+            
             //message box de confirmación con la descripcion del producto
             var result = MessageBox.Show($"¿Está seguro de eliminar el producto {product.Description}?", "Eliminar producto", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)

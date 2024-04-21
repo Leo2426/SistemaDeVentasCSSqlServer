@@ -160,29 +160,37 @@ namespace SistemaDeVentas.User
         internal string getRol(string name)
         {
           
-            using (var connection = new SqlConnection(connectionString))
+            try
             {
-                connection.Open();
-                using (var command = new SqlCommand(@"
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (var command = new SqlCommand(@"
      	        SELECT name
 	            FROM users
 	            inner join rols on users.rols_id = rols.id
 	            where users.user_name = @Username", connection))
-                {
-                    command.Parameters.AddWithValue("@Username", name);
-                    using (var reader = command.ExecuteReader())
                     {
-                        if (reader.Read())
+                        command.Parameters.AddWithValue("@Username", name);
+                        using (var reader = command.ExecuteReader())
                         {
-                            return reader["name"].ToString();
-                        }
-                        else
-                        {
-                            return "";
+                            if (reader.Read())
+                            {
+                                return reader["name"].ToString();
+                            }
+                            else
+                            {
+                                return "";
+                            }
                         }
                     }
-                }   
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show("Error al obtener rol: " + ex.Message);
+                return "";
             }
+           
 
         }
     }
