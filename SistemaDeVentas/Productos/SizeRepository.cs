@@ -84,6 +84,26 @@ namespace SistemaDeVentas.Productos
                 cmd.ExecuteNonQuery();
             }
         }
+
+        internal static bool sizeHasProduct(int id)
+        {
+            //verificar si la talla no se encuentra en products usando un query
+            using (var connection = new SqlConnection(Conexion.stringConexion))
+            {
+                connection.Open();
+                using (var command = new SqlCommand(@"
+                    SELECT 1
+                    FROM Products
+                    WHERE sizes_id = @SizeId", connection))
+                {
+                    command.Parameters.AddWithValue("@SizeId", id);
+                    using (var reader = command.ExecuteReader())
+                    {
+                        return reader.HasRows;
+                    }
+                }
+            }
+        }
     }
 }
 

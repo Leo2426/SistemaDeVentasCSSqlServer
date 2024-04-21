@@ -43,9 +43,18 @@ namespace SistemaDeVentas.Configuration
                 return;
             }
 
-            
-            //borrar talla seleccionada en el combobox
+            //seleccionar la talla
             var size = (Productos.Size)cb_sizes.SelectedItem;
+
+            //Comprobar si la talla tiene
+            if (SizeRepository.sizeHasProduct(size.Id))
+            {
+                MessageBox.Show("No se puede eliminar la porque tiene productos asociadas", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
+            //borrar talla seleccionada en el combobox
             if (size == null)
             {
                 MessageBox.Show("La talla no es válida", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

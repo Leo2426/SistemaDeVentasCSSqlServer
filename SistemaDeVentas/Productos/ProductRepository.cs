@@ -245,20 +245,26 @@ namespace SistemaDeVentas.Productos
 
         internal bool ProductHasSales(int id)
         {
-            //verificar si el producto se encuentra en products_sales usando un query
-            using (var connection = new SqlConnection(Conexion.stringConexion))
+            try
             {
-                connection.Open();
-                using (var command = new SqlCommand(@"
-                    SELECT * FROM products_sales WHERE products_id = @ProductId", connection))
+                //verificar si el producto se encuentra en products_sales usando un query
+                using (var connection = new SqlConnection(Conexion.stringConexion))
                 {
-                    command.Parameters.AddWithValue("@ProductId", id);
-                    using (var reader = command.ExecuteReader())
+                    connection.Open();
+                    using (var command = new SqlCommand(@"
+                    SELECT * FROM products_sales WHERE products_id = @ProductId", connection))
                     {
-                        return reader.HasRows;
+                        command.Parameters.AddWithValue("@ProductId", id);
+                        using (var reader = command.ExecuteReader())
+                        {
+                            return reader.HasRows;
+                        }
                     }
-                }
 
+                }
+            }catch(Exception ex)
+            {
+                throw new Exception("Error al verificar si el producto tiene ventas: " + ex.Message);
             }
         }
     }
