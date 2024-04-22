@@ -60,7 +60,7 @@ namespace SistemaDeVentas.Clientes
             cb_district.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
-        private void btn_edit_client_Click(object sender, EventArgs e)
+        private async void btn_edit_client_Click(object sender, EventArgs e)
         {
             client.Name = txt_name.Text;
             client.Address = txt_address.Text;
@@ -72,7 +72,7 @@ namespace SistemaDeVentas.Clientes
             client.District = cb_district.Text;
 
             ClientRepository clientRepository = new ClientRepository();
-            clientRepository.UpdateClient(client);
+            await clientRepository.UpdateClient(client);
             this.Close();
 
         }

@@ -30,10 +30,10 @@ namespace SistemaDeVentas.Ventas
 
         }
 
-        private void loadComboBoxes()
+        private async void loadComboBoxes()
         {
             //cargar clientes
-            loadClients();
+            await loadClients();
 
             //cargar payment types
             var paymentTypeRepository = new PaymentTypeRepository();
@@ -64,10 +64,11 @@ namespace SistemaDeVentas.Ventas
 
         }
 
-        private void loadClients()
+        private async Task loadClients()
         {
             var clientRepository = new ClientRepository();
-            var clients = clientRepository.GetAllClients();
+            var clients = await clientRepository.GetAllClientsAsync();  // Await aquí para evitar bloqueo
+
             cb_client_name.DataSource = clients;
             cb_client_name.DisplayMember = "Name";
             cb_client_name.ValueMember = "Name";
@@ -78,10 +79,11 @@ namespace SistemaDeVentas.Ventas
                 MessageBox.Show("No hay clientes registrados", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
 
-            //si hay clientes selecccionar last cliente
+
+            //si hay clientes seleccionar el último cliente
             if (clients.Count > 0)
             {
-                cb_client_name.Text =  clientRepository.getLasClient().Name;
+                cb_client_name.Text = clientRepository.getLasClient().Name;
             }
 
         }
@@ -397,14 +399,14 @@ namespace SistemaDeVentas.Ventas
             txt_reference.Text = client.Reference;
         }
 
-        private void btn_add_client_Click(object sender, EventArgs e)
+        private async void btn_add_client_Click(object sender, EventArgs e)
         {
             //cargar el formulario de agregar cliente
             var addClientForm = new AddClientForm();
             addClientForm.ShowDialog();
 
             //recargar los clientes
-            loadClients();
+            await loadClients();
         }
 
         private void txt_product_code_KeyDown(object sender, KeyEventArgs e)

@@ -68,74 +68,98 @@ namespace SistemaDeVentas.Clientes
 
 
 
-        public List<Client> GetAllClients()
+        public async Task<List<Client>> GetAllClientsAsync()
         {
-            // Obtener todos los clientes de la base de datos
+            // Obtener todos los clientes de la base de datos de manera asíncrona
             List<Client> clients = new List<Client>();
             try
             {
-                SqlConnection connection = new SqlConnection(connectionString);
-                SqlCommand command = new SqlCommand("spGetAllClientsWithDetails", connection);
-                command.CommandType = System.Data.CommandType.StoredProcedure;
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    Client client = new Client();
-                    client.Id = Convert.ToInt32(reader["id"]);
-                    client.Name = reader["name"].ToString();
-                    client.Address = reader["address"].ToString();
-                    client.Document = reader["document"].ToString();
-                    client.Phone = reader["phone"].ToString();
-                    client.Reference = reader["reference"].ToString();
-                    client.Department = reader["DepartmentName"].ToString();
-                    client.Province = reader["ProvinceName"].ToString();
-                    client.District = reader["DistrictName"].ToString();
-                    clients.Add(client);
+                    SqlCommand command = new SqlCommand("spGetAllClientsWithDetails", connection);
+                    command.CommandType = System.Data.CommandType.StoredProcedure;
+                    await connection.OpenAsync();
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                    while (await reader.ReadAsync())
+                    {
+                        Client client = new Client();
+                        client.Id = Convert.ToInt32(reader["id"]);
+                        client.Name = reader["name"].ToString();
+                        client.Address = reader["address"].ToString();
+                        client.Document = reader["document"].ToString();
+                        client.Phone = reader["phone"].ToString();
+                        client.Reference = reader["reference"].ToString();
+                        client.Department = reader["DepartmentName"].ToString();
+                        client.Province = reader["ProvinceName"].ToString();
+                        client.District = reader["DistrictName"].ToString();
+                        clients.Add(client);
+                    }
                 }
-                
-                connection.Close();
-                return clients;   
-
-            }catch(Exception ex)
-            {
-                throw new Exception("Error al obtener clientes: " + ex.Message);
-            }
-
-        }
-
-
-        public void UpdateClient(Client client)
-        {
-            // Actualizar cliente en base de datos
-            try
-            {
-                SqlConnection connection = new SqlConnection(connectionString);
-                
-                //crea el stored procedure 
-                SqlCommand command = new SqlCommand("spUpdateClient", connection);
-
-                command.CommandType = System.Data.CommandType.StoredProcedure;
-
-
-                command.Parameters.AddWithValue("@id", client.Id);
-                command.Parameters.AddWithValue("@name", client.Name);
-                command.Parameters.AddWithValue("@address", client.Address);
-                command.Parameters.AddWithValue("@document", client.Document);
-                command.Parameters.AddWithValue("@phone", client.Phone);
-                command.Parameters.AddWithValue("@reference", client.Reference);
-                command.Parameters.AddWithValue("@departmentName", client.Department);
-                command.Parameters.AddWithValue("@provinceName", client.Province);
-                command.Parameters.AddWithValue("@districtName", client.District);
-                connection.Open();
-                command.ExecuteNonQuery();
-                connection.Close();
+                return clients;
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al actualizar cliente: " + ex.Message);
+                throw new Exception("Error al obtener clientes de forma asíncrona: " + ex.Message);
             }
-        }   
+        }
+
+
+        public async Task UpdateClient(Client updatedClient)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    await connection.OpenAsync();
+                    var query = @"
+                DECLARE @ProvinceID VARCHAR(45);
+                SELECT @ProvinceID = id FROM provinces WHERE name = @Province;
+
+
+
+                UPDATE clients
+                SET 
+                    name = @Name,
+                    address = @Address,
+                    document = @Document,
+                    phone = @Phone,
+                    reference = @Reference,
+                    departments_id = (select id from departments where name = @Department),
+                    provinces_id = @ProvinceID,
+                    districts_id = (SELECT id FROM districts WHERE name = @District AND provinces_id = @ProvinceID)
+                WHERE Id = @Id";
+
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Name", updatedClient.Name);
+                        command.Parameters.AddWithValue("@Address", updatedClient.Address);
+                        command.Parameters.AddWithValue("@Document", updatedClient.Document);
+                        command.Parameters.AddWithValue("@Phone", updatedClient.Phone);
+                        command.Parameters.AddWithValue("@Reference", updatedClient.Reference);
+                        command.Parameters.AddWithValue("@Department", updatedClient.Department);
+                        command.Parameters.AddWithValue("@Province", updatedClient.Province);
+                        command.Parameters.AddWithValue("@District", updatedClient.District);
+                        command.Parameters.AddWithValue("@Id", updatedClient.Id);
+
+                        var result = await command.ExecuteNonQueryAsync();
+                        if (result > 0)
+                        {
+                            MessageBox.Show("Cliente actualizado correctamente.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se pudo actualizar el cliente. Verifique que el distrito corresponda a la provincia.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al actualizar cliente: " + ex.Message);
+            }
+        }
+
 
         public void deleteClient(int id)
         {
