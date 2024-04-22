@@ -17,6 +17,8 @@ namespace SistemaDeVentas.Productos
         List<Product> products = new List<Product>();
 
         DataTable table = new DataTable();
+
+        DataTable tabletemp = new DataTable();
         public ProductosForm()
         {
             InitializeComponent();
@@ -33,6 +35,18 @@ namespace SistemaDeVentas.Productos
             table.Columns.Add("Stok Mínimo", typeof(int));
             table.Columns.Add("Stock", typeof(int));
             table.Columns.Add("Talla", typeof(string));
+
+
+
+            tabletemp.Columns.Add("Id", typeof(int));
+            tabletemp.Columns.Add("Código", typeof(string));
+            tabletemp.Columns.Add("Descripción", typeof(string));
+            tabletemp.Columns.Add("Costo", typeof(decimal));
+            tabletemp.Columns.Add("Precio", typeof(decimal));
+            tabletemp.Columns.Add("Stok Mínimo", typeof(int));
+            tabletemp.Columns.Add("Stock", typeof(int));
+            tabletemp.Columns.Add("Talla", typeof(string));
+
 
             await LoadProductsAsync();
 
@@ -71,8 +85,8 @@ namespace SistemaDeVentas.Productos
 
             dt_products.DataSource = table;
 
-            //ocultar columna id
-            dt_products.Columns["Id"].Visible = false;
+            ////ocultar columna id
+            //dt_products.Columns["Id"].Visible = false;
 
         }
 
@@ -88,15 +102,16 @@ namespace SistemaDeVentas.Productos
 
         private void OnProductAdded(Product product)
         {
-           MessageBox.Show("Producto agregado correctamente" + product.Description, "Producto agregado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Producto agregado correctamente" + product.Description, "Producto agregado", MessageBoxButtons.OK, MessageBoxIcon.Information);
             table.Rows.Add(product.Id, product.Code, product.Description, product.Cost, product.Price, product.MinimumStock, product.InitialStock, product.SizesId);
             products.Add(product);
 
-            dt_products.Refresh();
 
+
+            dt_products.Refresh();
         }
 
-        private async void btn_update_Click(object sender, EventArgs e)
+        private void btn_update_Click(object sender, EventArgs e)
         {
             if (dt_products.CurrentRow == null)
             {
@@ -106,14 +121,14 @@ namespace SistemaDeVentas.Productos
 
             var product = new Product();
 
-            product.Id = (int)(table.Rows[dt_products.CurrentRow.Index]["Id"]);
-            product.Code = table.Rows[dt_products.CurrentRow.Index]["Código"].ToString();
-            product.Description = table.Rows[dt_products.CurrentRow.Index]["Descripción"].ToString();
-            product.Cost = decimal.Parse(table.Rows[dt_products.CurrentRow.Index]["Costo"].ToString());
-            product.Price = decimal.Parse(table.Rows[dt_products.CurrentRow.Index]["Precio"].ToString());
-            product.MinimumStock = int.Parse(table.Rows[dt_products.CurrentRow.Index]["Stok Mínimo"].ToString());
-            product.InitialStock = int.Parse(table.Rows[dt_products.CurrentRow.Index]["Stock"].ToString());
-            product.SizesId = table.Rows[dt_products.CurrentRow.Index]["Talla"].ToString();
+            product.Id = (int)(dt_products.CurrentRow.Cells["Id"].Value);
+            product.Code = dt_products.CurrentRow.Cells["Código"].Value.ToString();
+            product.Description = dt_products.CurrentRow.Cells["Descripción"].Value.ToString();
+            product.Cost = (decimal)(dt_products.CurrentRow.Cells["Costo"].Value);
+            product.Price = (decimal)(dt_products.CurrentRow.Cells["Precio"].Value);
+            product.MinimumStock = (int)(dt_products.CurrentRow.Cells["Stok Mínimo"].Value);
+            product.InitialStock = (int)(dt_products.CurrentRow.Cells["Stock"].Value);
+            product.SizesId = dt_products.CurrentRow.Cells["Talla"].Value.ToString();
 
 
             var updateProductForm = new UpdateProductForm(product);
@@ -133,15 +148,40 @@ namespace SistemaDeVentas.Productos
             productToUpdate.Price = product.Price;
             productToUpdate.MinimumStock = product.MinimumStock;
             productToUpdate.InitialStock = product.InitialStock;
+            productToUpdate.SizesId = product.SizesId;
 
-            //actualizar el producto en el DataGridView
-            table.Rows[dt_products.CurrentRow.Index]["Código"] = product.Code;
-            table.Rows[dt_products.CurrentRow.Index]["Descripción"] = product.Description;
-            table.Rows[dt_products.CurrentRow.Index]["Costo"] = product.Cost;
-            table.Rows[dt_products.CurrentRow.Index]["Precio"] = product.Price;
-            table.Rows[dt_products.CurrentRow.Index]["Stok Mínimo"] = product.MinimumStock;
-            table.Rows[dt_products.CurrentRow.Index]["Stock"] = product.InitialStock;
-            table.Rows[dt_products.CurrentRow.Index]["Talla"] = product.SizesId;
+            //actualizar el producto en el DataGridView buscando el id del producto en table
+            foreach (DataRow row in table.Rows)
+            {
+                if ((int)row["Id"] == productToUpdate.Id )
+                {
+                    row["Código"] = productToUpdate.Code;
+                    row["Descripción"] = productToUpdate.Description;
+                    row["Costo"] = productToUpdate.Cost;
+                    row["Precio"] = productToUpdate.Price;
+                    row["Stok Mínimo"] = productToUpdate.MinimumStock;
+                    row["Stock"] = productToUpdate.InitialStock;
+                    row["Talla"] = productToUpdate.SizesId;
+                    break;
+                }
+            }
+
+            //actualizar el tabletemp
+            foreach (DataRow row in tabletemp.Rows)
+            {
+                if ((int)row["Id"] == productToUpdate.Id)
+                {
+                    row["Código"] = productToUpdate.Code;
+                    row["Descripción"] = productToUpdate.Description;
+                    row["Costo"] = productToUpdate.Cost;
+                    row["Precio"] = productToUpdate.Price;
+                    row["Stok Mínimo"] = productToUpdate.MinimumStock;
+                    row["Stock"] = productToUpdate.InitialStock;
+                    row["Talla"] = productToUpdate.SizesId;
+                    break;
+                }
+            }
+
 
             dt_products.Refresh();
         }
@@ -215,16 +255,8 @@ namespace SistemaDeVentas.Productos
 
         private void UpdateDataGridView(List<Product> filteredProducts)
         {
-            DataTable tabletemp = new DataTable();
-            //agregar columna
-            tabletemp.Columns.Add("Id", typeof(int));
-            tabletemp.Columns.Add("Código", typeof(string));
-            tabletemp.Columns.Add("Descripción", typeof(string));
-            tabletemp.Columns.Add("Costo", typeof(decimal));
-            tabletemp.Columns.Add("Precio", typeof(decimal));
-            tabletemp.Columns.Add("Stok Mínimo", typeof(int));
-            tabletemp.Columns.Add("Stock", typeof(int));
-            tabletemp.Columns.Add("Talla", typeof(string));
+
+            tabletemp.Rows.Clear();
 
             foreach (var product in filteredProducts)
             {

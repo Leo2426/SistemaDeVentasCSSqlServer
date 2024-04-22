@@ -265,7 +265,7 @@ namespace SistemaDeVentas.Productos
             {
                 var cmd = new SqlCommand(@"  
           
-                    SELECT 1 from products where id = (SELECT MAX(id) FROM products)
+                    SELECT id from products where id = (SELECT MAX(id) FROM products)
                     ", connection)
                 {
                 };
