@@ -1,4 +1,5 @@
-﻿using SistemaDeVentas.Ubication;
+﻿using SistemaDeVentas.Productos;
+using SistemaDeVentas.Ubication;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,11 @@ namespace SistemaDeVentas.Clientes
 {
     public partial class AddClientForm : Form
     {
+        // Delegate declaration
+        public delegate void ClientEventHandler(Client product);
+
+        // Event declaration
+        public event ClientEventHandler cliendAdded;
 
         public AddClientForm()
         {
@@ -39,6 +45,10 @@ namespace SistemaDeVentas.Clientes
             client.Department = cb_department.Text.Trim();
             client.Province = cb_province.Text;
             client.District = cb_district.Text;
+
+            //lanzar evento
+            cliendAdded(client);
+
             clientRepository.InsertClient(client);
             this.Close();
 

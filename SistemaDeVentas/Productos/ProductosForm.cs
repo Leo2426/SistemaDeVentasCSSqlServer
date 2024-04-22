@@ -102,11 +102,8 @@ namespace SistemaDeVentas.Productos
 
         private void OnProductAdded(Product product)
         {
-            MessageBox.Show("Producto agregado correctamente" + product.Description, "Producto agregado", MessageBoxButtons.OK, MessageBoxIcon.Information);
             table.Rows.Add(product.Id, product.Code, product.Description, product.Cost, product.Price, product.MinimumStock, product.InitialStock, product.SizesId);
             products.Add(product);
-
-
 
             dt_products.Refresh();
         }
@@ -287,6 +284,11 @@ namespace SistemaDeVentas.Productos
         {
             //Resetear el filtro
             dt_products.DataSource = table;
+        }
+
+        private void dt_products_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            btn_edit.PerformClick();
         }
     }
 

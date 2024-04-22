@@ -147,10 +147,6 @@ namespace SistemaDeVentas.Clientes
                         {
                             MessageBox.Show("Cliente actualizado correctamente.");
                         }
-                        else
-                        {
-                            MessageBox.Show("No se pudo actualizar el cliente. Verifique que el distrito corresponda a la provincia.");
-                        }
                     }
                 }
             }
@@ -248,5 +244,29 @@ namespace SistemaDeVentas.Clientes
             }
         }
 
+        internal async Task<bool> ClientHasTransactionsAsync(int clientId)
+        {
+            // Verificar si el cliente no ha realizado transacciones en la tabla sales
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    await connection.OpenAsync();
+                    var query = "SELECT COUNT(*) FROM sales WHERE clients_id = @clientId";
+                    using (var command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@clientId", clientId);
+                        var result = (int)await command.ExecuteScalarAsync();
+                        return result > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al verificar si el cliente tiene transacciones: " + ex.Message);
+            }
+
+
+        }
     }
 }

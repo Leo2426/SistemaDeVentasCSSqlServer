@@ -14,6 +14,11 @@ namespace SistemaDeVentas.Clientes
     public partial class UpdateClientForm : Form
     {
         Client client;
+
+        //crear evento
+        public delegate void ClientEventHandler(Client client);
+        public event ClientEventHandler ClientUpdated;
+
         public UpdateClientForm(Client client)
         {
             InitializeComponent();
@@ -73,6 +78,10 @@ namespace SistemaDeVentas.Clientes
 
             ClientRepository clientRepository = new ClientRepository();
             await clientRepository.UpdateClient(client);
+
+            //lanzar evento
+            ClientUpdated(client);
+
             this.Close();
 
         }

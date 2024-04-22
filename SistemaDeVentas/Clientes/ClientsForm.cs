@@ -1,203 +1,299 @@
-﻿using SistemaDeVentas.Ubication;
+﻿using SistemaDeVentas.Productos;
+using SistemaDeVentas.Ubication;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Data;
+    using System.Drawing;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using System.Windows.Forms;
 
-namespace SistemaDeVentas.Clientes
-{
+    namespace SistemaDeVentas.Clientes
+    {
     public partial class ClientsForm : Form
     {
 
-        List<Client> clients;
+        List<Client> clients = new List<Client>();
+        DataTable clientsTable = new DataTable();
+        DataTable tabletemp = new DataTable();
+
+
         public ClientsForm()
         {
             InitializeComponent();
         }
 
-        private void ClientForm_Load(object sender, EventArgs e)
+        private async void ClientForm_Load(object sender, EventArgs e)
         {
+            SetupDataTable();
+            SetupDataTabletemp();
+            await LoadClientsAsync();
 
-            //si no hay columnas en el datagridview
-            if (dt_clients.Columns.Count == 0)
+            cb_columns.DataSource = clientsTable.Columns.Cast<DataColumn>()
+                                    .Select(c => c.ColumnName).ToList();
+            cb_columns.SelectedIndex = 1;  // Por defecto seleccionar 'Nombre'
+        }
+
+        private void SetupDataTabletemp()
+        {
+            tabletemp.Columns.Add("Id", typeof(int));
+            tabletemp.Columns.Add("Nombre", typeof(string));
+            tabletemp.Columns.Add("Dirección", typeof(string));
+            tabletemp.Columns.Add("Documento", typeof(string));
+            tabletemp.Columns.Add("Teléfono", typeof(string));
+            tabletemp.Columns.Add("Referencia", typeof(string));
+            tabletemp.Columns.Add("Departamento", typeof(string));
+            tabletemp.Columns.Add("Provincia", typeof(string));
+            tabletemp.Columns.Add("Distrito", typeof(string));
+        }
+        
+
+        private void SetupDataTable()
+        {
+            clientsTable.Columns.Add("Id", typeof(int));
+            clientsTable.Columns.Add("Nombre", typeof(string));
+            clientsTable.Columns.Add("Dirección", typeof(string));
+            clientsTable.Columns.Add("Documento", typeof(string));
+            clientsTable.Columns.Add("Teléfono", typeof(string));
+            clientsTable.Columns.Add("Referencia", typeof(string));
+            clientsTable.Columns.Add("Departamento", typeof(string));
+            clientsTable.Columns.Add("Provincia", typeof(string));
+            clientsTable.Columns.Add("Distrito", typeof(string));
+        }
+        private async Task LoadClientsAsync()
+        {
+            var clientRepository = new ClientRepository();
+            clients = await clientRepository.GetAllClientsAsync();
+
+            clientsTable.Rows.Clear();
+            foreach (var client in clients)
             {
-                //renombrar columnas
-                dt_clients.Columns.Add("Id", "Id");
-                dt_clients.Columns.Add("Name", "Nombre");
-                dt_clients.Columns.Add("Address", "Dirección");
-                dt_clients.Columns.Add("Document", "Documento");
-                dt_clients.Columns.Add("Phone", "Teléfono");
-                dt_clients.Columns.Add("Reference", "Referencia");
-                dt_clients.Columns.Add("Department", "Departamento");
-                dt_clients.Columns.Add("Province", "Provincia");
-                dt_clients.Columns.Add("District", "Distrito");
+                clientsTable.Rows.Add(client.Id, client.Name, client.Address, client.Document,
+                                      client.Phone, client.Reference, client.Department,
+                                      client.Province, client.District);
+            }
 
-                //cargar el cb_columns con los nombres de las columnas del datagrid
-                foreach (DataGridViewColumn column in dt_clients.Columns)
-                {
-                    cb_columns.Items.Add(column.HeaderText);
-                }
+            dt_clients.DataSource = clientsTable;
+            dt_clients.Columns["Id"].Visible = false; // Ocultar columna de ID
+        }
 
-                //seleccionar por defecto nombre
-                cb_columns.SelectedIndex = 1;
-                //cargar datagrid
-                loadGrid();
+
+        private async void btn_add_Click(object sender, EventArgs e)
+        {
+            var addClientForm = new AddClientForm();
+
+            // Suscribirse al evento ProductAdded
+            addClientForm.cliendAdded += onClienAdded;
+
+            if (addClientForm.ShowDialog() == DialogResult.OK)
+            {
+                await LoadClientsAsync();
             }
         }
 
-        private void btn_add_Click(object sender, EventArgs e)
+        private void onClienAdded(Client client)
         {
-            AddClientForm addClientForm = new AddClientForm();
-            addClientForm.ShowDialog();
-            loadGrid();
+            clientsTable.Rows.Add(client.Id, client.Name, client.Address, client.Document, client.Phone, client.Reference, client.Department, client.Province, client.District);
+            clients.Add(client);
 
+            dt_clients.Refresh();
         }
-
         private void btn_update_Click(object sender, EventArgs e)
         {
-            //obtener cliente seleccionado
-            Client client = new Client();
+            if (dt_clients.CurrentRow == null)
+            {
+                MessageBox.Show("Debe seleccionar un cliente");
+                return;
+            }
 
-            //select el cliente del datagrid
-            client.Id= (int)(dt_clients.CurrentRow.Cells[0].Value);
-            client.Name = dt_clients.CurrentRow.Cells[1].Value.ToString();
-            client.Address = dt_clients.CurrentRow.Cells[2].Value.ToString();
-            client.Document = dt_clients.CurrentRow.Cells[3].Value.ToString();
-            client.Phone = dt_clients.CurrentRow.Cells[4].Value.ToString();
-            client.Reference = dt_clients.CurrentRow.Cells[5].Value.ToString();
-            client.Department = dt_clients.CurrentRow.Cells[6].Value.ToString();
-            client.Province = dt_clients.CurrentRow.Cells[7].Value.ToString();
-            client.District = dt_clients.CurrentRow.Cells[8].Value.ToString();
+            var client = new Client()
+            {
+                Id = Convert.ToInt32(dt_clients.CurrentRow.Cells["Id"].Value),
+                Name = dt_clients.CurrentRow.Cells["Nombre"].Value.ToString(),
+                Address = dt_clients.CurrentRow.Cells["Dirección"].Value.ToString(),
+                Document = dt_clients.CurrentRow.Cells["Documento"].Value.ToString(),
+                Phone = dt_clients.CurrentRow.Cells["Teléfono"].Value.ToString(),
+                Reference = dt_clients.CurrentRow.Cells["Referencia"].Value.ToString(),
+                Department = dt_clients.CurrentRow.Cells["Departamento"].Value.ToString(),
+                Province = dt_clients.CurrentRow.Cells["Provincia"].Value.ToString(),
+                District = dt_clients.CurrentRow.Cells["Distrito"].Value.ToString()
+            };
 
- 
-            UpdateClientForm updateClientForm = new UpdateClientForm(client);
+            var updateClientForm = new UpdateClientForm(client);
+
+            // Suscribirse al evento ProductUpdated
+            updateClientForm.ClientUpdated += onClientUpdated;
+
             updateClientForm.ShowDialog();
-
-            loadGrid();
         }
 
-        // Asegúrate de que el método sea async
-        async void loadGrid()
+        private void onClientUpdated(Client client)
         {
-            ClientRepository clientRepository = new ClientRepository();
-
-            // Usar Task.Run para ejecutar de forma asíncrona la obtención de datos
-            clients = await Task.Run(() => clientRepository.GetAllClientsAsync().Result);
-
-            // Acceder al control de la UI en el thread principal
-            this.Invoke((MethodInvoker)delegate
+            //actualizar la fila en la tabla
+            var row = clientsTable.AsEnumerable().FirstOrDefault(r => r.Field<int>("Id") == client.Id);
+            if (row != null)
             {
-                dt_clients.Rows.Clear();
+                row.SetField("Nombre", client.Name);
+                row.SetField("Dirección", client.Address);
+                row.SetField("Documento", client.Document);
+                row.SetField("Teléfono", client.Phone);
+                row.SetField("Referencia", client.Reference);
+                row.SetField("Departamento", client.Department);
+                row.SetField("Provincia", client.Province);
+                row.SetField("Distrito", client.District);
+            }
 
-                // Insertar lista de clientes en datagrid
-                foreach (Client client in clients)
+            //actualizar la lista de productos
+            var clientToUpdate = clients.FirstOrDefault(c => c.Id == client.Id);
+            if (clientToUpdate != null)
+            {
+                clientToUpdate.Name = client.Name;
+                clientToUpdate.Address = client.Address;
+                clientToUpdate.Document = client.Document;
+                clientToUpdate.Phone = client.Phone;
+                clientToUpdate.Reference = client.Reference;
+                clientToUpdate.Department = client.Department;
+                clientToUpdate.Province = client.Province;
+                clientToUpdate.District = client.District;
+            }
+
+            //actualizar el tabletemp
+            foreach (DataRow rowd in tabletemp.Rows)
+            {
+                if ((int)rowd["Id"] == clientToUpdate.Id)
                 {
-                    dt_clients.Rows.Add(client.Id, client.Name, client.Address, client.Document, client.Phone, client.Reference, client.Department, client.Province, client.District);
+                    rowd["Nombre"] = clientToUpdate.Name;
+                    rowd["Dirección"] = clientToUpdate.Address;
+                    rowd["Documento"] = clientToUpdate.Document;
+                    rowd["Teléfono"] = clientToUpdate.Phone;
+                    rowd["Referencia"] = clientToUpdate.Reference;
+                    rowd["Departamento"] = clientToUpdate.Department;
+                    rowd["Provincia"] = clientToUpdate.Province;
+                    rowd["Distrito"] = clientToUpdate.District;
+
+                
+                    break;
                 }
-
-                // Ocultar columna id
-                dt_clients.Columns["Id"].Visible = false;
-            });
+            }
 
 
-
+            dt_clients.Refresh();
         }
 
         public void FilterData(string filterColumn, string filterValue)
         {
+            string propertyName = MapUserFriendlyNameToPropertyName(filterColumn);
             var filteredList = clients.Where(client =>
-                client.GetType().GetProperty(filterColumn)?.GetValue(client, null).ToString().IndexOf(filterValue, StringComparison.OrdinalIgnoreCase) >= 0
+                client.GetType().GetProperty(propertyName)?.GetValue(client, null)?.ToString()?.IndexOf(filterValue, StringComparison.OrdinalIgnoreCase) >= 0
             ).ToList();
 
             UpdateDataGridView(filteredList);
         }
 
-
         private void UpdateDataGridView(List<Client> filteredClients)
         {
-            dt_clients.Rows.Clear();
+            tabletemp.Rows.Clear();
             foreach (var client in filteredClients)
             {
-                dt_clients.Rows.Add(client.Id, client.Name, client.Address, client.Document, client.Phone, client.Reference, client.Department, client.Province, client.District);
+                tabletemp.Rows.Add(client.Id, client.Name, client.Address, client.Document, client.Phone, client.Reference, client.Department, client.Province, client.District);
+            }
+            dt_clients.DataSource = tabletemp;
+        }
+
+
+        private string MapUserFriendlyNameToPropertyName(string userFriendlyName)
+        {
+            switch (userFriendlyName)
+            {
+                case "Nombre": return "Name";
+                case "Dirección": return "Address";
+                case "Documento": return "Document";
+                case "Teléfono": return "Phone";
+                case "Referencia": return "Reference";
+                case "Departamento": return "Department";
+                case "Provincia": return "Province";
+                case "Distrito": return "District";
+                default: return null;  // Retorna nulo si no hay coincidencia
             }
         }
 
-        private void txt_search_KeyPress(object sender, KeyPressEventArgs e)
+
+
+
+        private async void btn_delete_Click(object sender, EventArgs e)
         {
-            //si presiona enter buscar
-            if (e.KeyChar == (char)Keys.Enter)
-            {
-                //string selectedColumn = cb_columns.SelectedItem.ToString();
-                string selectedColumn;
-                if (cb_columns.SelectedItem.ToString() == "Nombre")
-                    selectedColumn = "Name";
-                else if (cb_columns.SelectedItem.ToString() == "Dirección")
-                    selectedColumn = "Address";
-                else if (cb_columns.SelectedItem.ToString() == "Documento")
-                    selectedColumn = "Document";
-                else if (cb_columns.SelectedItem.ToString() == "Teléfono")
-                    selectedColumn = "Phone";
-                else if (cb_columns.SelectedItem.ToString() == "Referencia")
-                    selectedColumn = "Reference";
-                else if (cb_columns.SelectedItem.ToString() == "Departamento")
-                    selectedColumn = "Department";
-                else if (cb_columns.SelectedItem.ToString() == "Provincia")
-                    selectedColumn = "Province";
-                else
-                    selectedColumn = "District";
-
-
-
-                FilterData(selectedColumn, txt_search.Text);
-
-                e.Handled = true;
-            }
-
-            //cargar el dt
-
-            if (txt_search.Text == "")
-            {
-                loadGrid();
-            }
-
-        }
-
-        private void btn_delete_Click(object sender, EventArgs e)
-        {
-            //validar si se selecciono un cliente
-            if (dt_clients.SelectedRows.Count == 0)
+            if (dt_clients.CurrentRow == null)
             {
                 MessageBox.Show("Seleccione un cliente", "Eliminar Cliente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            //seleccionar id del cliente
-            int id = Convert.ToInt32(dt_clients.CurrentRow.Cells[0].Value);
+            int clientId = Convert.ToInt32(dt_clients.CurrentRow.Cells["Id"].Value);
+            var clientRepository = new ClientRepository();
 
-            //crear message box para confirmar eliminacion
-            DialogResult result = MessageBox.Show("¿Está seguro que desea eliminar este cliente?", "Eliminar Cliente", MessageBoxButtons.YesNo);
-
-            if (result == DialogResult.Yes)
+            if (await clientRepository.ClientHasTransactionsAsync(clientId))
             {
-                //eliminar cliente
-                ClientRepository clientRepository = new ClientRepository();
-                clientRepository.deleteClient(id);
-                loadGrid();
-
+                MessageBox.Show("No se puede eliminar el cliente porque tiene transacciones asociadas", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
+            var result = MessageBox.Show("¿Está seguro que desea eliminar este cliente?", "Eliminar Cliente", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                clientRepository.deleteClient(clientId);
+
+                // Eliminar la fila del DataGridView
+                var row = clientsTable.AsEnumerable().FirstOrDefault(r => r.Field<int>("Id") == clientId);
+                if (row != null)
+                {
+                    clientsTable.Rows.Remove(row);
+                }
+
+                // Eliminar el producto de la lista de productos
+                var client = clients.FirstOrDefault(c => c.Id == clientId);
+                if (client != null)
+                {
+                    clients.Remove(client);
+                }
+
+                // Eliminar el producto de la tabla temporal
+                foreach (DataRow rowd in tabletemp.Rows)
+                {
+                    if ((int)rowd["Id"] == clientId)
+                    {
+                        tabletemp.Rows.Remove(rowd);
+                        break;
+                    }
+                }
+
+                dt_clients.Refresh();
+
+
+            }
+        }
+
+        private void btn_search_Click(object sender, EventArgs e)
+        {
+            FilterData(cb_columns.Text, txt_search.Text);
+        }
+
+        private void txt_search_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //si se presiona la tecla enter
+            if (e.KeyChar == (char)13)
+            {
+                FilterData(cb_columns.Text, txt_search.Text);
+
+                e.Handled = true;
+            }
 
         }
 
-        private void iconButton1_Click(object sender, EventArgs e)
+        private void dt_clients_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            //reinciar el datagrid
-            FilterData("Name", "");
+            btn_edit.PerformClick();
         }
     }
 }
