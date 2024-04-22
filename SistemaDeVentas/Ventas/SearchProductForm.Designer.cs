@@ -87,6 +87,7 @@
             this.btn_search.Size = new System.Drawing.Size(41, 42);
             this.btn_search.TabIndex = 13;
             this.btn_search.UseVisualStyleBackColor = true;
+            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
             // 
             // label1
             // 

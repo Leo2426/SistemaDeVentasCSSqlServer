@@ -95,11 +95,55 @@ namespace SistemaDeVentas.Ventas
 
         private void txt_search_KeyPress(object sender, KeyPressEventArgs e)
         {
+
             //si presiona enter que busque
-            if (e.KeyChar == (char)Keys.Enter)
+            if (e.KeyChar != (char)Keys.Enter)
             {
-                btn_search.PerformClick();
+                return;
             }
+
+            //si esta vacio que muestre todos los productos
+            if (txt_search.Text == "")
+            {
+                loadProducts();
+                e.Handled = true;
+                return;
+            }
+
+
+            //filtrar productos del datagridview por nomnbre
+            btn_search.PerformClick();
+            e.Handled = true;
+        }
+
+        private void btn_search_Click(object sender, EventArgs e)
+        {
+            //filtrar productos del datagridview por nomnbre
+            string filterValue = txt_search.Text;
+            var filteredList = new List<Product>();
+
+
+            foreach (DataGridViewRow row in dt_products.Rows)
+            {
+                if (row.Cells["Description"].Value.ToString().IndexOf(filterValue, StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    filteredList.Add(new Product
+                    {
+                        Id = int.Parse(row.Cells["Id"].Value.ToString()),
+                        Code = row.Cells["Code"].Value.ToString(),
+                        Description = row.Cells["Description"].Value.ToString(),
+                        Cost = decimal.Parse(row.Cells["Cost"].Value.ToString()),
+                        Price = decimal.Parse(row.Cells["Price"].Value.ToString()),
+                        MinimumStock = int.Parse(row.Cells["MinimumStock"].Value.ToString()),
+                        InitialStock = int.Parse(row.Cells["InitialStock"].Value.ToString()),
+                        SizesId = row.Cells["SizesId"].Value.ToString()
+                    });
+                }
+            }
+
+            dt_products.DataSource = filteredList;
+
+
         }
     }
 }

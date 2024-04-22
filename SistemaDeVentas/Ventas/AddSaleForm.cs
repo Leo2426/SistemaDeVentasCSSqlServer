@@ -24,6 +24,11 @@ namespace SistemaDeVentas.Ventas
     {
         private Sale sale = new Sale();
         private List<ProductSaled> saledProducts = new List<ProductSaled>();
+
+        //crear evento
+        public delegate void SaleEventHandler(Sale sale);
+        public event SaleEventHandler SaleAdded;
+
         public AddSaleForm()
         {
             InitializeComponent();
@@ -209,6 +214,7 @@ namespace SistemaDeVentas.Ventas
             }
             
             var saleRepository = new SaleRepository();
+
             await saleRepository.InsertSaleAsync(sale);
 
             //agregar el id de la venta a la clase sale
@@ -236,13 +242,14 @@ namespace SistemaDeVentas.Ventas
                 await productRepository.UpdateProductAsync(product);
             }
 
+            Close();
 
 
-            this.Close();
+            //lanzar evento
+            SaleAdded(sale);
 
+            //generar ticket de venta si el usuario lo desea por confimacion de messagebox
 
-           //generar ticket de venta si el usuario lo desea por confimacion de messagebox
-            
             if (dialogResult == DialogResult.Yes)
             {
                 Ticket80mm ticket80Mm = new Ticket80mm(sale, saledProducts);
@@ -258,6 +265,7 @@ namespace SistemaDeVentas.Ventas
                 var deliveryForm = new DeliveryForm(sale, saledProducts);
                 deliveryForm.ShowDialog();
             }
+
 
 
         }
