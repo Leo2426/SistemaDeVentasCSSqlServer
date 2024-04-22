@@ -231,9 +231,9 @@ namespace SistemaDeVentas.Ventas
 
                 //disminuir la cantidad de initial stock de cada producto
                 var productRepository = new ProductRepository();
-                var product = productRepository.GetProductByCode(productSaled.Code);
+                var product = await productRepository.GetProductByCodeAsync(productSaled.Code);
                 product.InitialStock -= productSaled.Quantity;
-                productRepository.UpdateProduct(product);
+                await productRepository.UpdateProductAsync(product);
             }
 
 
@@ -302,7 +302,7 @@ namespace SistemaDeVentas.Ventas
         }
 
 
-        private void btn_add_product_to_dt_Click(object sender, EventArgs e)
+        private async void btn_add_product_to_dt_Click(object sender, EventArgs e)
         {
             //si el producto seleccionado ya esta en la lista no permitir agregarlo
             foreach (DataGridViewRow row in dt_products.Rows)
@@ -323,7 +323,7 @@ namespace SistemaDeVentas.Ventas
 
             var productRepository = new ProductRepository();
 
-            var product = productRepository.GetProductByCode(txt_product_code.Text);
+            var product = await productRepository.GetProductByCodeAsync(txt_product_code.Text);
 
 
             //si no existen productos que salga un messagebox de error
@@ -409,13 +409,13 @@ namespace SistemaDeVentas.Ventas
             await loadClients();
         }
 
-        private void txt_product_code_KeyDown(object sender, KeyEventArgs e)
+        private async void txt_product_code_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 //buscar el producto por el codigo
                 var productRepository = new ProductRepository();
-                var product = productRepository.GetProductByCode(txt_product_code.Text);
+                var product = await productRepository.GetProductByCodeAsync(txt_product_code.Text);
                 if (product.Code != null)
                 {
                     txt_product_name.Text = product.Description;
@@ -543,7 +543,7 @@ namespace SistemaDeVentas.Ventas
 
         }
 
-        private void btn_add_product_Click(object sender, EventArgs e)
+        private async void btn_add_product_Click(object sender, EventArgs e)
         {
             //lanzar el formulario de agregar producto
             var addProductForm = new AddProductForm();
@@ -551,7 +551,7 @@ namespace SistemaDeVentas.Ventas
 
             //cargar el ultimo producto agregado
             var productRepository = new ProductRepository();
-            var product = productRepository.getLastProductAdded();
+            var product = await productRepository.GetLastProductAddedAsync();
             if (product != null)
             {
                 txt_product_name.Text = product.Description;

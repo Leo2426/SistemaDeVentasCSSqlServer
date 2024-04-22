@@ -250,5 +250,12 @@ namespace SistemaDeVentas.Ventas
 
         }
 
+        private void btn_search_Click(object sender, EventArgs e)
+        {
+            //reset el filtro
+            FilterSales("ClientName", "");
+            txt_search.Text = "";
+        }
+
     }
 }

@@ -14,6 +14,12 @@ namespace SistemaDeVentas.Productos
 {
     public partial class AddProductForm : Form
     {
+        // Delegate declaration
+        public delegate void ProductEventHandler(Product product);
+
+        // Event declaration
+        public event ProductEventHandler ProductAdded;
+
         public AddProductForm()
         {
             InitializeComponent();
@@ -21,44 +27,41 @@ namespace SistemaDeVentas.Productos
 
         private void AddProductForm_Load(object sender, EventArgs e)
         {
-            //cargar tallas
-            LoadSizes();
+            // Cargar tallas de forma asíncrona
+             LoadSizesAsync();
         }
 
-        private void LoadSizes()
+        private  void LoadSizesAsync()
         {
             var sizeRepository = new SizeRepository();
-            var sizes = sizeRepository.GetAllSizes();
+            var sizes =  sizeRepository.GetAllSizes();
             cb_sizes.DataSource = sizes;
             cb_sizes.DisplayMember = "SizeName";
             cb_sizes.ValueMember = "Id";
 
-            //valor para mostrar en el combobox es (en blanco)
+            // Establecer valor por defecto en el combobox
+            cb_sizes.SelectedIndex = -1;
             cb_sizes.Text = "(en blanco)";
-
         }
 
-        private void btn_add_client_Click(object sender, EventArgs e)
+        private async void btn_add_client_Click(object sender, EventArgs e)
         {
-            //validar que los campos no esten vacios
+            // Validar que los campos no estén vacíos
             if (string.IsNullOrEmpty(txt_code.Text) || string.IsNullOrEmpty(txt_description.Text) || string.IsNullOrEmpty(txt_unit_cost.Text) || string.IsNullOrEmpty(txt_unit_price.Text) || string.IsNullOrEmpty(txt_minimum_stock.Text) || string.IsNullOrEmpty(txt_initial_stock.Text) || cb_sizes.SelectedItem == null)
             {
                 MessageBox.Show("Todos los campos son obligatorios", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
-            //validar que el codigo no se repita
-            var productRepository1 = new ProductRepository();
-            var product1 = productRepository1.GetProductByCode(txt_code.Text);
-            if (product1.Code != null)
+            // Validar que el código no se repita de forma asíncrona
+            var productRepository = new ProductRepository();
+            var productExists = await productRepository.GetProductByCodeAsync(txt_code.Text);
+            if (productExists !=null)
             {
                 MessageBox.Show("El código ya existe", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
-
-
-            //validar que el cliente este en la coleccion de clientes
             var size = (Size)cb_sizes.SelectedItem;
             if (size == null)
             {
@@ -66,11 +69,12 @@ namespace SistemaDeVentas.Productos
                 return;
             }
 
+            var lastId = await productRepository.getLastIdAsync();
 
-
-            //add product
+            // Crear producto
             var product = new Product
             {
+                Id = lastId + 1,
                 Code = txt_code.Text,
                 Description = txt_description.Text,
                 Cost = decimal.Parse(txt_unit_cost.Text),
@@ -78,13 +82,22 @@ namespace SistemaDeVentas.Productos
                 MinimumStock = int.Parse(txt_minimum_stock.Text),
                 InitialStock = int.Parse(txt_initial_stock.Text),
                 SizesId = cb_sizes.Text
-            };
-            
-            var productRepository = new ProductRepository();
-            productRepository.AddProduct(product);
-            this.Close();
 
+
+            };
+
+
+            // Trigger the event
+            ProductAdded?.Invoke(product);
+
+            // Añadir producto de forma asíncrona
+            await productRepository.AddProductAsync(product);
+
+
+            this.Close();
         }
+
+
 
         private void txt_unit_cost_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -127,3 +140,4 @@ namespace SistemaDeVentas.Productos
         }
     }
 }
+

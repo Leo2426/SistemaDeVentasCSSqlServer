@@ -14,6 +14,13 @@ namespace SistemaDeVentas.Productos
     public partial class UpdateProductForm : Form
     {
         private Product _product;
+
+        // Delegate declaration
+        public delegate void ProductEventHandler(Product product);
+
+        // Event declaration
+        public event ProductEventHandler ProductUpdated;
+
         public UpdateProductForm(Product product)
         {
             InitializeComponent();
@@ -48,7 +55,7 @@ namespace SistemaDeVentas.Productos
 
         }
 
-        private void btn_update_product_click(object sender, EventArgs e)
+        private async void btn_update_product_click(object sender, EventArgs e)
         {
             //update product
             _product.Code = txt_code.Text;
@@ -60,7 +67,11 @@ namespace SistemaDeVentas.Productos
             _product.SizesId = cb_sizes.Text;
 
             var productRepository = new ProductRepository();
-            productRepository.UpdateProduct(_product);
+
+            //invocar el evento
+            ProductUpdated?.Invoke(_product);
+
+            await productRepository.UpdateProductAsync(_product);
             MessageBox.Show("Producto actualizado correctamente");
             this.Close();
         }

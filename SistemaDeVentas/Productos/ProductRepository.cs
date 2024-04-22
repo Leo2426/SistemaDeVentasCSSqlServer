@@ -11,7 +11,7 @@ namespace SistemaDeVentas.Productos
 {
     internal class ProductRepository
     {
-        public void AddProduct(Product product)
+        public async Task AddProductAsync(Product product)
         {
             using (var connection = new SqlConnection(Conexion.stringConexion))
             {
@@ -28,13 +28,12 @@ namespace SistemaDeVentas.Productos
                 cmd.Parameters.Add(new SqlParameter("@initial_stock", product.InitialStock));
                 cmd.Parameters.Add(new SqlParameter("@size_name", product.SizesId));
 
-                connection.Open();
-                cmd.ExecuteNonQuery();
+                await connection.OpenAsync();
+                await cmd.ExecuteNonQueryAsync();
             }
         }
 
-
-        public List<Product> GetAllProducts()
+        public async Task<List<Product>> GetAllProductsAsync()
         {
             var products = new List<Product>();
             using (var connection = new SqlConnection(Conexion.stringConexion))
@@ -44,10 +43,10 @@ namespace SistemaDeVentas.Productos
                     CommandType = CommandType.StoredProcedure
                 };
 
-                connection.Open();
-                using (var reader = cmd.ExecuteReader())
+                await connection.OpenAsync();
+                using (var reader = await cmd.ExecuteReaderAsync())
                 {
-                    while (reader.Read())
+                    while (await reader.ReadAsync())
                     {
                         products.Add(new Product
                         {
@@ -58,7 +57,7 @@ namespace SistemaDeVentas.Productos
                             Price = decimal.Parse(reader["price"].ToString()),
                             MinimumStock = int.Parse(reader["minimum_stock"].ToString()),
                             InitialStock = int.Parse(reader["initial_stock"].ToString()),
-                            SizesId = (reader["size_name"].ToString())
+                            SizesId = reader["size_name"].ToString()
                         });
                     }
                 }
@@ -66,7 +65,7 @@ namespace SistemaDeVentas.Productos
             return products;
         }
 
-        public void DeleteProduct(int id)
+        public async Task DeleteProductAsync(int id)
         {
             using (var connection = new SqlConnection(Conexion.stringConexion))
             {
@@ -77,12 +76,12 @@ namespace SistemaDeVentas.Productos
 
                 cmd.Parameters.Add(new SqlParameter("@id", id));
 
-                connection.Open();
-                cmd.ExecuteNonQuery();
+                await connection.OpenAsync();
+                await cmd.ExecuteNonQueryAsync();
             }
         }
 
-        public void UpdateProduct(Product product)
+        public async Task UpdateProductAsync(Product product)
         {
             using (var connection = new SqlConnection(Conexion.stringConexion))
             {
@@ -100,13 +99,12 @@ namespace SistemaDeVentas.Productos
                 cmd.Parameters.Add(new SqlParameter("@initial_stock", product.InitialStock));
                 cmd.Parameters.Add(new SqlParameter("@size_name", product.SizesId));
 
-                connection.Open();
-                cmd.ExecuteNonQuery();
+                await connection.OpenAsync();
+                await cmd.ExecuteNonQueryAsync();
             }
         }
 
-        //search product por descripcion o codigo o precio o size 
-        public List<Product> SearchProduct(string search)
+        public async Task<List<Product>> SearchProductAsync(string search)
         {
             List<Product> products = new List<Product>();
             using (var connection = new SqlConnection(Conexion.stringConexion))
@@ -118,10 +116,10 @@ namespace SistemaDeVentas.Productos
 
                 cmd.Parameters.Add(new SqlParameter("@SearchTerm", search));
 
-                connection.Open();
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                await connection.OpenAsync();
+                using (SqlDataReader reader = await cmd.ExecuteReaderAsync())
                 {
-                    while (reader.Read())
+                    while (await reader.ReadAsync())
                     {
                         products.Add(new Product
                         {
@@ -132,7 +130,7 @@ namespace SistemaDeVentas.Productos
                             Price = decimal.Parse(reader["price"].ToString()),
                             MinimumStock = int.Parse(reader["minimum_stock"].ToString()),
                             InitialStock = int.Parse(reader["initial_stock"].ToString()),
-                            SizesId = (reader["size_name"].ToString())
+                            SizesId = reader["size_name"].ToString()
                         });
                     }
                 }
@@ -140,10 +138,9 @@ namespace SistemaDeVentas.Productos
             return products;
         }
 
-        //obtener un producto por codigo
-        public Product GetProductByCode(string code)
+        public async Task<Product> GetProductByCodeAsync(string code)
         {
-            Product product = new Product();
+            Product product = null;
             using (var connection = new SqlConnection(Conexion.stringConexion))
             {
                 var cmd = new SqlCommand("spGetProductByCode", connection)
@@ -153,10 +150,10 @@ namespace SistemaDeVentas.Productos
 
                 cmd.Parameters.Add(new SqlParameter("@code", code));
 
-                connection.Open();
-                using (var reader = cmd.ExecuteReader())
+                await connection.OpenAsync();
+                using (var reader = await cmd.ExecuteReaderAsync())
                 {
-                    while (reader.Read())
+                    if (await reader.ReadAsync())
                     {
                         product = new Product
                         {
@@ -167,41 +164,7 @@ namespace SistemaDeVentas.Productos
                             Price = decimal.Parse(reader["price"].ToString()),
                             MinimumStock = int.Parse(reader["minimum_stock"].ToString()),
                             InitialStock = int.Parse(reader["initial_stock"].ToString()),
-                            SizesId = (reader["SizeName"].ToString())
-                        };
-                    }
-                }
-            }
-            return product;
-        }
-
-
-
-        public Product getLastProductAdded()
-        {
-            Product product = new Product();
-            using (var connection = new SqlConnection(Conexion.stringConexion))
-            {
-                var cmd = new SqlCommand("spGetLastProductAdded", connection)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-
-                connection.Open();
-                using (var reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        product = new Product
-                        {
-                            Id = int.Parse(reader["id"].ToString()),
-                            Code = reader["code"].ToString(),
-                            Description = reader["description"].ToString(),
-                            Cost = decimal.Parse(reader["cost"].ToString()),
-                            Price = decimal.Parse(reader["price"].ToString()),
-                            MinimumStock = int.Parse(reader["minimum_stock"].ToString()),
-                            InitialStock = int.Parse(reader["initial_stock"].ToString()),
-                            SizesId = (reader["size"].ToString())
+                            SizesId = reader["SizeName"].ToString()
                         };
                     }
                 }
@@ -243,32 +206,75 @@ namespace SistemaDeVentas.Productos
             return products;
         }
 
-        internal bool ProductHasSales(int id)
+        public async Task<Product> GetLastProductAddedAsync()
+        {
+            Product product = null;
+            using (var connection = new SqlConnection(Conexion.stringConexion))
+            {
+                var cmd = new SqlCommand("spGetLastProductAdded", connection)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+
+                await connection.OpenAsync();
+                using (var reader = await cmd.ExecuteReaderAsync())
+                {
+                    if (await reader.ReadAsync())
+                    {
+                        product = new Product
+                        {
+                            Id = int.Parse(reader["id"].ToString()),
+                            Code = reader["code"].ToString(),
+                            Description = reader["description"].ToString(),
+                            Cost = decimal.Parse(reader["cost"].ToString()),
+                            Price = decimal.Parse(reader["price"].ToString()),
+                            MinimumStock = int.Parse(reader["minimum_stock"].ToString()),
+                            InitialStock = int.Parse(reader["initial_stock"].ToString()),
+                            SizesId = reader["size_name"].ToString()
+                        };
+                    }
+                }
+            }
+            return product;
+        }
+
+        public async Task<bool> ProductHasSalesAsync(int id)
         {
             try
             {
-                //verificar si el producto se encuentra en products_sales usando un query
                 using (var connection = new SqlConnection(Conexion.stringConexion))
                 {
-                    connection.Open();
-                    using (var command = new SqlCommand(@"
-                    SELECT * FROM products_sales WHERE products_id = @ProductId", connection))
-                    {
-                        command.Parameters.AddWithValue("@ProductId", id);
-                        using (var reader = command.ExecuteReader())
-                        {
-                            return reader.HasRows;
-                        }
-                    }
+                    await connection.OpenAsync();
+                    var cmd = new SqlCommand("SELECT COUNT(*) FROM products_sales WHERE products_id = @ProductId", connection);
+                    cmd.Parameters.AddWithValue("@ProductId", id);
 
+                    int count = (int)await cmd.ExecuteScalarAsync();
+                    return count > 0;
                 }
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw new Exception("Error al verificar si el producto tiene ventas: " + ex.Message);
             }
         }
+
+
+        public async Task<int> getLastIdAsync()
+        {
+            using (var connection = new SqlConnection(Conexion.stringConexion))
+            {
+                var cmd = new SqlCommand(@"  
+          
+                    SELECT 1 from products where id = (SELECT MAX(id) FROM products)
+                    ", connection)
+                {
+                };
+
+                await connection.OpenAsync();
+                var id = await cmd.ExecuteScalarAsync();
+                return (int)id;
+            }
+        }
+
     }
-
-
 }
-

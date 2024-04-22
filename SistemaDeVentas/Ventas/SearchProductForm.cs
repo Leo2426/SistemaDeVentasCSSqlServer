@@ -92,16 +92,6 @@ namespace SistemaDeVentas.Ventas
             this.Close();
         }
 
-        private void btn_search_Click(object sender, EventArgs e)
-        {
-            //buscar productos por código o descripción
-            var productRepository = new ProductRepository();
-            var products = productRepository.SearchProduct(txt_search.Text);
-            
-            //cargar los productos 
-            dt_products.DataSource = products;
-
-        }
 
         private void txt_search_KeyPress(object sender, KeyPressEventArgs e)
         {

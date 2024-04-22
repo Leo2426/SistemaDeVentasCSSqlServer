@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemaDeVentas.Clientes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,129 +13,249 @@ namespace SistemaDeVentas.Productos
 {
     public partial class ProductosForm : Form
     {
+
+        List<Product> products = new List<Product>();
+
+        DataTable table = new DataTable();
         public ProductosForm()
         {
             InitializeComponent();
         }
 
-        private void ProductosForm_Load(object sender, EventArgs e)
+        private async void ProductosForm_Load(object sender, EventArgs e)
         {
-            //cargar productos
-            LoadProducts();
+
+            table.Columns.Add("Id", typeof(int));
+            table.Columns.Add("Código", typeof(string));
+            table.Columns.Add("Descripción", typeof(string));
+            table.Columns.Add("Costo", typeof(decimal));
+            table.Columns.Add("Precio", typeof(decimal));
+            table.Columns.Add("Stok Mínimo", typeof(int));
+            table.Columns.Add("Stock", typeof(int));
+            table.Columns.Add("Talla", typeof(string));
+
+            await LoadProductsAsync();
+
+            //cargar el cb_columns con los nombres de las columnas del datagrid
+            foreach (DataGridViewColumn column in dt_products.Columns)
+            {
+                cb_columns.Items.Add(column.HeaderText);
+            }
+                
+            //seleccionar por defecto nombre
+            cb_columns.SelectedIndex = 1;
+                
+            // Llamar a cargar productos de forma asincrónica
+
+
+
         }
 
-
-        private void LoadProducts()
+        private async Task LoadProductsAsync()
         {
             var productRepository = new ProductRepository();
-            var products = productRepository.GetAllProducts();
-            dt_products.DataSource = products;
+            products = await productRepository.GetAllProductsAsync();
+
+            //foreach (var product in products)
+            //{
+            //    dt_products.Rows.Add(product.Id, product.Code, product.Description, product.Cost, product.Price, product.MinimumStock, product.InitialStock, product.SizesId);
+            //}
+
+            table.Rows.Clear();
+
+            foreach (var product in products)
+            {
+                table.Rows.Add(product.Id, product.Code, product.Description, product.Cost, product.Price, product.MinimumStock, product.InitialStock, product.SizesId);
+            }
+
+
+            dt_products.DataSource = table;
 
             //ocultar columna id
             dt_products.Columns["Id"].Visible = false;
 
-            //renombrar columnas
-            dt_products.Columns["Code"].HeaderText = "Código";
-            dt_products.Columns["Description"].HeaderText = "Descripción";
-            dt_products.Columns["Cost"].HeaderText = "Costo";
-            dt_products.Columns["Price"].HeaderText = "Precio";
-            dt_products.Columns["MinimumStock"].HeaderText = "Stock mínimo";
-            dt_products.Columns["InitialStock"].HeaderText = "Stock";
-            dt_products.Columns["SizesId"].HeaderText = "Talla";
-           
-
-
         }
 
-        private void btn_add_product_Click(object sender, EventArgs e)
+        private  void btn_add_product_Click(object sender, EventArgs e)
         {
-            //abrir formulario para agregar producto
             var addProductForm = new AddProductForm();
+
+            addProductForm.ProductAdded += OnProductAdded;
             addProductForm.ShowDialog();
-            LoadProducts();
+
+
         }
 
-        private void btn_update_Click(object sender, EventArgs e)
+        private void OnProductAdded(Product product)
         {
-            //enviar producto seleccionado al formulario de actualización
-            //validar que haya seleccionado un producto
+           MessageBox.Show("Producto agregado correctamente" + product.Description, "Producto agregado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            table.Rows.Add(product.Id, product.Code, product.Description, product.Cost, product.Price, product.MinimumStock, product.InitialStock, product.SizesId);
+            products.Add(product);
 
+            dt_products.Refresh();
+
+        }
+
+        private async void btn_update_Click(object sender, EventArgs e)
+        {
             if (dt_products.CurrentRow == null)
             {
                 MessageBox.Show("Debe seleccionar un producto");
                 return;
             }
-            var product = dt_products.CurrentRow;
-            var updateProductForm = new UpdateProductForm((Product)product.DataBoundItem);
+
+            var product = new Product();
+
+            product.Id = (int)(table.Rows[dt_products.CurrentRow.Index]["Id"]);
+            product.Code = table.Rows[dt_products.CurrentRow.Index]["Código"].ToString();
+            product.Description = table.Rows[dt_products.CurrentRow.Index]["Descripción"].ToString();
+            product.Cost = decimal.Parse(table.Rows[dt_products.CurrentRow.Index]["Costo"].ToString());
+            product.Price = decimal.Parse(table.Rows[dt_products.CurrentRow.Index]["Precio"].ToString());
+            product.MinimumStock = int.Parse(table.Rows[dt_products.CurrentRow.Index]["Stok Mínimo"].ToString());
+            product.InitialStock = int.Parse(table.Rows[dt_products.CurrentRow.Index]["Stock"].ToString());
+            product.SizesId = table.Rows[dt_products.CurrentRow.Index]["Talla"].ToString();
+
+
+            var updateProductForm = new UpdateProductForm(product);
+            updateProductForm.ProductUpdated += OnProductUpdated;
             updateProductForm.ShowDialog();
-            LoadProducts();  
+
+
         }
 
-        private void btn_delete_Click(object sender, EventArgs e)
+        private void OnProductUpdated(Product product)
         {
-            //delete product
-            var product = (Product)dt_products.CurrentRow.DataBoundItem;
+            //actualizar el producto en products
+            var productToUpdate = products.Find(p => p.Id == product.Id);
+            productToUpdate.Code = product.Code;
+            productToUpdate.Description = product.Description;
+            productToUpdate.Cost = product.Cost;
+            productToUpdate.Price = product.Price;
+            productToUpdate.MinimumStock = product.MinimumStock;
+            productToUpdate.InitialStock = product.InitialStock;
+
+            //actualizar el producto en el DataGridView
+            table.Rows[dt_products.CurrentRow.Index]["Código"] = product.Code;
+            table.Rows[dt_products.CurrentRow.Index]["Descripción"] = product.Description;
+            table.Rows[dt_products.CurrentRow.Index]["Costo"] = product.Cost;
+            table.Rows[dt_products.CurrentRow.Index]["Precio"] = product.Price;
+            table.Rows[dt_products.CurrentRow.Index]["Stok Mínimo"] = product.MinimumStock;
+            table.Rows[dt_products.CurrentRow.Index]["Stock"] = product.InitialStock;
+            table.Rows[dt_products.CurrentRow.Index]["Talla"] = product.SizesId;
+
+            dt_products.Refresh();
+        }
+
+        private async void btn_delete_Click(object sender, EventArgs e)
+        {
+            if (dt_products.CurrentRow == null)
+            {
+                MessageBox.Show("Debe seleccionar un producto");
+                return;
+            }
+            var product = new Product();
+            product.Id = int.Parse(dt_products.CurrentRow.Cells["Id"].Value.ToString());
             var productRepository = new ProductRepository();
-            
-            //Comprobar si el producto tiene ventas
-            if (productRepository.ProductHasSales(product.Id))
+
+            if (await productRepository.ProductHasSalesAsync(product.Id))
             {
                 MessageBox.Show("No se puede eliminar el producto porque tiene ventas asociadas", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            
-            
-            //message box de confirmación con la descripcion del producto
+
             var result = MessageBox.Show($"¿Está seguro de eliminar el producto {product.Description}?", "Eliminar producto", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                productRepository.DeleteProduct(product.Id);
-                LoadProducts();
+                await productRepository.DeleteProductAsync(product.Id);
+                
+                // Eliminar el producto de la lista
+                products.RemoveAll(p => p.Id == product.Id);
+
+                // Eliminar el producto del DataGridView
+                dt_products.Rows.Remove(dt_products.CurrentRow);
+
             }
+        }
+
+
+
+        public void FilterData(string filterColumn, string filterValue)
+        {
+            string propertyName = MapUserFriendlyNameToPropertyName(filterColumn);
+            var filteredList = products.Where(product =>
+                product.GetType().GetProperty(propertyName)?.GetValue(product, null)?.ToString()?.IndexOf(filterValue, StringComparison.OrdinalIgnoreCase) >= 0
+            ).ToList();
+
+            UpdateDataGridView(filteredList);
+        }
+
+        private string MapUserFriendlyNameToPropertyName(string userFriendlyName)
+        {
+            switch (userFriendlyName)
+            {
+                case "Código":
+                    return "Code";
+                case "Descripción":
+                    return "Description";
+                case "Costo":
+                    return "Cost";
+                case "Precio":
+                    return "Price";
+                case "Stok Mínimo":
+                    return "MinimumStock";
+                case "Stock":
+                    return "InitialStock";
+                case "Talla":
+                    return "SizesId";
+                default:
+                    return userFriendlyName;
+            }
+        }
+
+
+        private void UpdateDataGridView(List<Product> filteredProducts)
+        {
+            DataTable tabletemp = new DataTable();
+            //agregar columna
+            tabletemp.Columns.Add("Id", typeof(int));
+            tabletemp.Columns.Add("Código", typeof(string));
+            tabletemp.Columns.Add("Descripción", typeof(string));
+            tabletemp.Columns.Add("Costo", typeof(decimal));
+            tabletemp.Columns.Add("Precio", typeof(decimal));
+            tabletemp.Columns.Add("Stok Mínimo", typeof(int));
+            tabletemp.Columns.Add("Stock", typeof(int));
+            tabletemp.Columns.Add("Talla", typeof(string));
+
+            foreach (var product in filteredProducts)
+            {
+               tabletemp.Rows.Add(product.Id, product.Code, product.Description, product.Cost, product.Price, product.MinimumStock, product.InitialStock, product.SizesId);
+            }
+
+            dt_products.DataSource = tabletemp;
+        }
+
+        private void txt_search_KeyPress(object sender, KeyPressEventArgs e)
+        {
+ 
+
+            //si presiona enter
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                string selectedColumn = cb_columns.Text;
+
+                FilterData(selectedColumn, txt_search.Text);
+
+                e.Handled = true;
+            }   
+
 
         }
 
         private void btn_search_Click(object sender, EventArgs e)
         {
-            //search product
-            var productRepository = new ProductRepository();
-            var products = productRepository.SearchProduct(txt_search.Text);
-                      
-            dt_products.DataSource = products;
-
-
-
-
-        }
-
-        public void formating()
-        {
-         
-            //dar formato a las columnas de color si la resta de stock inicial y stock minimo es menor a 2
-
-            foreach (DataGridViewRow row in dt_products.Rows)
-            {
-                var initialStock = Convert.ToInt32(row.Cells["InitialStock"].Value);
-                var minimumStock = Convert.ToInt32(row.Cells["MinimumStock"].Value);
-                if (initialStock - minimumStock <= 3)
-                {
-                   //toda la fila
-                   row.DefaultCellStyle.BackColor = Color.Red;
-                    row.DefaultCellStyle.ForeColor = Color.White;
-                    //solo una celda
-                }
-            }
-
-            
-        }
-
-        private void txt_search_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //si presiona enter buscar
-            if (e.KeyChar == (char)13)
-            {
-                btn_search.PerformClick();
-            }
+            //Resetear el filtro
+            dt_products.DataSource = table;
         }
     }
+
 }
