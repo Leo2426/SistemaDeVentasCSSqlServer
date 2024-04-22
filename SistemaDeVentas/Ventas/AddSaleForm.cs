@@ -129,7 +129,7 @@ namespace SistemaDeVentas.Ventas
 
         }
 
-        private void btn_add_Click(object sender, EventArgs e)
+        private async  void btn_add_Click(object sender, EventArgs e)
         {
             //validar que el cliente no este vacio
             if (string.IsNullOrWhiteSpace(cb_client_name.Text))
@@ -209,7 +209,7 @@ namespace SistemaDeVentas.Ventas
             }
             
             var saleRepository = new SaleRepository();
-            saleRepository.InsertSale(sale);
+            await saleRepository.InsertSaleAsync(sale);
 
             //agregar el id de la venta a la clase sale
             sale.Id = saleRepository.GetLastSaleId();
@@ -225,7 +225,7 @@ namespace SistemaDeVentas.Ventas
                 productSaled.Code = row.Cells["Code"].Value.ToString();
                 productSaled.Quantity = int.Parse(row.Cells["Quantity"].Value.ToString());
                 productSaled.SalePrice = decimal.Parse(row.Cells["Price"].Value.ToString());
-                saleRepository.InsertProductSaled(productSaled);
+                await saleRepository.InsertProductSaledAsync(productSaled);
                 saledProducts.Add(productSaled);
 
 

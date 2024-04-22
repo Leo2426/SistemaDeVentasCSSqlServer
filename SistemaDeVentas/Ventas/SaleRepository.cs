@@ -19,7 +19,7 @@ namespace SistemaDeVentas.Ventas
             _connectionString = Conexion.stringConexion;
         }
 
-        public void InsertSale(Sale sale)
+        public async Task InsertSaleAsync(Sale sale)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -43,8 +43,9 @@ namespace SistemaDeVentas.Ventas
                 command.Parameters.AddWithValue("@UserName", sale.UserName);
                 command.Parameters.AddWithValue("@Profit", sale.Profit);
 
-                connection.Open();
-                command.ExecuteNonQuery();
+
+                await connection.OpenAsync();
+                await command.ExecuteNonQueryAsync();
             }
         }
 
@@ -53,7 +54,7 @@ namespace SistemaDeVentas.Ventas
 
 
 
-        public List<Sale> GetAllSales()
+        public async Task<List<Sale>> GetAllSalesAsync()
         {
             List<Sale> sales = new List<Sale>();
 
@@ -62,32 +63,31 @@ namespace SistemaDeVentas.Ventas
                 SqlCommand command = new SqlCommand("spGetAllSales", connection);
                 command.CommandType = CommandType.StoredProcedure;
 
-                connection.Open();
-                using (SqlDataReader reader = command.ExecuteReader())
+                await connection.OpenAsync();
+                using (SqlDataReader reader = await command.ExecuteReaderAsync())
                 {
-                    while (reader.Read())
+                    while (await reader.ReadAsync())
                     {
                         Sale sale = new Sale()
                         {
                             // Asumiendo que tienes una clase Sale con estas propiedades
                             Id = int.Parse(reader["id"].ToString()),
                             SaleType = reader["sale_type"].ToString(),
-                            ClientName = reader["ClientName"].ToString(),
                             Date = DateTime.Parse(reader["date"].ToString()),
                             Phone = reader["phone"].ToString(),
                             Reference = reader["reference"].ToString(),
                             Address = reader["address"].ToString(),
-                            PaymentTypeName = reader["PaymentType"].ToString(),
                             Observation = reader["observation"].ToString(),
                             Channel = reader["channel"].ToString(),
-                            PaymentConditionName = reader["PaymentCondition"].ToString(),
                             Total = decimal.Parse(reader["total"].ToString()),
                             CashPayment = reader["cash_payment"] == DBNull.Value ? 0 : (decimal?)decimal.Parse(reader["cash_payment"].ToString()),
                             CreditPayment = reader["credit_payment"] == DBNull.Value ? 0 : (decimal?)decimal.Parse(reader["credit_payment"].ToString()),
                             CreditDays = reader["credit_days"] == DBNull.Value ? 0 : int.Parse(reader["credit_days"].ToString()),
+                            ClientName = reader["ClientName"].ToString(),
+                            PaymentTypeName = reader["PaymentType"].ToString(),
+                            PaymentConditionName = reader["PaymentCondition"].ToString(),
                             UserName = reader["UserName"].ToString(),
                             Profit = decimal.Parse(reader["profit"].ToString())
-
 
                         };
                         sales.Add(sale);
@@ -96,6 +96,7 @@ namespace SistemaDeVentas.Ventas
             }
             return sales;
         }
+
 
         public List<SalesMan> getAllSalesMan()
         {
@@ -121,7 +122,7 @@ namespace SistemaDeVentas.Ventas
                 }
             }
             return salesMans;
-            
+
         }
 
         public List<ProductSaled> getAllProductsWithSaleId(int saleID)
@@ -158,20 +159,20 @@ namespace SistemaDeVentas.Ventas
             return products;
         }
 
-        public void InsertProductSaled(ProductSaled productSaled)
+        public async Task<int> InsertProductSaledAsync(ProductSaled productSaled)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 SqlCommand command = new SqlCommand("spInsertProductSale", connection);
                 command.CommandType = CommandType.StoredProcedure;
-
+                // Parámetros...
                 command.Parameters.AddWithValue("@sales_id", productSaled.SaleId);
                 command.Parameters.AddWithValue("@products_id", productSaled.ProductId);
                 command.Parameters.AddWithValue("@quantity", productSaled.Quantity);
                 command.Parameters.AddWithValue("@sale_price", productSaled.SalePrice);
 
-                connection.Open();
-                command.ExecuteNonQuery();
+                await connection.OpenAsync();
+                return await command.ExecuteNonQueryAsync();
             }
         }
 
@@ -203,11 +204,10 @@ namespace SistemaDeVentas.Ventas
             return saleId;
         }
 
-        public void DeleteSale(int saleId)
+        public async Task DeleteSaleAsync(int saleId)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-
                 //Borrar los delivery de la venta
                 var deliveryRepository = new DeliveryRepository();
                 deliveryRepository.DeleteDeliveryBySalesId(saleId);
@@ -216,16 +216,11 @@ namespace SistemaDeVentas.Ventas
 
                 SqlCommand command = new SqlCommand("spDeleteSale", connection);
                 command.CommandType = CommandType.StoredProcedure;
-
                 command.Parameters.AddWithValue("@id", saleId);
 
-                connection.Open();
-                command.ExecuteNonQuery();
-
-
-
+                await connection.OpenAsync();
+                await command.ExecuteNonQueryAsync();
             }
-
         }
 
         public void UpdateSale(Sale sale)
@@ -256,7 +251,7 @@ namespace SistemaDeVentas.Ventas
             }
         }
 
-        public void DeleteProductsSalesBySalesId (int salesId)
+        public void DeleteProductsSalesBySalesId(int salesId)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -269,9 +264,9 @@ namespace SistemaDeVentas.Ventas
                 command.ExecuteNonQuery();
             }
         }
-        
 
-        public List<Sale> getSalesbyDate (string day, string month, string year)
+
+        public List<Sale> getSalesbyDate(string day, string month, string year)
         {
             List<Sale> sales = new List<Sale>();
 
@@ -338,49 +333,6 @@ namespace SistemaDeVentas.Ventas
                             ClientName = reader["name"].ToString(),
                             Profit = decimal.Parse(reader["profit"].ToString()),
                             Total = decimal.Parse(reader["total"].ToString()),
-                        };
-                        sales.Add(sale);
-                    }
-                }
-            }
-            return sales;
-        }
-
-        public List<Sale> searchSalesByTerm(string term)
-        {
-            List<Sale> sales = new List<Sale>();
-
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                SqlCommand command = new SqlCommand("spSearchSalesByTerm", connection);
-                command.CommandType = CommandType.StoredProcedure;
-
-                command.Parameters.AddWithValue("@Term", term);
-
-                connection.Open();
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        Sale sale = new Sale()
-                        {
-                            Id = int.Parse(reader["id"].ToString()),
-                            SaleType = reader["sale_type"].ToString(),
-                            Date = DateTime.Parse(reader["date"].ToString()),
-                            Phone = reader["phone"].ToString(),
-                            Reference = reader["reference"].ToString(),
-                            Address = reader["address"].ToString(),
-                            Observation = reader["observation"].ToString(),
-                            Channel = reader["channel"].ToString(),
-                            Total = decimal.Parse(reader["total"].ToString()),
-                            CashPayment = reader["cash_payment"] == DBNull.Value ? 0 : (decimal?)decimal.Parse(reader["cash_payment"].ToString()),
-                            CreditPayment = reader["credit_payment"] == DBNull.Value ? 0 : (decimal?)decimal.Parse(reader["credit_payment"].ToString()),
-                            CreditDays = reader["credit_days"] == DBNull.Value ? 0 : int.Parse(reader["credit_days"].ToString()),
-                            ClientName = reader["client_name"].ToString(),
-                            PaymentTypeName = reader["payment_type"].ToString(),
-                            PaymentConditionName = reader["payment_condition"].ToString(),
-                            UserName = reader["user_name"].ToString(),
-                            Profit = decimal.Parse(reader["profit"].ToString())
                         };
                         sales.Add(sale);
                     }
