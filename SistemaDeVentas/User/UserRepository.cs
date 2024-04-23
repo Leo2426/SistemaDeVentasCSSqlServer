@@ -206,7 +206,6 @@ namespace SistemaDeVentas.User
                         command.Parameters.AddWithValue("@UserId", id);
                         using (var reader = command.ExecuteReader())
                         {
-
                             return reader.HasRows;
                         }
                     }
