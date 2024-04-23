@@ -16,6 +16,7 @@ namespace SistemaDeVentas.Ventas
     public partial class SearchProductForm : Form
     {
         private string conectionString = Conexion.stringConexion;
+        private List<Product> products = new List<Product>();
         public SearchProductForm()
         {
             InitializeComponent();
@@ -32,7 +33,7 @@ namespace SistemaDeVentas.Ventas
         {
 
             var productRepository = new ProductRepository();
-            var products = productRepository.getAllProductsWithSock();
+            products = productRepository.getAllProductsWithSock();
 
             //si la no hay productos mostrar mensaje
             if (products.Count == 0)
@@ -112,12 +113,15 @@ namespace SistemaDeVentas.Ventas
 
 
             //filtrar productos del datagridview por nomnbre
-            btn_search.PerformClick();
+            filterData();
             e.Handled = true;
         }
 
-        private void btn_search_Click(object sender, EventArgs e)
+        private void filterData()
         {
+            //limpiar el datagridview
+            dt_products.DataSource = products;
+
             //filtrar productos del datagridview por nomnbre
             string filterValue = txt_search.Text;
             var filteredList = new List<Product>();
@@ -142,7 +146,12 @@ namespace SistemaDeVentas.Ventas
             }
 
             dt_products.DataSource = filteredList;
+        }
 
+
+        private void btn_search_Click(object sender, EventArgs e)
+        {
+            dt_products.DataSource = products;
 
         }
     }

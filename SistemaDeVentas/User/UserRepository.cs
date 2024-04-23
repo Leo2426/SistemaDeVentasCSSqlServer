@@ -193,5 +193,31 @@ namespace SistemaDeVentas.User
            
 
         }
+
+        internal bool userHasSales(int id)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    using (var command = new SqlCommand("SELECT * FROM sales WHERE users_id = @UserId", connection))
+                    {
+                        command.Parameters.AddWithValue("@UserId", id);
+                        using (var reader = command.ExecuteReader())
+                        {
+
+                            return reader.HasRows;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al obtener ventas: " + ex.Message);
+                return false;
+            }
+
+        }
     }
 }

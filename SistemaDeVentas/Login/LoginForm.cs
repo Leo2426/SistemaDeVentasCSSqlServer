@@ -21,6 +21,9 @@ namespace SistemaDeVentas.Login
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
+            //set focus al txt_password
+            txt_password.Focus();
+            
             //agregar autocomplete a el cb_usuarios
             UserRepository userRepository = new UserRepository();
             var users = userRepository.getAllUsers();
@@ -37,7 +40,7 @@ namespace SistemaDeVentas.Login
             UserRepository userRepository = new UserRepository();
             User.User user = new User.User();
             user.Name = cb_users.Text;
-            user.Password = textBox2.Text;
+            user.Password = txt_password.Text;
             if (userRepository.Login(user))
             {
                 GlobalClass.ActualUser.Name = user.Name;
@@ -53,8 +56,8 @@ namespace SistemaDeVentas.Login
             }
             else
             {
-                textBox2.Text = "";
-                textBox2.Focus();
+                txt_password.Text = "";
+                txt_password.Focus();
                 MessageBox.Show("Usuario o contraseña incorrectos");
             }
         }

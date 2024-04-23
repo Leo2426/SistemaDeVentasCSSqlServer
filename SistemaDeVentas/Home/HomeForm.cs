@@ -31,7 +31,7 @@ namespace SistemaDeVentas.Home
             dt_end.Value = dt_end.Value.AddDays(1);
 
             //si el usuario actual no es administrador ocultar el lbl_profit y lbl_total_sales
-            if (GlobalClass.ActualUser.Name != "ADMINISTRADOR")
+            if (GlobalClass.ActualUser.Rol != "ADMINISTRADOR")
             {
                 lbl_profit.Visible = false;
                 lbl_total_sales.Visible = false;

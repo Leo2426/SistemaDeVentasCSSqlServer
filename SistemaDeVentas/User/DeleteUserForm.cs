@@ -51,6 +51,14 @@ namespace SistemaDeVentas.User
 
             //eliminar el usuario
             var userRepository = new UserRepository();
+
+            //validar que el usuario no tenga ventas
+            if (userRepository.userHasSales(Convert.ToInt32(cb_user.SelectedValue)))
+            {
+                MessageBox.Show("No se puede eliminar el usuario porque tiene ventas registradas");
+                return;
+            }
+
             userRepository.deleteUser(Convert.ToInt32(cb_user.SelectedValue));
 
             MessageBox.Show("Usuario eliminado correctamente");

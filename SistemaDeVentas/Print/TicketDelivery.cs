@@ -84,7 +84,7 @@ namespace SistemaDeVentas.Print
             graphics.DrawString(amountText, font, new SolidBrush(Color.Black), startX, startY + offset * 7 + productBoxHeight);
 
             // Dibujar SALDO A COBRAR justo al lado
-            graphics.DrawString(amountDueText, font, new SolidBrush(Color.Black), startX + amountTextWidth + 10, startY + offset * 7 + productBoxHeight);  // Ajusta el '10' si se necesita más espacio entre textos
+            graphics.DrawString(amountDueText, font, new SolidBrush(Color.Black), startX + amountTextWidth + 20, startY + offset * 7 + productBoxHeight);  // Ajusta el '10' si se necesita más espacio entre textos
         }
 
 

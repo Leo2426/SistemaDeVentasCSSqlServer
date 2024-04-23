@@ -189,16 +189,18 @@ namespace SistemaDeVentas.Ventas.Delivery
                     //obtener el delivery seleccionado
                     var selectedRow = dt_deliverys.CurrentRow;
                     var delivery = new Delivery();
-                    delivery.ClientName = selectedRow.Cells["ClientName"].Value.ToString();
-                    delivery.Date = selectedRow.Cells["Date"].Value.ToString();
-                    delivery.Address = selectedRow.Cells["Address"].Value.ToString();
-                    delivery.Reference = selectedRow.Cells["Reference"].Value.ToString();
-                    delivery.Instructions = selectedRow.Cells["Instructions"].Value.ToString();
-                    delivery.PaymentCondition = selectedRow.Cells["PaymentCondition"].Value.ToString();
-                    delivery.Phone = selectedRow.Cells["Phone"].Value.ToString();
-                    delivery.Amount = decimal.Parse(selectedRow.Cells["Amount"].Value.ToString());
-                    delivery.Amount_due = decimal.Parse(selectedRow.Cells["Amount_due"].Value.ToString());
-                    delivery.SaleId = int.Parse(selectedRow.Cells["SaleId"].Value.ToString());
+                    delivery.SaleId = Convert.ToInt32(selectedRow.Cells["Correlativo"].Value);
+                    delivery.ClientName = selectedRow.Cells["Cliente"].Value.ToString();
+                    delivery.Date = selectedRow.Cells["Fecha"].Value.ToString();
+                    delivery.Address = selectedRow.Cells["Dirección"].Value.ToString();
+                    delivery.Reference = selectedRow.Cells["Referencia"].Value.ToString();
+                    delivery.Instructions = selectedRow.Cells["Instrucciones"].Value.ToString();
+                    delivery.PaymentCondition = selectedRow.Cells["C.de Pago"].Value.ToString();
+                    delivery.Phone = selectedRow.Cells["Teléfono"].Value.ToString();
+                    delivery.Amount = Convert.ToDecimal(selectedRow.Cells["Monto"].Value);
+                    delivery.Amount_due = Convert.ToDecimal(selectedRow.Cells["Saldo a cobrar"].Value);
+
+
 
                     //obtener los productos del delivery
                     var productSaledRepository = new SaleRepository();
