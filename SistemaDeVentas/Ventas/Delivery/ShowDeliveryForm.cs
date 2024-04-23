@@ -13,6 +13,11 @@ namespace SistemaDeVentas.Ventas.Delivery
 {
     public partial class ShowDeliveryForm : Form
     {
+        List<Delivery> deliveries = new List<Delivery>();
+        DataTable deliberiestable = new DataTable();
+        DataTable tabletemp = new DataTable();
+
+
         public ShowDeliveryForm()
         {
             InitializeComponent();
@@ -23,26 +28,145 @@ namespace SistemaDeVentas.Ventas.Delivery
             //cargar todos los deliverys
 
             var deliveryRepository = new DeliveryRepository();
-            var deliveries = deliveryRepository.GetAllDeliveries();
+            deliveries = deliveryRepository.GetAllDeliveries();
 
-            dt_deliverys.Columns.Add("SaleId", "Correlativo");
-            dt_deliverys.Columns.Add("ClientName", "Cliente");
-            dt_deliverys.Columns.Add("Date", "Fecha");
-            dt_deliverys.Columns.Add("Address", "Dirección");
-            dt_deliverys.Columns.Add("Reference", "Referencia");
-            dt_deliverys.Columns.Add("Instructions", "Instrucciones");
-            dt_deliverys.Columns.Add("PaymentCondition", "C.de Pago");
-            dt_deliverys.Columns.Add("Phone", "Teléfono");
-            dt_deliverys.Columns.Add("Amount", "Monto");
-            dt_deliverys.Columns.Add("Amount_due", "Saldo a cobrar");
+            setupTable();
+            setupTempTable();
 
-            
-            foreach (var delivery in deliveries)
+            //agregar columnas cb_columns con los nombres de las columnas
+            cb_columns.Items.Add("Correlativo");
+            cb_columns.Items.Add("Cliente");
+            cb_columns.Items.Add("Fecha");
+            cb_columns.Items.Add("Dirección");
+            cb_columns.Items.Add("Referencia");
+            cb_columns.Items.Add("Instrucciones");
+            cb_columns.Items.Add("C.de Pago");
+            cb_columns.Items.Add("Teléfono");
+            cb_columns.Items.Add("Monto");
+            cb_columns.Items.Add("Saldo a cobrar");
+
+            //seleccionar por defecto la primera columna
+            cb_columns.SelectedIndex = 1;
+
+
+            loadDataGrid();
+
+        }
+
+
+        private void FilterSales(string filterColumn, string filterValue)
+        {
+            var filteredList = deliveries.Where(sale =>
+                sale.GetType().GetProperty(filterColumn)?.GetValue(sale, null)?.ToString().IndexOf(filterValue, StringComparison.OrdinalIgnoreCase) >= 0
+            ).ToList();
+
+            UpdateDataGridView(filteredList);
+        }
+
+        private void UpdateDataGridView(List<Delivery> filteredDelivery)
+        {
+            tabletemp.Rows.Clear();
+            foreach (var delivery in filteredDelivery)
             {
-                dt_deliverys.Rows.Add(delivery.SaleId, delivery.ClientName, delivery.Date, delivery.Address, delivery.Reference, delivery.Instructions, delivery.PaymentCondition, delivery.Phone, delivery.Amount, delivery.Amount_due);
+                tabletemp.Rows.Add(delivery.SaleId, delivery.ClientName, delivery.Date, delivery.Address, delivery.Reference, delivery.Instructions, delivery.PaymentCondition, delivery.Phone, delivery.Amount, delivery.Amount_due);
             }
 
+            dt_deliverys.DataSource = tabletemp;
+        }
 
+
+
+        private void txt_search_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                string selectedColumn;
+
+                switch (selectedColumn = cb_columns.Text)
+                {
+                    case "Correlativo":
+                        selectedColumn = "SaleId";
+                        break;
+                    case "Cliente":
+                        selectedColumn = "ClientName";
+                        break;
+                    case "Fecha":
+                        selectedColumn = "Date";
+                        break;
+                    case "Dirección":
+                        selectedColumn = "Address";
+                        break;
+                    case "Referencia":
+                        selectedColumn = "Reference";
+                        break;
+                    case "Instrucciones":
+                        selectedColumn = "Instructions";
+                        break;
+                    case "C.de Pago":
+                        selectedColumn = "PaymentCondition";
+                        break;
+                    case "Teléfono":
+                        selectedColumn = "Phone";
+                        break;
+                    case "Monto":
+                        selectedColumn = "Amount";
+                        break;
+                    case "Saldo a cobrar":
+                        selectedColumn = "Amount_due";
+                        break;
+                    default:
+                        selectedColumn = "ClientName";
+                        break;
+                }
+
+
+
+
+                FilterSales(selectedColumn, txt_search.Text);
+                e.Handled = true;
+            }
+        }
+
+
+        private void loadDataGrid()
+        {
+            //limpiar la tabla
+            deliberiestable.Clear();
+
+            foreach (var delivery in deliveries)
+            {
+                deliberiestable.Rows.Add(delivery.SaleId, delivery.ClientName, delivery.Date, delivery.Address, delivery.Reference, delivery.Instructions, delivery.PaymentCondition, delivery.Phone, delivery.Amount, delivery.Amount_due);
+            }
+
+            dt_deliverys.DataSource = deliberiestable;
+        }
+
+        private void setupTempTable()
+        {
+            tabletemp.Columns.Add("Correlativo");
+            tabletemp.Columns.Add( "Cliente");
+            tabletemp.Columns.Add("Fecha");
+            tabletemp.Columns.Add("Dirección");
+            tabletemp.Columns.Add("Referencia");
+            tabletemp.Columns.Add( "Instrucciones");
+            tabletemp.Columns.Add( "C.de Pago");
+            tabletemp.Columns.Add( "Teléfono");
+            tabletemp.Columns.Add( "Monto");
+            tabletemp.Columns.Add("Saldo a cobrar");
+        }
+
+        private void setupTable()
+        {
+            deliberiestable.Columns.Add("Correlativo");
+            deliberiestable.Columns.Add("Cliente");
+            deliberiestable.Columns.Add("Fecha");
+            deliberiestable.Columns.Add("Dirección");
+            deliberiestable.Columns.Add("Referencia");
+            deliberiestable.Columns.Add("Instrucciones");
+            deliberiestable.Columns.Add("C.de Pago");
+            deliberiestable.Columns.Add("Teléfono");
+            deliberiestable.Columns.Add("Monto");
+            deliberiestable.Columns.Add("Saldo a cobrar");
         }
 
         private void btn_print_Click(object sender, EventArgs e)
@@ -94,6 +218,11 @@ namespace SistemaDeVentas.Ventas.Delivery
             }
         
             
+        }
+
+        private void btn_search_Click(object sender, EventArgs e)
+        {
+            dt_deliverys.DataSource = deliberiestable;
         }
     }
 }

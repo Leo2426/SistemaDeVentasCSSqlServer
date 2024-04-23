@@ -136,7 +136,7 @@ namespace SistemaDeVentas.Ventas
 
 
 
-        private async void btn_add_Click(object sender, EventArgs e)
+        private void btn_add_Click(object sender, EventArgs e)
         {
             var addSaleForm = new AddSaleForm();
             //suscribirse al evento
