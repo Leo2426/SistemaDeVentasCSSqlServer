@@ -24,7 +24,7 @@ namespace SistemaDeVentas.Ventas.Delivery
         {
             //cargar los txt
             txt_name.Text = delivery.ClientName;
-            txt_address.Text = delivery.Address;
+            txt_address.Text = delivery.Address + " - " + delivery.District;
             txt_reference.Text = delivery.Reference;
             txt_instructions.Text = delivery.Instructions;
             txt_date.Text = DateTime.Now.ToString("dd/MM/yyyy");

@@ -94,7 +94,7 @@ namespace SistemaDeVentas.Ventas
         }
 
 
-        private void AddSaleForm_Load(object sender, EventArgs e)
+        private async void AddSaleForm_Load(object sender, EventArgs e)
         {
             loadComboBoxes();
             addbtndeleteAndHeaders();
