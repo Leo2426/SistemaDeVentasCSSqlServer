@@ -1,4 +1,5 @@
-﻿using SistemaDeVentas.Clientes;
+﻿using PagedList;
+using SistemaDeVentas.Clientes;
 using SistemaDeVentas.Print;
 using SistemaDeVentas.Ventas.Delivery;
 using System;
@@ -17,88 +18,65 @@ namespace SistemaDeVentas.Ventas
     {
         List<Sale> sales;
 
-        DataTable salesTable = new DataTable();
-        DataTable tabletemp = new DataTable();
+        int pageNumber = 1;
+        IPagedList<Sale> list;
+        
+
+
 
         public VentasForm()
         {
             InitializeComponent();
         }
 
+
         private async void VentasForm2_Load(object sender, EventArgs e)
         {
-            SetupDataTable();
-            SetupDataTableTemp();
-            await LoadSalesAsync();
 
-            cb_columns.DataSource = salesTable.Columns.Cast<DataColumn>()
-                                    .Where(c => c.ColumnName != "Id") // Excluir la columna de ID
-                                    .Select(c => c.ColumnName).ToList();
-            cb_columns.SelectedIndex = 2;
+            setUpPaginator();
+
+
+
+            //cb_columns.DataSource = salesTable.Columns.Cast<DataColumn>()
+            //                        .Where(c => c.ColumnName != "Id") // Excluir la columna de ID
+            //                        .Select(c => c.ColumnName).ToList();
+            //cb_columns.SelectedIndex = 2;
         }
 
-        private void SetupDataTableTemp()
+        private async Task<IPagedList<Sale>> GetPagedListAsync(int pageNumber = 1, int pageSize = 35, string filterColumn = null, string filterValue = null)
         {
-            tabletemp.Columns.Add("Id", typeof(int));
-            tabletemp.Columns.Add("Tipo de Venta", typeof(string));
-            tabletemp.Columns.Add("Cliente", typeof(string));
-            tabletemp.Columns.Add("Fecha", typeof(DateTime));
-            tabletemp.Columns.Add("Teléfono", typeof(string));
-            tabletemp.Columns.Add("Referencia", typeof(string));
-            tabletemp.Columns.Add("Dirección", typeof(string));
-            tabletemp.Columns.Add("Tipo de Pago", typeof(string));
-            tabletemp.Columns.Add("Observación", typeof(string));
-            tabletemp.Columns.Add("Canal", typeof(string));
-            tabletemp.Columns.Add("Condición de Pago", typeof(string));
-            tabletemp.Columns.Add("Total", typeof(decimal));
-            tabletemp.Columns.Add("Pago Efectivo", typeof(decimal));
-            tabletemp.Columns.Add("Pago Crédito", typeof(decimal));
-            tabletemp.Columns.Add("Días Crédito", typeof(int));
-            tabletemp.Columns.Add("Usuario", typeof(string));
-            tabletemp.Columns.Add("Distrito", typeof(string));
-            tabletemp.Columns.Add("Ganancia", typeof(decimal));
-
+            var saleRepository = new SaleRepository();
+            return await saleRepository.GetSalesPagedAsync(pageNumber, pageSize, filterColumn, filterValue);
         }
 
-        private void SetupDataTable()
+        private async Task setUpPaginator(string filterColumn = null, string filterValue = null)
         {
-            salesTable.Columns.Add("Id", typeof(int));
-            salesTable.Columns.Add("Tipo de Venta", typeof(string));
-            salesTable.Columns.Add("Cliente", typeof(string));
-            salesTable.Columns.Add("Fecha", typeof(DateTime));
-            salesTable.Columns.Add("Teléfono", typeof(string));
-            salesTable.Columns.Add("Referencia", typeof(string));
-            salesTable.Columns.Add("Dirección", typeof(string));
-            salesTable.Columns.Add("Tipo de Pago", typeof(string));
-            salesTable.Columns.Add("Observación", typeof(string));
-            salesTable.Columns.Add("Canal", typeof(string));
-            salesTable.Columns.Add("Condición de Pago", typeof(string));
-            salesTable.Columns.Add("Total", typeof(decimal));
-            salesTable.Columns.Add("Pago Efectivo", typeof(decimal));
-            salesTable.Columns.Add("Pago Crédito", typeof(decimal));
-            salesTable.Columns.Add("Días Crédito", typeof(int));
-            salesTable.Columns.Add("Usuario", typeof(string));
-            salesTable.Columns.Add("Distrito", typeof(string));
-            salesTable.Columns.Add("Ganancia", typeof(decimal));
+            list = await GetPagedListAsync(pageNumber, 35, filterColumn, filterValue);
+            btn_previous_page.Enabled = list.HasPreviousPage;
+            btn_next_page.Enabled = list.HasNextPage;
+
+            dt_sales.DataSource = list.ToList();
+            lbl_page.Text = $"Página {pageNumber} de {list.PageCount}";
         }
+
 
         private async Task LoadSalesAsync()
         {
-            var saleRepository = new SaleRepository();
-            sales = await saleRepository.GetAllSalesAsync();
+            //var saleRepository = new SaleRepository();
+            //sales = await saleRepository.GetAllSalesAsync();
 
-            salesTable.Rows.Clear();
-            foreach (var sale in sales)
-            {
-                salesTable.Rows.Add(sale.Id, sale.SaleType, sale.ClientName, sale.Date, sale.Phone, sale.Reference, sale.Address,
-                    sale.PaymentTypeName, sale.Observation, sale.Channel, sale.PaymentConditionName, sale.Total,
-                    sale.CashPayment, sale.CreditPayment, sale.CreditDays, sale.UserName, sale.District, sale.Profit);
-            }
+            //salesTable.Rows.Clear();
+            //foreach (var sale in sales)
+            //{
+            //    salesTable.Rows.Add(sale.Id, sale.SaleType, sale.ClientName, sale.Date, sale.Phone, sale.Reference, sale.Address,
+            //        sale.PaymentTypeName, sale.Observation, sale.Channel, sale.PaymentConditionName, sale.Total,
+            //        sale.CashPayment, sale.CreditPayment, sale.CreditDays, sale.UserName, sale.District, sale.Profit);
+            //}
 
-            dt_sales.DataSource = salesTable;
+            //dt_sales.DataSource = salesTable;
 
-            //renombrar id por correlativo
-            dt_sales.Columns["Id"].HeaderText = "Correlativo";
+            ////renombrar id por correlativo
+            //dt_sales.Columns["Id"].HeaderText = "Correlativo";
         }
 
 
@@ -113,13 +91,13 @@ namespace SistemaDeVentas.Ventas
 
         private void UpdateDataGridView(List<Sale> filteredSales)
         {
-            salesTable.Rows.Clear();
-            foreach (var sale in filteredSales)
-            {
-                salesTable.Rows.Add(sale.Id, sale.SaleType, sale.ClientName, sale.Date, sale.Phone, sale.Reference, sale.Address,
-                    sale.PaymentTypeName, sale.Observation, sale.Channel, sale.PaymentConditionName, sale.Total,
-                    sale.CashPayment, sale.CreditPayment, sale.CreditDays, sale.UserName, sale.District, sale.Profit);
-            }
+            //salesTable.Rows.Clear();
+            //foreach (var sale in filteredSales)
+            //{
+            //    salesTable.Rows.Add(sale.Id, sale.SaleType, sale.ClientName, sale.Date, sale.Phone, sale.Reference, sale.Address,
+            //        sale.PaymentTypeName, sale.Observation, sale.Channel, sale.PaymentConditionName, sale.Total,
+            //        sale.CashPayment, sale.CreditPayment, sale.CreditDays, sale.UserName, sale.District, sale.Profit);
+            //}
         }
 
 
@@ -128,8 +106,7 @@ namespace SistemaDeVentas.Ventas
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                string selectedColumn = cb_columns.Text;
-                FilterSales(selectedColumn, txt_search.Text);
+                btn_search_Click(sender, e);
                 e.Handled = true;
             }
         }
@@ -149,21 +126,21 @@ namespace SistemaDeVentas.Ventas
 
         private void handlerSaleAdded(Sale sale)
         {
-            //agregar la venta a la tabla
-            salesTable.Rows.Add(sale.Id, sale.SaleType, sale.ClientName, sale.Date, sale.Phone, sale.Reference, sale.Address,
-                               sale.PaymentTypeName, sale.Observation, sale.Channel, sale.PaymentConditionName, sale.Total,
-                                              sale.CashPayment, sale.CreditPayment, sale.CreditDays, sale.UserName, sale.District, sale.Profit);
+            ////agregar la venta a la tabla
+            //salesTable.Rows.Add(sale.Id, sale.SaleType, sale.ClientName, sale.Date, sale.Phone, sale.Reference, sale.Address,
+            //                   sale.PaymentTypeName, sale.Observation, sale.Channel, sale.PaymentConditionName, sale.Total,
+            //                                  sale.CashPayment, sale.CreditPayment, sale.CreditDays, sale.UserName, sale.District, sale.Profit);
 
-            //agregar la venta a la lista
-            sales.Add(sale);
+            ////agregar la venta a la lista
+            //sales.Add(sale);
 
-            //agregar la venta a la tabla temporal
-            tabletemp.Rows.Add(sale.Id, sale.SaleType, sale.ClientName, sale.Date, sale.Phone, sale.Reference, sale.Address,
-                                              sale.PaymentTypeName, sale.Observation, sale.Channel, sale.PaymentConditionName, sale.Total,
-                                                                                           sale.CashPayment, sale.CreditPayment, sale.CreditDays, sale.UserName, sale.District, sale.Profit);
+            ////agregar la venta a la tabla temporal
+            //tabletemp.Rows.Add(sale.Id, sale.SaleType, sale.ClientName, sale.Date, sale.Phone, sale.Reference, sale.Address,
+            //                                  sale.PaymentTypeName, sale.Observation, sale.Channel, sale.PaymentConditionName, sale.Total,
+            //                                                                               sale.CashPayment, sale.CreditPayment, sale.CreditDays, sale.UserName, sale.District, sale.Profit);
 
-            //actualizar la tabla
-            dt_sales.Refresh();
+            ////actualizar la tabla
+            //dt_sales.Refresh();
         }
 
 
@@ -242,7 +219,7 @@ namespace SistemaDeVentas.Ventas
 
         private void btn_search_Click(object sender, EventArgs e)
         {
-            dt_sales.DataSource = salesTable;
+            //dt_sales.DataSource = salesTable;
         }
 
         private void  btn_export_Click(object sender, EventArgs e)
@@ -276,5 +253,32 @@ namespace SistemaDeVentas.Ventas
                 MessageBox.Show("No records found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private async void btn_previous_page_Click(object sender, EventArgs e)
+        {
+            if(list.HasPreviousPage)
+            {
+                list = await GetPagedListAsync(--pageNumber);
+                btn_previous_page.Enabled = list.HasPreviousPage;
+                btn_next_page.Enabled = list.HasNextPage;
+                dt_sales.DataSource = list.ToList();
+                lbl_page.Text = $"Página {pageNumber} de {list.PageCount}";
+            }
+
+
+        }
+
+        private async void btn_next_page_Click(object sender, EventArgs e)
+        {
+            if(list.HasNextPage)
+            {
+                list = await GetPagedListAsync(++pageNumber);
+                btn_previous_page.Enabled = list.HasPreviousPage;
+                btn_next_page.Enabled = list.HasNextPage;
+                dt_sales.DataSource = list.ToList();
+                lbl_page.Text = $"Página {pageNumber} de {list.PageCount}";
+            }
+        }
+
     }
 }

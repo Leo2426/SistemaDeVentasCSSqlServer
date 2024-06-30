@@ -54,9 +54,10 @@
             // 
             this.lbl_heading.AutoSize = true;
             this.lbl_heading.Font = new System.Drawing.Font("Tahoma", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_heading.Location = new System.Drawing.Point(302, 74);
+            this.lbl_heading.Location = new System.Drawing.Point(252, 62);
+            this.lbl_heading.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_heading.Name = "lbl_heading";
-            this.lbl_heading.Size = new System.Drawing.Size(157, 53);
+            this.lbl_heading.Size = new System.Drawing.Size(133, 45);
             this.lbl_heading.TabIndex = 0;
             this.lbl_heading.Text = "label1";
             // 
@@ -86,33 +87,37 @@
             this.panel1.Controls.Add(this.btn_home);
             this.panel1.Controls.Add(this.iconPictureBox1);
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(270, 926);
+            this.panel1.Size = new System.Drawing.Size(225, 772);
             this.panel1.TabIndex = 2;
             // 
             // lbl_user
             // 
             this.lbl_user.Font = new System.Drawing.Font("Trebuchet MS", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_user.ForeColor = System.Drawing.Color.White;
-            this.lbl_user.Location = new System.Drawing.Point(3, 125);
+            this.lbl_user.Location = new System.Drawing.Point(2, 104);
+            this.lbl_user.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_user.Name = "lbl_user";
-            this.lbl_user.Size = new System.Drawing.Size(264, 53);
+            this.lbl_user.Size = new System.Drawing.Size(220, 44);
             this.lbl_user.TabIndex = 0;
             this.lbl_user.Text = "label1";
             this.lbl_user.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panel3
             // 
-            this.panel3.Location = new System.Drawing.Point(272, 233);
+            this.panel3.Location = new System.Drawing.Point(227, 194);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1173, 692);
+            this.panel3.Size = new System.Drawing.Size(978, 577);
             this.panel3.TabIndex = 3;
             // 
             // panel2
             // 
-            this.panel2.Location = new System.Drawing.Point(273, 289);
+            this.panel2.Location = new System.Drawing.Point(228, 241);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1162, 616);
+            this.panel2.Size = new System.Drawing.Size(968, 513);
             this.panel2.TabIndex = 3;
             // 
             // iconButton5
@@ -128,11 +133,11 @@
             this.iconButton5.IconColor = System.Drawing.Color.White;
             this.iconButton5.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconButton5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton5.Location = new System.Drawing.Point(-1, 733);
+            this.iconButton5.Location = new System.Drawing.Point(-1, 611);
             this.iconButton5.Margin = new System.Windows.Forms.Padding(0);
             this.iconButton5.Name = "iconButton5";
-            this.iconButton5.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.iconButton5.Size = new System.Drawing.Size(270, 104);
+            this.iconButton5.Padding = new System.Windows.Forms.Padding(17, 0, 0, 0);
+            this.iconButton5.Size = new System.Drawing.Size(225, 87);
             this.iconButton5.TabIndex = 3;
             this.iconButton5.Text = "Config";
             this.iconButton5.UseVisualStyleBackColor = false;
@@ -151,11 +156,11 @@
             this.iconButton4.IconColor = System.Drawing.Color.White;
             this.iconButton4.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconButton4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton4.Location = new System.Drawing.Point(0, 629);
+            this.iconButton4.Location = new System.Drawing.Point(0, 524);
             this.iconButton4.Margin = new System.Windows.Forms.Padding(0);
             this.iconButton4.Name = "iconButton4";
-            this.iconButton4.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.iconButton4.Size = new System.Drawing.Size(270, 104);
+            this.iconButton4.Padding = new System.Windows.Forms.Padding(17, 0, 0, 0);
+            this.iconButton4.Size = new System.Drawing.Size(225, 87);
             this.iconButton4.TabIndex = 3;
             this.iconButton4.Text = "Delivery";
             this.iconButton4.UseVisualStyleBackColor = false;
@@ -174,11 +179,11 @@
             this.iconButton3.IconColor = System.Drawing.Color.White;
             this.iconButton3.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconButton3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton3.Location = new System.Drawing.Point(0, 525);
+            this.iconButton3.Location = new System.Drawing.Point(0, 438);
             this.iconButton3.Margin = new System.Windows.Forms.Padding(0);
             this.iconButton3.Name = "iconButton3";
-            this.iconButton3.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.iconButton3.Size = new System.Drawing.Size(270, 104);
+            this.iconButton3.Padding = new System.Windows.Forms.Padding(17, 0, 0, 0);
+            this.iconButton3.Size = new System.Drawing.Size(225, 87);
             this.iconButton3.TabIndex = 3;
             this.iconButton3.Text = "Clientes";
             this.iconButton3.UseVisualStyleBackColor = false;
@@ -197,11 +202,11 @@
             this.iconButton2.IconColor = System.Drawing.Color.White;
             this.iconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconButton2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton2.Location = new System.Drawing.Point(0, 421);
+            this.iconButton2.Location = new System.Drawing.Point(0, 351);
             this.iconButton2.Margin = new System.Windows.Forms.Padding(0);
             this.iconButton2.Name = "iconButton2";
-            this.iconButton2.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.iconButton2.Size = new System.Drawing.Size(270, 104);
+            this.iconButton2.Padding = new System.Windows.Forms.Padding(17, 0, 0, 0);
+            this.iconButton2.Size = new System.Drawing.Size(225, 87);
             this.iconButton2.TabIndex = 3;
             this.iconButton2.Text = "Productos";
             this.iconButton2.UseVisualStyleBackColor = false;
@@ -220,11 +225,11 @@
             this.iconButton1.IconColor = System.Drawing.Color.White;
             this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton1.Location = new System.Drawing.Point(0, 317);
+            this.iconButton1.Location = new System.Drawing.Point(0, 264);
             this.iconButton1.Margin = new System.Windows.Forms.Padding(0);
             this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.iconButton1.Size = new System.Drawing.Size(270, 104);
+            this.iconButton1.Padding = new System.Windows.Forms.Padding(17, 0, 0, 0);
+            this.iconButton1.Size = new System.Drawing.Size(225, 87);
             this.iconButton1.TabIndex = 3;
             this.iconButton1.Text = "Ventas";
             this.iconButton1.UseVisualStyleBackColor = false;
@@ -243,10 +248,11 @@
             this.btn_home.IconColor = System.Drawing.Color.White;
             this.btn_home.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.btn_home.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_home.Location = new System.Drawing.Point(0, 210);
+            this.btn_home.Location = new System.Drawing.Point(0, 175);
+            this.btn_home.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btn_home.Name = "btn_home";
-            this.btn_home.Padding = new System.Windows.Forms.Padding(20, 0, 0, 0);
-            this.btn_home.Size = new System.Drawing.Size(270, 104);
+            this.btn_home.Padding = new System.Windows.Forms.Padding(17, 0, 0, 0);
+            this.btn_home.Size = new System.Drawing.Size(225, 87);
             this.btn_home.TabIndex = 3;
             this.btn_home.Text = "Home";
             this.btn_home.UseVisualStyleBackColor = false;
@@ -258,10 +264,11 @@
             this.iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.UserAlt;
             this.iconPictureBox1.IconColor = System.Drawing.Color.White;
             this.iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconPictureBox1.IconSize = 80;
-            this.iconPictureBox1.Location = new System.Drawing.Point(94, 40);
+            this.iconPictureBox1.IconSize = 72;
+            this.iconPictureBox1.Location = new System.Drawing.Point(78, 33);
+            this.iconPictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.iconPictureBox1.Name = "iconPictureBox1";
-            this.iconPictureBox1.Size = new System.Drawing.Size(87, 87);
+            this.iconPictureBox1.Size = new System.Drawing.Size(72, 72);
             this.iconPictureBox1.TabIndex = 0;
             this.iconPictureBox1.TabStop = false;
             // 
@@ -271,20 +278,22 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.principal_panel.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.principal_panel.Location = new System.Drawing.Point(270, 165);
+            this.principal_panel.Location = new System.Drawing.Point(225, 138);
             this.principal_panel.Margin = new System.Windows.Forms.Padding(0);
             this.principal_panel.Name = "principal_panel";
-            this.principal_panel.Size = new System.Drawing.Size(1196, 761);
+            this.principal_panel.Size = new System.Drawing.Size(997, 634);
             this.principal_panel.TabIndex = 3;
             // 
             // PrincipalForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1457, 925);
+            this.ClientSize = new System.Drawing.Size(1214, 771);
             this.Controls.Add(this.lbl_heading);
             this.Controls.Add(this.principal_panel);
             this.Controls.Add(this.panel1);
+            this.DoubleBuffered = true;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "PrincipalForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

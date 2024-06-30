@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using SistemaDeVentas.Productos;
 using SistemaDeVentas.Ventas.Delivery;
+using Dapper;
+using PagedList;
 
 namespace SistemaDeVentas.Ventas
 {
@@ -18,6 +20,44 @@ namespace SistemaDeVentas.Ventas
         {
             _connectionString = Conexion.stringConexion;
         }
+
+
+        public async Task<IPagedList<Sale>> GetSalesPagedAsync(int pageNumber, int pageSize, string filterColumn = null, string filterValue = null)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var query = new StringBuilder(@"
+                SELECT s.id, s.sale_type AS SaleType, c.name AS ClientName, s.date, s.phone, s.reference, s.address, 
+                       pt.name AS PaymentTypeName, s.observation, s.channel, pc.name AS PaymentConditionName, 
+                       s.total, s.cash_payment AS CashPayment, s.credit_payment AS CreditPayment, 
+                       s.credit_days AS CreditDays, u.user_name AS UserName, s.profit
+                FROM sales s
+                JOIN clients c ON s.clients_id = c.id
+                JOIN payment_type pt ON s.payment_type_id = pt.id
+                JOIN payment_condition pc ON s.payment_condition_id = pc.id
+                JOIN users u ON s.users_id = u.id");
+
+                if (!string.IsNullOrEmpty(filterColumn) && !string.IsNullOrEmpty(filterValue))
+                {
+                    query.Append($" WHERE {filterColumn} LIKE @FilterValue");
+                }
+
+                query.Append(" ORDER BY s.date DESC OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY;");
+
+                var offset = (pageNumber - 1) * pageSize;
+                var sales = await connection.QueryAsync<Sale>(query.ToString(), new { Offset = offset, PageSize = pageSize, FilterValue = $"%{filterValue}%" });
+
+                var countQuery = "SELECT COUNT(*) FROM sales";
+                if (!string.IsNullOrEmpty(filterColumn) && !string.IsNullOrEmpty(filterValue))
+                {
+                    countQuery += $" WHERE {filterColumn} LIKE @FilterValue";
+                }
+                var totalItemCount = await connection.ExecuteScalarAsync<int>(countQuery, new { FilterValue = $"%{filterValue}%" });
+
+                return new StaticPagedList<Sale>(sales, pageNumber, pageSize, totalItemCount);
+            }
+        }
+
 
         public async Task InsertSaleAsync(Sale sale)
         {
@@ -56,45 +96,25 @@ namespace SistemaDeVentas.Ventas
 
         public async Task<List<Sale>> GetAllSalesAsync()
         {
-            List<Sale> sales = new List<Sale>();
-
+            //retornar las sales usando dapper
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                SqlCommand command = new SqlCommand("spGetAllSales", connection);
-                command.CommandType = CommandType.StoredProcedure;
+                string query = @"
+                SELECT s.id, s.sale_type AS SaleType, c.name AS ClientName, s.date, s.phone, s.reference, s.address, 
+                       pt.name AS PaymentType, s.observation, s.channel, pc.name AS PaymentCondition, 
+                       s.total, s.cash_payment AS CashPayment, s.credit_payment AS CreditPayment, 
+                       s.credit_days AS CreditDays, u.user_name AS UserName, s.profit
+                FROM sales s
+                JOIN clients c ON s.clients_id = c.id
+                JOIN payment_type pt ON s.payment_type_id = pt.id
+                JOIN payment_condition pc ON s.payment_condition_id = pc.id
+                JOIN users u ON s.users_id = u.id
+                ORDER BY s.date DESC
+            ";
 
-                await connection.OpenAsync();
-                using (SqlDataReader reader = await command.ExecuteReaderAsync())
-                {
-                    while (await reader.ReadAsync())
-                    {
-                        Sale sale = new Sale()
-                        {
-                            // Asumiendo que tienes una clase Sale con estas propiedades
-                            Id = int.Parse(reader["id"].ToString()),
-                            SaleType = reader["sale_type"].ToString(),
-                            Date = DateTime.Parse(reader["date"].ToString()),
-                            Phone = reader["phone"].ToString(),
-                            Reference = reader["reference"].ToString(),
-                            Address = reader["address"].ToString(),
-                            Observation = reader["observation"].ToString(),
-                            Channel = reader["channel"].ToString(),
-                            Total = decimal.Parse(reader["total"].ToString()),
-                            CashPayment = reader["cash_payment"] == DBNull.Value ? 0 : (decimal?)decimal.Parse(reader["cash_payment"].ToString()),
-                            CreditPayment = reader["credit_payment"] == DBNull.Value ? 0 : (decimal?)decimal.Parse(reader["credit_payment"].ToString()),
-                            CreditDays = reader["credit_days"] == DBNull.Value ? 0 : int.Parse(reader["credit_days"].ToString()),
-                            ClientName = reader["ClientName"].ToString(),
-                            PaymentTypeName = reader["PaymentType"].ToString(),
-                            PaymentConditionName = reader["PaymentCondition"].ToString(),
-                            UserName = reader["UserName"].ToString(),
-                            Profit = decimal.Parse(reader["profit"].ToString())
-
-                        };
-                        sales.Add(sale);
-                    }
-                }
+                return connection.Query<Sale>(query).ToList();
             }
-            return sales;
+
         }
 
 
